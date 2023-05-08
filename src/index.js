@@ -37,6 +37,8 @@ import SmartCities from "components/market/SmartCities";
 import CommercialEstablishment from "components/market/CommercialEstablishment";
 import PrivateOrganization from "components/market/PrivateOrganization";
 import WasteCollector from "components/market/WasteCollectors";
+import AboutCompany from "components/Company/AoutCompany";
+import Partnership from "components/Company/Partnership";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -84,6 +86,17 @@ root.render(
         path="/waste-collectors"
         exact
         render={(props) => <WasteCollector {...props} />}
+      />
+
+<Route
+        path="/about-company"
+        exact
+        render={(props) => <AboutCompany {...props} />}
+      />
+      <Route
+        path="/partnership-opportunities"
+        exact
+        render={(props) => <Partnership {...props} />}
       />
       <Route
         path="/login-page"

@@ -1,20 +1,20 @@
-import Benefits from 'components/Benefits'
 import FooterComponent from 'components/FooterComponents'
 import DemoNavbar from 'components/Navbars/DemoNavbar'
-import BenefitsSmartCities from 'components/contact/components/BenefitsSmartCities'
-import Carateristique from 'components/products/components/Carecteristiques'
-import ElectronicBrochure from 'components/products/components/ElectronicBrochure'
-import Features from 'components/products/components/Features'
+import AppDownload from 'components/products/components/AppDownload'
+import FaQFeet from 'components/products/components/FaQFeet'
+import FeaturesFeetManagmentPlatform from 'components/products/components/FeaturesFeetManagmentPlatform'
 import MoreFeatures from 'components/products/components/MoreFeatures'
-import ProductDetails from 'components/products/components/ProductDetails'
+import PlatformAppView from 'components/products/components/PlatformAppView'
 import React from 'react'
 
 import { Container, Row } from 'reactstrap'
-import WhereToSettleCity from './components/WhereToSettleCity'
-import BenifitsWastCollector from './components/BenifitsWastCollector'
+import SecondComponent from './components/SecondComponent'
+import FaqPartnersship from './components/FaqPartnersship'
+import FormParternership from './components/FormParternership'
 
 
-function WasteCollector() {
+
+function Partnership() {
   return (
     <>
      <DemoNavbar />
@@ -23,9 +23,7 @@ function WasteCollector() {
             {/* shape Hero */}
             <section className="section section-lg section-shaped pb-300 ">
             <div className="shape shape-style-1 shape-default mb--100 " style={{
-              backgroundImage: "url('https://xgenbox.com/wp-content/uploads/2023/04/Collecte.jpg')", height: "50vh",  backgroundSize: "cover", filter: "brightness(90%) ",
-              backgroundPosition: " center ",
-              }}>
+              backgroundImage: "url('https://xgenbox.com/wp-content/uploads/2023/04/REPLACE-THIS-SCREEN1111112-copie.png')", height: "50vh",  backgroundSize: "cover"}}>
   
 </div>
 
@@ -67,48 +65,46 @@ function WasteCollector() {
             {/* 1st Hero Variation */}
           </div>
           <section
-      style={{
-        // backgroundColor: "#F8F9FE",
-        marginTop: 90,
-        marginBottom:50
-      }}
->
-{/* <section className="section bg-secondary"> */}
-            <div
+      className="section section-lg pt-lg-0 "  
+      style={{ marginTop:20}}
+          >
+                  <div
   className="shape shape-style-1 shape-default flex align-items-sm-center"
   style={
-   { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginTop:-20}
+   { textAlign: "center", fontSize: 40, fontWeight: '400', color:'#434955', marginTop:20}
   }
 >
-Waste collectors
+Are you interested in becoming our business partner?
+<p>We are always open to discussing potential partnerships in all regions. Write to us and we would be happy to discuss a possible partnership!</p>
 </div>
-  {/* <Carateristique/> */}
-  <div
-   style={{
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: '400',
-    color:'#434955',
-    marginTop:20,
-    marginBottom:20,
-    margin:20
-  }}
-  >
 
-  <p
- 
-  >Whether it’s a family hauler, a municipality or a large waste management company responsible for multiple counties, our solutions will provide insight into their operations, identified areas for efficiency improvement and improved performance in several key areas of fleet management.</p>
+    {/* <SecondComponent/> */}
+    
+          </section>
+        
+<section>
   
-  
-  </div>
+<Container>
+
+<FaqPartnersship/>
+</Container>
 </section>
-<section className="section bg-secondary">
-     
 
-            <BenifitsWastCollector/>
-            </section>
-          
+<section>
+<div
+  className="shape shape-style-1 shape-default flex align-items-sm-center"
+  style={
+   { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginTop:70}
+  }
+>
+Submit your partnership request
+</div>
 
+<Container>
+  
+  <FormParternership/>
+  </Container>
+</section>
 
 
 
@@ -119,4 +115,4 @@ Waste collectors
   )
 }
 
-export default WasteCollector
+export default Partnership
