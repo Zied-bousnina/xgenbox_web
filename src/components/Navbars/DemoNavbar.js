@@ -96,7 +96,7 @@ class DemoNavbar extends React.Component {
                       <Link to="/">
                         <img
                           alt="..."
-                          src={require("assets/img/brand/argon-react.png")}
+                          src={"https://xgenbox.com/wp-content/uploads/2023/03/logo.png"}
                         />
                       </Link>
                     </Col>
@@ -196,18 +196,20 @@ class DemoNavbar extends React.Component {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Products</span>
+                      <span className="nav-link-inner--text ">Products</span>
+                     
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem to="/landing-page" tag={Link}>
+                      <DropdownItem to="/smart-box" tag={Link}>
                         Smart box
                       </DropdownItem>
-                      <DropdownItem to="/profile-page" tag={Link}>
+                      <DropdownItem to="/fleet-management-platform" tag={Link}>
                         Fleet Management platform
                       </DropdownItem>
                       
                     </DropdownMenu>
                   </UncontrolledDropdown>
+                  
 
                  {/* Markets */}
                   <UncontrolledDropdown nav>
@@ -216,16 +218,16 @@ class DemoNavbar extends React.Component {
                       <span className="nav-link-inner--text">Markets</span>
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem to="/landing-page" tag={Link}>
+                      <DropdownItem to="/smart-cities" tag={Link}>
                         Smart cities
                       </DropdownItem>
-                      <DropdownItem to="/profile-page" tag={Link}>
+                      <DropdownItem to="/commercial-establishments" tag={Link}>
                         Commercial establishments
                       </DropdownItem>
-                      <DropdownItem to="/login-page" tag={Link}>
+                      <DropdownItem to="/private-organizations" tag={Link}>
                         private organizations
                       </DropdownItem>
-                      <DropdownItem to="/register-page" tag={Link}>
+                      <DropdownItem to="/waste-collectors" tag={Link}>
                         Waste collectors
                       </DropdownItem>
                     </DropdownMenu>

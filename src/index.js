@@ -22,16 +22,25 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
+// import "./index.css"
 
 import Index from "views/Index.js";
 import Landing from "views/examples/Landing.js";
 import Login from "views/examples/Login.js";
 import Profile from "views/examples/Profile.js";
 import Register from "views/examples/Register.js";
-
+import { ChakraProvider } from '@chakra-ui/react'
+import SmartBox from "components/products/SmartBox";
+import FleetManagmentPlatform from "components/products/FleetManagmentPlatform";
+import QuoteRequest from "components/contact/QuoteRequest";
+import SmartCities from "components/market/SmartCities";
+import CommercialEstablishment from "components/market/CommercialEstablishment";
+import PrivateOrganization from "components/market/PrivateOrganization";
+import WasteCollector from "components/market/WasteCollectors";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
+  <ChakraProvider>
   <BrowserRouter>
     <Switch>
       <Route path="/" exact render={(props) => <Landing {...props} />} />
@@ -39,6 +48,42 @@ root.render(
         path="/landing-page"
         exact
         render={(props) => <Landing {...props} />}
+      />
+      <Route
+        path="/smart-box"
+        exact
+        render={(props) => <SmartBox {...props} />}
+      />
+
+      <Route
+        path="/fleet-management-platform"
+        exact
+        render={(props) => <FleetManagmentPlatform {...props} />}
+      />
+       <Route
+        path="/quote-request"
+        exact
+        render={(props) => <QuoteRequest {...props} />}
+      />
+      <Route
+        path="/smart-cities"
+        exact
+        render={(props) => <SmartCities {...props} />}
+      />
+      <Route
+        path="/commercial-establishments"
+        exact
+        render={(props) => <CommercialEstablishment {...props} />}
+      />
+      <Route
+        path="/private-organizations"
+        exact
+        render={(props) => <PrivateOrganization {...props} />}
+      />
+      <Route
+        path="/waste-collectors"
+        exact
+        render={(props) => <WasteCollector {...props} />}
       />
       <Route
         path="/login-page"
@@ -58,4 +103,5 @@ root.render(
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>
+  </ChakraProvider>
 );

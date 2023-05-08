@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useRef } from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 
@@ -46,6 +46,12 @@ import Download from "../IndexSections/Download.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBug, faCloud, faPenNib, faQuestion, faRecycle, faSolarPanel, faTrash, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import TabExemple from "components/TabExemple.js";
+import Benefits from "components/Benefits.js";
+import { fontSize, fontWeight } from "@mui/system";
+import Faq from "components/FaQ.js";
+import FooterComponent from "components/FooterComponents.js";
+import ContactUs from "components/ContactUs.js";
 class Landing extends React.Component {
   state = {};
   componentDidMount() {
@@ -53,7 +59,23 @@ class Landing extends React.Component {
     document.scrollingElement.scrollTop = 0;
     this.refs.main.scrollTop = 0;
   }
+  constructor(props) {
+    super(props);
+    this.myRefSolution = React.createRef();
+    this.myRefFeatures = React.createRef();
+    this.myRefFaq = React.createRef();
+  }
+  scrollToSolution = () => {
+    this.myRefSolution.current.scrollIntoView({ behavior: 'smooth' });
+  };
+  scrollToFeatures = () => {
+    this.myRefFeatures.current.scrollIntoView({ behavior: 'smooth' });
+  };
+  scrollToFAQ = () => {
+    this.myRefFaq.current.scrollIntoView({ behavior: 'smooth' });
+  };
   render() {
+    
     return (
       <>
         <DemoNavbar />
@@ -121,8 +143,10 @@ class Landing extends React.Component {
                           <Button
                             className="mt-4"
                             color="primary"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            href="#solution"
+                            onClick={(e) => {e.preventDefault()
+                            this.scrollToSolution()
+                            }}
                           >
                             Learn more
                           </Button>
@@ -143,7 +167,9 @@ class Landing extends React.Component {
                             className="mt-4"
                             color="success"
                             href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={(e) => {e.preventDefault()
+                            this.scrollToFeatures()
+                            }}
                           >
                             Learn more
                           </Button>
@@ -164,7 +190,9 @@ class Landing extends React.Component {
                             className="mt-4"
                             color="warning"
                             href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={(e) => {e.preventDefault()
+                            this.scrollToFAQ()
+                            }}
                           >
                             Learn more
                           </Button>
@@ -269,10 +297,10 @@ class Landing extends React.Component {
               <Row className="row-grid align-items-center">
                 
                 <Col className="order-md-1" md="6">
-                  <div className="pr-md-5">
-                    <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5">
-                      <i className="ni ni-settings-gear-65" />
-                    </div>
+                  <div className="pr-md-5" ref={this.myRefSolution}>
+                    {/* <div className="icon icon-lg icon-shape icon-shape-success shadow rounded-circle mb-5"> */}
+                      {/* <i className="ni ni-settings-gear-65" /> */}
+                    {/* </div> */}
                     <h3>Presentation of XGENBOX's Solution</h3>
                     <p>
                     XGENBOX offers a comprehensive and intelligent waste management solution using an application connected to a smart bin sensor. Our integrated range of products includes:
@@ -325,84 +353,15 @@ class Landing extends React.Component {
       className="embed-responsive-item"
       src="https://www.youtube.com/embed/Xu4Uy0f_XY0"
       allowFullScreen
-      width="560"
-      height="315"
+      width="100%"
+      height="300"
   
 
     />
                 </Col>
               </Row>
               
-              <Row className="row-grid align-items-center">
-                
-                <Col className="order-md-1" md="6">
-                  <Row>
-                    <Col className="order-md-1" md="6">
-                    <div className="pr-md-5">
-                    
-                    <h3>Awesome features</h3>
-                    <div className="d-flex justify-content-center  align-items-center  img-fluid  circle rounded rounded-circle" style={{backgroundColor: "white", width: "150px", height: "150px", border:"solid", borderColor:"#3C976E"}}>
-          <img
-            alt="..."
-            className="rounded-circle img-fluid  "
-            src="https://xgenbox.com/wp-content/uploads/2023/04/c77dbdd3-e16f-400e-8114-9051989d40a2.png"
-            width={150}
-            
-            style={{zIndex: "1"}}
-            onMouseOver={e => e.currentTarget.parentNode.style.backgroundColor = "#3C976E"}
-      onMouseOut={e => e.currentTarget.parentNode.style.backgroundColor = "white"}
-          />
-        </div>
-                  </div>
-                    </Col>
-                    <Col className="order-md-2" md="6">
-                    <h3>Fleet management application</h3>
-                    <p>
-                    Capable of leveraging data from your current waste management operations and transforming your manually scheduled routes into fully optimized routes using machine learning algorithms.
-
-                    </p>
-                      </Col>
-
-                  </Row>
-                </Col>
-                <Col className="order-md-1" md="6">
-                  <Row
-                  style={{marginTop:"100px"}}
-
-                  >
-                    <Col className="order-md-1" md="6">
-                    <div className="pr-md-5">
-                    
-                    {/* <h3>Awesome features</h3> */}
-                    <div className="d-flex justify-content-center  align-items-center  img-fluid  circle rounded rounded-circle" style={{backgroundColor: "white", width: "150px", height: "150px", border:"solid", borderColor:"#3C976E"}}>
-          <img
-            alt="..."
-            className="rounded-circle img-fluid  "
-            src="https://xgenbox.com/wp-content/uploads/2023/04/65699-copie.png"
-            width={150}
-            
-            style={{zIndex: "1"}}
-            onMouseOver={e => e.currentTarget.parentNode.style.backgroundColor = "#3C976E"}
-      onMouseOut={e => e.currentTarget.parentNode.style.backgroundColor = "white"}
-          />
-        </div>
-                  </div>
-                    </Col>
-                    <Col className="order-md-2" md="6">
-                    {/* <div className="pr-md-5"> */}
-                    
-                    <h3>Smart box</h3>
-                    <p>
-                    Compatible with standard 140L and 360L wheeled bins for easy and safe waste removal, and it also communicates the information it collects in real-time via wireless transmission.
-
-                    </p>
-
-                    {/* </div> */}
-                      </Col>
-
-                  </Row>
-                </Col>
-              </Row>
+              
               
               {/* <Row className="row-grid align-items-center">
                 <Col className="order-md-2" md="6">
@@ -478,8 +437,132 @@ class Landing extends React.Component {
                 </Col>
               </Row> */}
             </Container>
+            <section
+              // className="section section-lg pt-lg-0 mt-400"
+              style={{
+                marginTop:60
+              }}
+            >
+              <Container
+                className="py-lg-md d-flex"
+               
+                // style={{marginTop: "-100px"}}
+              >
+              <Row className="row-grid  ">
+                
+                <Col className="order-md-1" md="6">
+                  <Row>
+                    <Col className="order-md-1" md="6">
+                    <div className="pr-md-5">
+                    
+                    {/* <h3>Awesome features</h3> */}
+                    <div className="d-flex justify-content-center  align-items-center  img-fluid  circle rounded rounded-circle" style={{backgroundColor: "white", width: "150px", height: "150px", border:"solid", borderColor:"#3C976E"}}>
+          <img
+            alt="..."
+            className="rounded-circle img-fluid  "
+            src="https://xgenbox.com/wp-content/uploads/2023/04/c77dbdd3-e16f-400e-8114-9051989d40a2.png"
+            width={150}
+            
+            style={{zIndex: "1"}}
+            onMouseOver={e => e.currentTarget.parentNode.style.backgroundColor = "#3C976E"}
+      onMouseOut={e => e.currentTarget.parentNode.style.backgroundColor = "white"}
+          />
+        </div>
+                  </div>
+                    </Col>
+                    <Col className="order-md-2" md="6">
+                    <h3>Smart box</h3>
+                    <p>
+                    Compatible with standard 140L and 360L wheeled bins for easy and safe waste removal, and it also communicates the information it collects in real-time via wireless transmission.
+                    </p>
+                      </Col>
+
+                  </Row>
+                </Col>
+                <Col className="order-md-1" md="6">
+                  <Row
+                  // style={{marginTop:"100px"}}
+
+                  >
+                    <Col className="order-md-1" md="6">
+                    <div className="pr-md-5">
+                    
+                    {/* <h3>Awesome features</h3> */}
+                    <div className="d-flex justify-content-center  align-items-center  img-fluid  circle rounded rounded-circle" style={{backgroundColor: "white", width: "150px", height: "150px", border:"solid", borderColor:"#3C976E"}}>
+          <img
+            alt="..."
+            className="rounded-circle img-fluid  "
+            src="https://xgenbox.com/wp-content/uploads/2023/04/65699-copie.png"
+            width={150}
+            
+            style={{zIndex: "1"}}
+            onMouseOver={e => e.currentTarget.parentNode.style.backgroundColor = "#3C976E"}
+      onMouseOut={e => e.currentTarget.parentNode.style.backgroundColor = "white"}
+          />
+        </div>
+                  </div>
+                    </Col>
+                    <Col className="order-md-2" md="6">
+                    {/* <div className="pr-md-5"> */}
+                    
+                    <h3>Fleet management application</h3>
+                    <p>
+                    Capable of leveraging data from your current waste management operations and transforming your manually scheduled routes into fully optimized routes using machine learning algorithms.
+                    </p>
+
+                    {/* </div> */}
+                      </Col>
+
+                  </Row>
+                </Col>
+              </Row>
+              </Container>
+            </section>
+            <section className="section " ref={this.myRefFeatures}>
+            <div
+  className="shape shape-style-1 shape-default flex align-items-sm-center"
+  style={
+   { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginBottom:20}
+  }
+>
+Features
+</div>
+
+            <TabExemple/>
+            </section>
+            <section className="section bg-secondary">
+            <div
+  className="shape shape-style-1 shape-default flex align-items-sm-center"
+  style={
+   { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginTop:-20}
+  }
+>
+  Who benefits from our solution ?
+</div>
+
+            <Benefits/>
+            </section>
           </section>
-          <section className="section bg-secondary">
+
+          <section className="section " ref={this.myRefFaq}>
+          <div
+  className="shape shape-style-1 shape-default flex align-items-sm-center"
+  style={
+   { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginBottom:20}
+  }
+>
+Frequently asked questions
+</div>
+
+
+            <Container >
+              <Faq/>
+
+            </Container>
+
+          </section>
+          {/* <section className="section bg-secondary">
+     
             <Container>
               <Row className="row-grid align-items-center">
                 <Col md="6">
@@ -549,8 +632,8 @@ class Landing extends React.Component {
                 </Col>
               </Row>
             </Container>
-          </section>
-          <section className="section pb-0 bg-gradient-warning">
+          </section> */}
+          {/* <section className="section pb-0 bg-gradient-warning">
             <Container>
               <Row className="row-grid align-items-center">
                 <Col className="order-lg-2 ml-lg-auto" md="6">
@@ -637,7 +720,8 @@ class Landing extends React.Component {
                 </Col>
               </Row>
             </Container>
-            {/* SVG separator */}
+            
+
             <div className="separator separator-bottom separator-skew zindex-100">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -653,8 +737,8 @@ class Landing extends React.Component {
                 />
               </svg>
             </div>
-          </section>
-          <section className="section section-lg">
+          </section> */}
+          {/* <section className="section section-lg">
             <Container>
               <Row className="justify-content-center text-center mb-lg">
                 <Col lg="8">
@@ -839,8 +923,8 @@ class Landing extends React.Component {
                 </Col>
               </Row>
             </Container>
-          </section>
-          <section className="section section-lg pt-0">
+          </section> */}
+          {/* <section className="section section-lg pt-0">
             <Container>
               <Card className="bg-gradient-warning shadow-lg border-0">
                 <div className="p-5">
@@ -870,8 +954,8 @@ class Landing extends React.Component {
                 </div>
               </Card>
             </Container>
-          </section>
-          <section className="section section-lg bg-gradient-default">
+          </section> */}
+          {/* <section className="section section-lg bg-gradient-default">
             <Container className="pt-lg pb-300">
               <Row className="text-center justify-content-center">
                 <Col lg="10">
@@ -917,7 +1001,7 @@ class Landing extends React.Component {
                 </Col>
               </Row>
             </Container>
-            {/* SVG separator */}
+           
             <div className="separator separator-bottom separator-skew zindex-100">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -933,8 +1017,8 @@ class Landing extends React.Component {
                 />
               </svg>
             </div>
-          </section>
-          <section className="section section-lg pt-lg-0 section-contact-us">
+          </section> */}
+          {/* <section className="section section-lg pt-lg-0 section-contact-us">
             <Container>
               <Row className="justify-content-center mt--300">
                 <Col lg="8">
@@ -1016,10 +1100,12 @@ class Landing extends React.Component {
                 </Col>
               </Row>
             </Container>
-          </section>
-          <Download />
+          </section> */}
+          {/* <Download /> */}
+        
         </main>
-        <CardsFooter />
+        <FooterComponent/>
+        {/* <CardsFooter /> */}
       </>
     );
   }
