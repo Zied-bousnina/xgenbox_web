@@ -1,20 +1,21 @@
+import FaqPartnersship from 'components/Company/components/FaqPartnersship'
+import FormParternership from 'components/Company/components/FormParternership'
 import FooterComponent from 'components/FooterComponents'
 import DemoNavbar from 'components/Navbars/DemoNavbar'
-import AppDownload from 'components/products/components/AppDownload'
-import FaQFeet from 'components/products/components/FaQFeet'
-import FeaturesFeetManagmentPlatform from 'components/products/components/FeaturesFeetManagmentPlatform'
-import MoreFeatures from 'components/products/components/MoreFeatures'
-import PlatformAppView from 'components/products/components/PlatformAppView'
+
+
 import React from 'react'
 
-import { Container, Row } from 'reactstrap'
-import SecondComponent from './components/SecondComponent'
-import FaqPartnersship from './components/FaqPartnersship'
-import FormParternership from './components/FormParternership'
+import { Col, Container, Row } from 'reactstrap'
+import ContactUsForm from './components/ContactUsForm'
+import { AspectRatio, Card } from '@chakra-ui/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faLocation, faLocationDot, faLocationPin, faLocationPinLock, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 
 
-function Partnership() {
+
+function ContactDetail() {
   return (
     <>
      <DemoNavbar />
@@ -64,31 +65,9 @@ function Partnership() {
 </section>
             {/* 1st Hero Variation */}
           </div>
-          <section
-      className="section section-lg pt-lg-0 "  
-      style={{ marginTop:20}}
-          >
-                  <div
-  className="shape shape-style-1 shape-default flex align-items-sm-center"
-  style={
-   { textAlign: "center", fontSize: 40, fontWeight: '400', color:'#434955', marginTop:20}
-  }
->
-Are you interested in becoming our business partner?
-<p>We are always open to discussing potential partnerships in all regions. Write to us and we would be happy to discuss a possible partnership!</p>
-</div>
-
-    {/* <SecondComponent/> */}
-    
-          </section>
+          
         
-<section>
-  
-<Container>
 
-<FaqPartnersship/>
-</Container>
-</section>
 
 <section>
 <div
@@ -97,12 +76,78 @@ Are you interested in becoming our business partner?
    { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginTop:70}
   }
 >
-Submit your partnership request
+Contact us
 </div>
 
+<Row>
+  <Col
+    md="8"
+  >
+  <ContactUsForm/>
+  </Col>
+  <Col
+    md="4"
+    className=" bg-secondary"
+  >
 
+<Card variant="outlined" sx={{ width: 400, padding:5 }}
+className="section bg-secondary"
+>
+<AspectRatio ratio={16 / 9}>
+  <iframe
+    src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12784.65166088452!2d10.210111!3d36.766659!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd367d86ee0f63%3A0xc92b9c9cf6c49dba!2sJebel%20Jelloud%2C%20Tunisia!5e0!3m2!1sen!2sus!4v1683624829166!5m2!1sen!2sus'
+    
+  />
+</AspectRatio>
+  {/* <Typography mt={2}>Title</Typography>
+  <Typography level="body2">Description of the card.</Typography> */}
+  <Row
+  style={{
+    marginTop:40
+  }}
+  >
+    <Col
+      md="12"
+    >
+    <FontAwesomeIcon icon={faLocationDot} style={{marginRight:20, color:"#3C976E", fontSize:21}} />
+    Z4, Saint Gobain, Jbel Jloud
+    </Col>
+
+  </Row>
+  <Row
+  style={{
+    marginTop:20
+  }}
+  >
+    <Col
+      md="12"
+    >
+    <FontAwesomeIcon icon={faPhone} style={{marginRight:20, color:"#3C976E", fontSize:21}} />
+    
++216 20 200 698
+    </Col>
+
+  </Row>
+  <Row
+  style={{
+    marginTop:20
+  }}
+  >
+    <Col
+      md="12"
+    >
+    <FontAwesomeIcon icon={faEnvelope} style={{marginRight:20, color:"#3C976E", fontSize:21}} />
+    direction@xgenbox.com
+    </Col>
+
+  </Row>
   
-  <FormParternership/>
+
+</Card>
+
+  </Col>
+</Row>
+  
   
 </section>
 
@@ -115,4 +160,4 @@ Submit your partnership request
   )
 }
 
-export default Partnership
+export default ContactDetail

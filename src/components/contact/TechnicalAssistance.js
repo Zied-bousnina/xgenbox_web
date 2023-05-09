@@ -1,20 +1,17 @@
+
+import FaqPartnersship from 'components/Company/components/FaqPartnersship'
+import FormParternership from 'components/Company/components/FormParternership'
 import FooterComponent from 'components/FooterComponents'
 import DemoNavbar from 'components/Navbars/DemoNavbar'
-import AppDownload from 'components/products/components/AppDownload'
-import FaQFeet from 'components/products/components/FaQFeet'
-import FeaturesFeetManagmentPlatform from 'components/products/components/FeaturesFeetManagmentPlatform'
-import MoreFeatures from 'components/products/components/MoreFeatures'
-import PlatformAppView from 'components/products/components/PlatformAppView'
 import React from 'react'
 
 import { Container, Row } from 'reactstrap'
-import SecondComponent from './components/SecondComponent'
-import FaqPartnersship from './components/FaqPartnersship'
-import FormParternership from './components/FormParternership'
+import FormTechnicalAssistance from './components/FormTechnicalAssistance'
 
 
 
-function Partnership() {
+
+function TechnicalAssistance() {
   return (
     <>
      <DemoNavbar />
@@ -74,35 +71,23 @@ function Partnership() {
    { textAlign: "center", fontSize: 40, fontWeight: '400', color:'#434955', marginTop:20}
   }
 >
-Are you interested in becoming our business partner?
-<p>We are always open to discussing potential partnerships in all regions. Write to us and we would be happy to discuss a possible partnership!</p>
+Technical Support Request​
+<p>This form allows our customers to report issues and get help from the XGENBOX technical support team.
+Please provide as much information as possible, then click Submit to submit the request.</p>
 </div>
 
     {/* <SecondComponent/> */}
     
           </section>
         
-<section>
-  
-<Container>
 
-<FaqPartnersship/>
-</Container>
-</section>
 
 <section>
-<div
-  className="shape shape-style-1 shape-default flex align-items-sm-center"
-  style={
-   { textAlign: "center", fontSize: 28, fontWeight: '400', color:'#434955', marginTop:70}
-  }
->
-Submit your partnership request
-</div>
+
 
 
   
-  <FormParternership/>
+  <FormTechnicalAssistance/>
   
 </section>
 
@@ -115,4 +100,4 @@ Submit your partnership request
   )
 }
 
-export default Partnership
+export default TechnicalAssistance

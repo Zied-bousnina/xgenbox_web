@@ -256,13 +256,13 @@ class DemoNavbar extends React.Component {
                       <span className="nav-link-inner--text">Contact</span>
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem to="/landing-page" tag={Link}>
+                      <DropdownItem to="/contact-details" tag={Link}>
                         Contact details
                       </DropdownItem>
                       <DropdownItem to="/quote-request" tag={Link}>
                         Quote request
                       </DropdownItem>
-                      <DropdownItem to="/login-page" tag={Link}>
+                      <DropdownItem to="/technical-assistance" tag={Link}>
                         Technical assistance
                       </DropdownItem>
                       

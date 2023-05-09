@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import axios from 'axios';
 
-function FormParternership() {
+function FormTechnicalAssistance() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
@@ -258,52 +258,15 @@ style={
     
   </Row>
   <Row>
-    <Col
+    
+    <Col 
     md="12"
     >
-       <label className="form-label">Company presentation <span style={{color:"red"}}>*</span></label>
-      <textarea
-
-      name={"company-presentation"}
-      className={classNames("form-control")}
-      onChange={onChangeHandler}
-      placeholder="Message"
-      style={{height:"100px"}}
-      />
-    </Col>
-  </Row>
-  <Row>
-    <Col 
-    md="6"
-    >
        <div className=" mb-3">
-      <label className="form-label">Type of partnership<span style={{color:"red"}}>*</span></label>
+      <label className="form-label">Product serial number(s)  <span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
-        
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      <select name={"size"} className={classNames("form-control")} onChange={onChangeHandler}>
-        <option>Sales agent</option>
-        <option>General Distributor</option>
-        <option>Exclusive Distributor</option>
-        <option>Other</option>
-
-      </select>
-      </div>
-    </div>
-    </Col>
-    <Col 
-    md="6"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Target markets <span color="red">*</span></label>
-      <div className="input-group">
-        
-        <input type="select"  name={"quantity"} className={classNames("form-control")} onChange={onChangeHandler}/>
+        <input type="select" required  name={"serialNumber"} className={classNames("form-control")} onChange={onChangeHandler}/>
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -318,32 +281,38 @@ style={
     <Col
     md="12"
     >
-       <label className="form-label" required>Distribution strategy  <span style={{color:"red"}}>*</span></label>
+       <label className="form-label">Description of the problem <span style={{color:"red"}}>*</span></label>
       <textarea
 
-      name={"company-presentation"}
+      name={"probDesc"}
       className={classNames("form-control")}
       onChange={onChangeHandler}
-      placeholder="Message"
+      placeholder="description of the problem"
       style={{height:"100px"}}
       />
     </Col>
   </Row>
   <Row>
-    <Col
-    md="12"
-    >
-       <label className="form-label" required>Projects for which you plan to use the solution   <span style={{color:"red"}}>*</span></label>
-      <textarea
-
-      name={"company-presentation"}
-      className={classNames("form-control")}
-      onChange={onChangeHandler}
-      placeholder="Message"
-      style={{height:"100px"}}
-      />
+    <Col md="12">
+    <FormGroup>
+    <Label>
+    Attachments
+    </Label>
+    <div className="custom-control custom-radio mb-3">
+    <input type="file"
+       id="avatar" name="avatar"
+       
+       accept="image/png, image/jpeg"/>
+      
+    </div>
+    
+    
+  </FormGroup>
     </Col>
   </Row>
+  
+  
+  
 
   <Row>
     <Col
@@ -395,4 +364,4 @@ style={
   );
 }
 
-export default FormParternership;
+export default FormTechnicalAssistance;

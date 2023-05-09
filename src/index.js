@@ -39,6 +39,8 @@ import PrivateOrganization from "components/market/PrivateOrganization";
 import WasteCollector from "components/market/WasteCollectors";
 import AboutCompany from "components/Company/AoutCompany";
 import Partnership from "components/Company/Partnership";
+import ContactDetail from "components/contact/ContactDetail";
+import TechnicalAssistance from "components/contact/TechnicalAssistance";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -97,6 +99,16 @@ root.render(
         path="/partnership-opportunities"
         exact
         render={(props) => <Partnership {...props} />}
+      />
+       <Route
+        path="/contact-details"
+        exact
+        render={(props) => <ContactDetail {...props} />}
+      />
+      <Route
+        path="/technical-assistance"
+        exact
+        render={(props) => <TechnicalAssistance {...props} />}
       />
       <Route
         path="/login-page"
