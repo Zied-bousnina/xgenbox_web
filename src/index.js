@@ -41,6 +41,11 @@ import AboutCompany from "components/Company/AoutCompany";
 import Partnership from "components/Company/Partnership";
 import ContactDetail from "components/contact/ContactDetail";
 import TechnicalAssistance from "components/contact/TechnicalAssistance";
+import AdminLayout from "./layouts/Admin.js";
+
+import "./assets/plugins/nucleo/css/nucleo.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./assets/scss/argon-dashboard-react.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -79,6 +84,7 @@ root.render(
         exact
         render={(props) => <CommercialEstablishment {...props} />}
       />
+      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route
         path="/private-organizations"
         exact
