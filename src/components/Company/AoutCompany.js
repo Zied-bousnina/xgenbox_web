@@ -9,6 +9,7 @@ import React from 'react'
 
 import { Container, Row } from 'reactstrap'
 import SecondComponent from './components/SecondComponent'
+import TopButton from 'components/TopButton/TopButton'
 
 
 
@@ -73,7 +74,7 @@ function AboutCompany() {
 
 
 
-
+          <TopButton/>
 
      </main>
      

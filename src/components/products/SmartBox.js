@@ -7,6 +7,7 @@ import FooterComponent from 'components/FooterComponents'
 import Carateristique from './components/Carecteristiques'
 import MoreFeatures from './components/MoreFeatures'
 import ElectronicBrochure from './components/ElectronicBrochure'
+import TopButton from 'components/TopButton/TopButton'
 
 function SmartBox() {
   return (
@@ -98,7 +99,7 @@ Characteristic
   
   <ElectronicBrochure/>
 </section>
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

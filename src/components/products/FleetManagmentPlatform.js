@@ -11,6 +11,7 @@ import PlatformAppView from './components/PlatformAppView'
 import FeaturesFeetManagmentPlatform from './components/FeaturesFeetManagmentPlatform'
 import FaQFeet from './components/FaQFeet'
 import AppDownload from './components/AppDownload'
+import TopButton from 'components/TopButton/TopButton'
 
 function FleetManagmentPlatform() {
   return (
@@ -107,7 +108,7 @@ Downloads
   
   {/* <ElectronicBrochure/> */}
 </section>
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

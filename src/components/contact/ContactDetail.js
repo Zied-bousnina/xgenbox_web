@@ -11,6 +11,7 @@ import ContactUsForm from './components/ContactUsForm'
 import { AspectRatio, Card } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faLocation, faLocationDot, faLocationPin, faLocationPinLock, faPhone } from '@fortawesome/free-solid-svg-icons'
+import TopButton from 'components/TopButton/TopButton'
 
 
 
@@ -152,7 +153,7 @@ className="section bg-secondary"
 </section>
 
 
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

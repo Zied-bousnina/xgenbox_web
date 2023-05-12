@@ -9,6 +9,7 @@ import React from 'react'
 
 import { Container, Row } from 'reactstrap'
 import QuoteForm from './components/QuoteForm'
+import TopButton from 'components/TopButton/TopButton'
 
 
 function QuoteRequest() {
@@ -115,7 +116,7 @@ Quote request
   
   <ElectronicBrochure/>
 </section>
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

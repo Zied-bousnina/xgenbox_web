@@ -14,6 +14,7 @@ import WhereToSettleCity from './components/WhereToSettleCity'
 import BenifitsCommercialEstabilishments from './components/BenifitsCommercialEstabilishments'
 import WhereToInstall from './components/WhereToInstall'
 import WhereToInstallaPrivateOrganization from './components/WhereToInstallPrivateOrganization'
+import TopButton from 'components/TopButton/TopButton'
 
 
 function CommercialEstablishment() {
@@ -139,7 +140,7 @@ Where to Install
 
 
 
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

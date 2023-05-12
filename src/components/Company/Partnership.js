@@ -11,6 +11,7 @@ import { Container, Row } from 'reactstrap'
 import SecondComponent from './components/SecondComponent'
 import FaqPartnersship from './components/FaqPartnersship'
 import FormParternership from './components/FormParternership'
+import TopButton from 'components/TopButton/TopButton'
 
 
 
@@ -107,7 +108,7 @@ Submit your partnership request
 </section>
 
 
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

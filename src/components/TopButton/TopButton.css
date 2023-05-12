@@ -1,0 +1,31 @@
+.top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #3c976E;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  animation: bounce_513 1s infinite;
+}
+
+.top-button:hover {
+  background-color: #4ca87f;
+  transform: scale(1.1);
+  animation: bounce_513 1s none;
+}
+
+@keyframes bounce_513 {
+  0%,
+    100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}

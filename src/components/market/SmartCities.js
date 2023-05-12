@@ -11,6 +11,7 @@ import React from 'react'
 
 import { Container, Row } from 'reactstrap'
 import WhereToSettleCity from './components/WhereToSettleCity'
+import TopButton from 'components/TopButton/TopButton'
 
 
 function SmartCities() {
@@ -116,7 +117,7 @@ Become a smart city
 
 
 
-
+<TopButton/>
      </main>
      
      <FooterComponent/>

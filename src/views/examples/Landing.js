@@ -52,6 +52,7 @@ import { fontSize, fontWeight } from "@mui/system";
 import Faq from "components/FaQ.js";
 import FooterComponent from "components/FooterComponents.js";
 import ContactUs from "components/ContactUs.js";
+import TopButton from "components/TopButton/TopButton.js";
 class Landing extends React.Component {
   state = {};
   componentDidMount() {
@@ -1103,7 +1104,9 @@ Frequently asked questions
           </section> */}
           {/* <Download /> */}
         
+        <TopButton/>
         </main>
+
         <FooterComponent/>
         {/* <CardsFooter /> */}
       </>

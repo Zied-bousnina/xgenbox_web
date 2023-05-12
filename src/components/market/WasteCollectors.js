@@ -12,6 +12,7 @@ import React from 'react'
 import { Container, Row } from 'reactstrap'
 import WhereToSettleCity from './components/WhereToSettleCity'
 import BenifitsWastCollector from './components/BenifitsWastCollector'
+import TopButton from 'components/TopButton/TopButton'
 
 
 function WasteCollector() {
@@ -111,7 +112,7 @@ Waste collectors
 
 
 
-
+            <TopButton/>
      </main>
      
      <FooterComponent/>
