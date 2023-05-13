@@ -88,7 +88,7 @@ export default function FooterComponent() {
               © {new Date().getFullYear()} <span style={{color:"#48BB78", fontWeight:"bold" }}  >XGENBOX</span> All rights reserved
             </Text>
             <Stack direction={'row'} spacing={6}>
-              <SocialButton label={'Twitter'} href={'#'}>
+              <SocialButton label={'Twitter'} href={'/admin'}>
               <FontAwesomeIcon icon={faTwitter} />
               </SocialButton>
               <SocialButton label={'YouTube'} href={'#'}>
