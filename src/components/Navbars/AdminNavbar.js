@@ -15,6 +15,8 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { LogOut } from "Redux/actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -35,6 +37,14 @@ import {
 } from "reactstrap";
 
 const AdminNavbar = (props) => {
+  const user = useSelector(state=>state?.auth?.user)
+  const profile = useSelector(state=>state?.profile?.profile)
+  // console
+  const dispatch = useDispatch()
+
+  const logout = _=>{
+    dispatch(LogOut())
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -64,12 +74,14 @@ const AdminNavbar = (props) => {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={require("../../assets/img/theme/team-4-800x800.jpg")}
+                      src={
+                        profile?.avatar
+                      }
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Jessica Jones
+                     {user?.name}
                     </span>
                   </Media>
                 </Media>
@@ -95,7 +107,7 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={logout}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

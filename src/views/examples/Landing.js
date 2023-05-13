@@ -41,7 +41,7 @@ import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import CardsFooter from "components/Footers/CardsFooter.js";
 
 // index page sections
-import Download from "../IndexSections/Download.js";
+
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBug, faCloud, faPenNib, faQuestion, faRecycle, faSolarPanel, faTrash, faTruck, faTruckFast } from '@fortawesome/free-solid-svg-icons'

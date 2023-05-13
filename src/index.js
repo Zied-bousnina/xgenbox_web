@@ -30,12 +30,15 @@ import { ChakraProvider } from '@chakra-ui/react'
 import "./assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/scss/argon-dashboard-react.scss";
+import store from './Redux/store';
+import { Provider } from "react-redux";
 import App from "App";
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(
+  <Provider store={store}>
+
   <ChakraProvider>
  <App/>
   </ChakraProvider>
+  </Provider>
 );

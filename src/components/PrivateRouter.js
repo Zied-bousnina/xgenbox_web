@@ -6,7 +6,7 @@ const PrivateRouter = ({ user, children }) => {
     return <Redirect to="/login" />
   }
   
-  if (user.role !== "ADMIN") {
+  if (!user.isAdmin ) {
     return <Redirect to="/noaccess" />
   }
   

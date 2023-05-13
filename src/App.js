@@ -21,11 +21,13 @@ import PrivateRouter from "components/PrivateRouter.js";
 import ForceRedirect from "components/ForceRedirect.js";
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import NoAccess from "components/NoAccess.js";
+import { useSelector } from "react-redux";
 function App() {
-  const user= {
-    isConnected:true,
-    role:"ADMIN"
-  }
+  // const user= {
+  //   isConnected:false,
+  //   role:"ADMIN"
+  // }
+  const user = useSelector(state=>state.auth)
  
   return (
     <BrowserRouter>
@@ -65,7 +67,7 @@ function App() {
          </ForceRedirect>
            {/* <Route path="/noaccess" exact render={(props) => <NoAccess {...props} />}/> */}
            {/* <FooterComponent/> */}
-           <Redirect to="/" />
+           <Redirect  to="/" />
     </Switch>
   </BrowserRouter>
   );
