@@ -51,6 +51,7 @@ import {
   Row,
   Col
 } from "reactstrap";
+import { useSelector } from "react-redux";
 
 var ps;
 
@@ -68,6 +69,7 @@ const Sidebar = (props) => {
   const closeCollapse = () => {
     setCollapseOpen(false);
   };
+  const profile = useSelector(state=>state?.profile?.profile)
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => {
     return routes.map((prop, key) => {
@@ -151,7 +153,7 @@ const Sidebar = (props) => {
                 <span className="avatar avatar-sm rounded-circle">
                   <img
                     alt="..."
-                    src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                    src={profile?.avatar}
                   />
                 </span>
               </Media>

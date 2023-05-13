@@ -37,8 +37,10 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import { useSelector } from "react-redux";
 
 const Tables = () => {
+  const profile = useSelector(state=>state?.profile?.profile)
   return (
     <>
       <Header />
@@ -101,7 +103,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -251,7 +253,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -399,7 +401,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -549,7 +551,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -699,7 +701,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -928,7 +930,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -1078,7 +1080,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -1223,7 +1225,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -1373,7 +1375,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
@@ -1523,7 +1525,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("../../assets/img/theme/team-1-800x800.jpg")}
+                            src={profile?.avatar}
                           />
                         </a>
                         <UncontrolledTooltip
