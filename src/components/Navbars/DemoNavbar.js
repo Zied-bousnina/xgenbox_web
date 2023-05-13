@@ -246,6 +246,9 @@ class DemoNavbar extends React.Component {
                       <DropdownItem to="/partnership-opportunities" tag={Link}>
                         Partnership opportunities
                       </DropdownItem>
+                      <DropdownItem to="/admin" tag={Link}>
+                        Admin
+                      </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
 

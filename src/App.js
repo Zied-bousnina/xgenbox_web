@@ -73,7 +73,7 @@ function App() {
     <BrowserRouter>
     {/* <DemoNavbar/> */}
     <Switch>
-           <Route path="/admin"   render={(props) => 
+           <Route  path="/admin"   render={(props) => 
            <PrivateRouter user={user}>
             <AdminLayout {...props} />
            </PrivateRouter>
