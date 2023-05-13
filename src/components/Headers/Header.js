@@ -17,9 +17,31 @@
 */
 
 // reactstrap components
+import { getBinsCount } from "Redux/actions/Statistiques.action";
+import { getUsersCounts } from "Redux/actions/Statistiques.action";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 
+
+
 const Header = () => {
+  const dispatch = useDispatch()
+  const userStatistiques = useSelector(state=>state?.userStatistiques?.statistiques)
+  const BinStatistiques = useSelector(state=>state?.binStatistiques?.statistiques)
+
+useEffect(() => {
+  dispatch(getUsersCounts())
+  dispatch(getBinsCount())
+},[userStatistiques, BinStatistiques] )
+
+const user = userStatistiques?.byRole?.filter(el => el.role === "USER") || [];
+const municipal = userStatistiques?.byRole?.filter(el => el.role === "MUNICIPAL") || [];
+
+const allUser = userStatistiques?.total
+console.log(user[0]?.currentDayCount)
+
+
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -36,10 +58,10 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Traffic
+                          All Bins
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          350,897
+                         {BinStatistiques?.totalCount}
                         </span>
                       </div>
                       <Col className="col-auto">
@@ -49,10 +71,13 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
+                      {/* <span className="text-success mr-2">
                         <i className="fa fa-arrow-up" /> 3.48%
+                      </span>{" "} */}
+                      <span className={`${BinStatistiques?.percentageIncrease >0 ? "text-success": "text-danger"} mr-2`}>
+                         {BinStatistiques?.percentageIncrease >0 ? <i className="fa fa-arrow-up" />:<i className="fas fa-arrow-down" />   }  {BinStatistiques?.percentageIncrease}%
                       </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
+                      <span className="text-nowrap">Since yesterday</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -66,9 +91,9 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          New users
+                          all users
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">2,356</span>
+                        <span className="h2 font-weight-bold mb-0">{allUser?.totalCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -77,10 +102,10 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-danger mr-2">
-                        <i className="fas fa-arrow-down" /> 3.48%
+                      <span className={`${allUser?.percentageIncrease >0 ? "text-success": "text-danger"} mr-2`}>
+                         {allUser?.percentageIncrease >0 ? <i className="fa fa-arrow-up" />:<i className="fas fa-arrow-down" />   }  {allUser?.percentageIncrease}%
                       </span>{" "}
-                      <span className="text-nowrap">Since last week</span>
+                      <span className="text-nowrap">Since last yesterday</span>
                     </p>
                   </CardBody>
                 </Card>
@@ -94,9 +119,9 @@ const Header = () => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Sales
+                          MUNICIPAL
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">924</span>
+                        <span className="h2 font-weight-bold mb-0">{municipal[0]?.totalCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -105,8 +130,10 @@ const Header = () => {
                       </Col>
                     </Row>
                     <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> 1.10%
+                      {/* <span className="text-warning mr-2"> */}
+                      <span className={`${municipal[0]?.percentageIncrease >0 ? "text-success": "text-danger"} mr-2`}>
+                         {municipal[0]?.percentageIncrease >0 ? <i className="fa fa-arrow-up" />:<i className="fas fa-arrow-down" />   }  {municipal[0]?.percentageIncrease}%
+                        {/* <i className="fas fa-arrow-down" /> {municipal[0]?.percentageIncrease}% */}
                       </span>{" "}
                       <span className="text-nowrap">Since yesterday</span>
                     </p>

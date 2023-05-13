@@ -31,8 +31,11 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const profile = useSelector(state=>state?.profile?.profile)
+  const user = useSelector(state=>state.auth?.user)
   return (
     <>
       <UserHeader />
@@ -48,14 +51,14 @@ const Profile = () => {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src={require("../../assets/img/theme/team-4-800x800.jpg")}
+                        src={profile?.avatar}
                       />
                     </a>
                   </div>
                 </Col>
               </Row>
               <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
+                {/* <div className="d-flex justify-content-between">
                   <Button
                     className="mr-4"
                     color="info"
@@ -74,49 +77,30 @@ const Profile = () => {
                   >
                     Message
                   </Button>
-                </div>
+                </div> */}
               </CardHeader>
               <CardBody className="pt-0 pt-md-4">
-                <Row>
-                  <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">Friends</span>
-                      </div>
-                      <div>
-                        <span className="heading">10</span>
-                        <span className="description">Photos</span>
-                      </div>
-                      <div>
-                        <span className="heading">89</span>
-                        <span className="description">Comments</span>
-                      </div>
-                    </div>
-                  </div>
-                </Row>
-                <div className="text-center">
+                
+                <div className="text-center mt-md-5">
                   <h3>
-                    Jessica Jones
-                    <span className="font-weight-light">, 27</span>
+                  {user?.name}
+                    {/* <span className="font-weight-light">, 27</span> */}
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
+                    {profile?. address}, {profile?.city}, {profile?.country}
                   </div>
-                  <div className="h5 mt-4">
+                  {/* <div className="h5 mt-4">
                     <i className="ni business_briefcase-24 mr-2" />
                     Solution Manager - Creative Tim Officer
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <i className="ni education_hat mr-2" />
                     University of Computer Science
-                  </div>
+                  </div> */}
                   <hr className="my-4" />
                   <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
+                    {profile?.Bio}
                   </p>
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                     Show more
@@ -161,7 +145,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="lucky.jesse"
+                            defaultValue={user?.name}
                             id="input-username"
                             placeholder="Username"
                             type="text"
@@ -180,12 +164,13 @@ const Profile = () => {
                             className="form-control-alternative"
                             id="input-email"
                             placeholder="jesse@example.com"
+                            defaultValue={user?.email}
                             type="email"
                           />
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                       <Col lg="6">
                         <FormGroup>
                           <label
@@ -220,7 +205,7 @@ const Profile = () => {
                           />
                         </FormGroup>
                       </Col>
-                    </Row>
+                    </Row> */}
                   </div>
                   <hr className="my-4" />
                   {/* Address */}
@@ -239,7 +224,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                            defaultValue={profile?.address}
                             id="input-address"
                             placeholder="Home Address"
                             type="text"
@@ -258,7 +243,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="New York"
+                            defaultValue={profile?.city}
                             id="input-city"
                             placeholder="City"
                             type="text"
@@ -275,7 +260,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="United States"
+                            defaultValue={profile?.country}
                             id="input-country"
                             placeholder="Country"
                             type="text"
@@ -294,6 +279,7 @@ const Profile = () => {
                             className="form-control-alternative"
                             id="input-postal-code"
                             placeholder="Postal code"
+                            defaultValue={profile?.postalCode}
                             type="number"
                           />
                         </FormGroup>
@@ -302,7 +288,7 @@ const Profile = () => {
                   </div>
                   <hr className="my-4" />
                   {/* Description */}
-                  <h6 className="heading-small text-muted mb-4">About me</h6>
+                  {/* <h6 className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
                     <FormGroup>
                       <label>About Me</label>
@@ -315,7 +301,7 @@ const Profile = () => {
                         type="textarea"
                       />
                     </FormGroup>
-                  </div>
+                  </div> */}
                 </Form>
               </CardBody>
             </Card>

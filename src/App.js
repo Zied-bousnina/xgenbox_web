@@ -21,14 +21,54 @@ import PrivateRouter from "components/PrivateRouter.js";
 import ForceRedirect from "components/ForceRedirect.js";
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import NoAccess from "components/NoAccess.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import jwt_decode from 'jwt-decode';
+import { LogOut } from "Redux/actions/authActions.js";
+import { SetAuthToken } from "utils/SetAuthToken.js";
+import { GetProfile } from "Redux/actions/profile.actions.js";
+import { setCurrentUser } from "Redux/actions/authActions.js";
 function App() {
   // const user= {
   //   isConnected:false,
   //   role:"ADMIN"
   // }
   const user = useSelector(state=>state.auth)
- 
+  const profile = useSelector(state=>state?.profile?.profile)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const value = localStorage.getItem('jwtToken')
+    
+        if (value) {
+          const decode = jwt_decode(value);
+          // console.log("ligne 107:******************************************",value)
+          // console.log(decode);
+          dispatch(setCurrentUser(decode));
+          dispatch(GetProfile());
+          dispatch(GetProfile());
+          // dispatch(GetRequest());
+          SetAuthToken(value); // Corrected typo here
+        }
+     
+
+    const activeExpires = new Date(user?.user?.iat);
+    const currentDate = new Date();
+    // console.log(`activeExpires-----------------------------------------------------------------------------------`,
+    //  activeExpires < currentDate);
+    // if (currentDate > activeExpires) {
+    //   localStorage.removeItem('jwtToken');
+    //   dispatch(LogOut())
+    //   // dispatch(setCurrentUser({}));
+    // }
+  }, []);
+
+  useEffect(() => {
+    dispatch(GetProfile())
+    
+  }, [profile])
+  
+      
+
   return (
     <BrowserRouter>
     {/* <DemoNavbar/> */}
