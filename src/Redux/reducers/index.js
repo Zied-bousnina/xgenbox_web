@@ -7,6 +7,7 @@ import requestSentsuccesReducer from './requestSentsuccesReducer';
 import profileReducers from './profile.reducers';
 import UserStatistiquesReducers from './UserStatistiques.reducers';
 import binsStatistiquesReducers from './binsStatistiques.reducers';
+import requestsMunicipal from './requestsMunicipal';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -14,6 +15,7 @@ export default combineReducers({
     success:requestSentsuccesReducer,
     profile: profileReducers,
     userStatistiques: UserStatistiquesReducers,
-    binStatistiques : binsStatistiquesReducers
+    binStatistiques : binsStatistiquesReducers,
+    MunicipaRequest : requestsMunicipal
     
 })
