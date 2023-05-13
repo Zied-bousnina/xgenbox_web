@@ -33,6 +33,7 @@ import "./assets/scss/argon-dashboard-react.scss";
 import store from './Redux/store';
 import { Provider } from "react-redux";
 import App from "App";
+import index from './index.css'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
