@@ -8,6 +8,7 @@ import profileReducers from './profile.reducers';
 import UserStatistiquesReducers from './UserStatistiques.reducers';
 import binsStatistiquesReducers from './binsStatistiques.reducers';
 import requestsMunicipal from './requestsMunicipal';
+import AllUsersReducers from './AllUsers.reducers';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -16,6 +17,7 @@ export default combineReducers({
     profile: profileReducers,
     userStatistiques: UserStatistiquesReducers,
     binStatistiques : binsStatistiquesReducers,
-    MunicipaRequest : requestsMunicipal
+    MunicipaRequest : requestsMunicipal,
+    users: AllUsersReducers
     
 })

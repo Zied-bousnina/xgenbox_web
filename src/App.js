@@ -28,6 +28,7 @@ import { LogOut } from "Redux/actions/authActions.js";
 import { SetAuthToken } from "utils/SetAuthToken.js";
 import { GetProfile } from "Redux/actions/profile.actions.js";
 import { setCurrentUser } from "Redux/actions/authActions.js";
+import UserDetails from "components/UserDetails.js";
 function App() {
   // const user= {
   //   isConnected:false,
@@ -76,8 +77,10 @@ function App() {
            <Route  path="/admin"   render={(props) => 
            <PrivateRouter user={user}>
             <AdminLayout {...props} />
+
            </PrivateRouter>
           } />
+          
           
            <Route path="/" exact render={(props) => <Landing {...props} />} />
            <Route path="/landing-page" exact render={(props) => <Landing {...props} />}/>

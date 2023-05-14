@@ -23,7 +23,7 @@ class Chat extends Component {
   }
 
   render() {
-    return <div>Chat</div>;
+    return <div></div>;
   }
 }
 

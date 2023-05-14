@@ -1,6 +1,7 @@
 import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import CostomFormik from "../../costomFormik/CostomFormik";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useForm } from "react-hook-form";
 import {
   FormGroup,
@@ -23,14 +24,28 @@ import { Field, Formik } from "formik";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { CreatePartership } from "Redux/actions/PartnershipAction";
+
+
 
 function FormParternership() {
   const [countries, setCountries] = useState([]);
+  const dispatch = useDispatch()
+  const isLoad = useSelector(state=>state?.isLoading?.isLoading)
+  const isSuccess = useSelector(state=>state?.success?.success)
 
+  const showToastMessage = () => {
+    toast.success('Request sent successfully.', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+    });
+  }
   useEffect(() => {
     axios.get('https://restcountries.com/v2/all')
       .then(response => {
         setCountries(response.data);
+       
       })
       .catch(error => {
         console.log(error);
@@ -40,66 +55,68 @@ function FormParternership() {
   
   
   const [form, setForm] = useState({
-    sensors:[],
-    disinfection:[]
   })
   
   const onChangeHandler = (e) => {
     const { name, checked, value } = e.target;
   
-    if (name === "sensors") {
-      if (checked) {
-        setForm({
-          ...form,
-          sensors: [...form.sensors, value]
-        });
-      } else {
-        setForm({
-          ...form,
-          sensors: form.sensors.filter((sensor) => sensor !== value)
-        });
-      }
-    } else {
+   
       setForm({
         ...form,
         [name]: value
       });
-    }
-    
+      
+      
   };
-  const onChangeHandlerDistfection = (e) => {
-    const { name, checked, value } = e.target;
+  useEffect(() => {
+    if (isSuccess) {
+      
+      showToastMessage()
+    }
+  }, [isSuccess])
   
-    if (name === "disinfection") {
-      if (checked) {
-        setForm({
-          ...form,
-          disinfection: [...form.disinfection, value]
-        });
-      } else {
-        setForm({
-          ...form,
-          disinfection: form.disinfection.filter((disinfection) => disinfection !== value)
-        });
-      }
-    } else {
-      setForm({
-        ...form,
-        [name]: value
-      });
-    }
+  // const onChangeHandlerDistfection = (e) => {
+    //   const { name, checked, value } = e.target;
     
-  };
-
+    //   if (name === "disinfection") {
+      //     if (checked) {
+        //       setForm({
+          //         ...form,
+  //         disinfection: [...form.disinfection, value]
+  //       });
+  //     } else {
+    //       setForm({
+      //         ...form,
+      //         disinfection: form.disinfection.filter((disinfection) => disinfection !== value)
+  //       });
+  //     }
+  //   } else {
+  //     setForm({
+  //       ...form,
+  //       [name]: value
+  //     });
+  //   }
+  
+  // };
+  
   const onSubmit = (e)=>{
     
-  e.preventDefault();
-  console.log(form)
-  // dispatch(LoginAction(form, navigate))
+    e.preventDefault();
+    console.log(form)
+  dispatch(CreatePartership(form))
+
+    
+   
+      // showToastMessage()
+      
+      e.target.reset();
+   
+  
   }
   return (
-
-<>
+    
+    <>
+    
 <form onSubmit={onSubmit}
 style={
   {
@@ -154,7 +171,7 @@ style={
       <label className="form-label">Phone number <span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
-        <input type="text" required  name={"tlp"} className={classNames("form-control")} onChange={onChangeHandler}/>
+        <input type="text" required  name={"tel"} className={classNames("form-control")} onChange={onChangeHandler} minLength={8} maxLength={8}/>
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -164,6 +181,7 @@ style={
     </div>
     </Col>
   </Row>
+  <ToastContainer />
   <Row>
     <Col 
     md="4"
@@ -264,7 +282,7 @@ style={
        <label className="form-label">Company presentation <span style={{color:"red"}}>*</span></label>
       <textarea
 
-      name={"company-presentation"}
+      name={"companyPresentation"}
       className={classNames("form-control")}
       onChange={onChangeHandler}
       placeholder="Message"
@@ -286,7 +304,7 @@ style={
           {errors}
         </div>)
         } */}
-      <select name={"size"} className={classNames("form-control")} onChange={onChangeHandler}>
+      <select name={"partnershipType"} className={classNames("form-control")} onChange={onChangeHandler}>
         <option>Sales agent</option>
         <option>General Distributor</option>
         <option>Exclusive Distributor</option>
@@ -303,7 +321,7 @@ style={
       <label className="form-label">Target markets <span color="red">*</span></label>
       <div className="input-group">
         
-        <input type="select"  name={"quantity"} className={classNames("form-control")} onChange={onChangeHandler}/>
+        <input type="select"  name={"TargetMarkets"} className={classNames("form-control")} onChange={onChangeHandler}/>
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -320,8 +338,8 @@ style={
     >
        <label className="form-label" required>Distribution strategy  <span style={{color:"red"}}>*</span></label>
       <textarea
-
-      name={"company-presentation"}
+required
+      name={"DistrubutionSrategy"}
       className={classNames("form-control")}
       onChange={onChangeHandler}
       placeholder="Message"
@@ -335,8 +353,9 @@ style={
     >
        <label className="form-label" required>Projects for which you plan to use the solution   <span style={{color:"red"}}>*</span></label>
       <textarea
+      required
 
-      name={"company-presentation"}
+      name={"ProjectsForWhichYouPlanToUseTheSolution"}
       className={classNames("form-control")}
       onChange={onChangeHandler}
       placeholder="Message"
@@ -359,7 +378,8 @@ style={
             name="disinfection"
             type="checkbox"
             value="Automatic spray"
-        onChange={onChangeHandlerDistfection}
+        // onChange={onChangeHandlerDistfection}
+        required
           />
           <label className="custom-control-label" htmlFor="automaticspray">
           I consent to XGENBOX storing my submitted information so they can respond to my inquiry.
@@ -372,7 +392,8 @@ style={
             id="UVsterilization"
             type="checkbox"
             value={"UV sterilization"}
-            onChange={onChangeHandlerDistfection}
+            // onChange={onChangeHandlerDistfection}
+            required
           />
           <label className="custom-control-label" htmlFor="UVsterilization">
           Subscribe to our newsletter ?
@@ -386,7 +407,15 @@ style={
   <Row>
     <Col>
     <button type="submit" className="btn btn-outline-primary">
-                  Submit <i className="fa-solid fa-floppy-disk"></i>
+    {isLoad ? (
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden"></span>
+        </div>
+      ) : (
+        'Submit'
+      )}
+
+                  <i className="fa-solid fa-floppy-disk"></i>
                 </button></Col>
   </Row>
 </form>

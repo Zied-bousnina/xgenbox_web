@@ -1,32 +1,29 @@
-import { FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import CostomFormik from "../../costomFormik/CostomFormik";
 
-import { useForm } from "react-hook-form";
 import {
   FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Row,
   Col,
-  Label,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Button
 } from "reactstrap";
-import * as yup from 'yup';
-import { Field, Formik } from "formik";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch, useSelector } from "react-redux";
+import { CreateContactUs } from "Redux/actions/ContactUsAction";
 function ContactUsForm() {
   const [countries, setCountries] = useState([]);
+  const isLoad = useSelector(state=>state?.isLoading?.isLoading)
+  const isSuccess = useSelector(state=>state?.success?.success)
+  const dispatch = useDispatch()
+  const [form, setForm] = useState({  })
 
+  const showToastMessage = () => {
+    toast.success('Request sent successfully.', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+    });
+  }
   useEffect(() => {
     axios.get('https://restcountries.com/v2/all')
       .then(response => {
@@ -36,66 +33,41 @@ function ContactUsForm() {
         console.log(error);
       });
   }, []);
-  console.log(countries)
+  // console.log(countries)
   
   
-  const [form, setForm] = useState({
-    sensors:[],
-    disinfection:[]
-  })
+  
   
   const onChangeHandler = (e) => {
-    const { name, checked, value } = e.target;
+    const { name, value } = e.target;
   
-    if (name === "sensors") {
-      if (checked) {
-        setForm({
-          ...form,
-          sensors: [...form.sensors, value]
-        });
-      } else {
-        setForm({
-          ...form,
-          sensors: form.sensors.filter((sensor) => sensor !== value)
-        });
-      }
-    } else {
-      setForm({
-        ...form,
-        [name]: value
-      });
-    }
-    
-  };
-  const onChangeHandlerDistfection = (e) => {
-    const { name, checked, value } = e.target;
-  
-    if (name === "disinfection") {
-      if (checked) {
-        setForm({
-          ...form,
-          disinfection: [...form.disinfection, value]
-        });
-      } else {
-        setForm({
-          ...form,
-          disinfection: form.disinfection.filter((disinfection) => disinfection !== value)
-        });
-      }
-    } else {
-      setForm({
-        ...form,
-        [name]: value
-      });
-    }
+    setForm({
+      ...form,
+      [name]: value
+    });
     
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      
+      showToastMessage()
+    }
+  }, [isSuccess])
+
   const onSubmit = (e)=>{
     
-  e.preventDefault();
-  console.log(form)
-  // dispatch(LoginAction(form, navigate))
+    e.preventDefault();
+    console.log(form)
+  dispatch(CreateContactUs(form))
+
+    
+   
+      // showToastMessage()
+      
+      e.target.reset();
+   
+  
   }
   return (
 
@@ -154,7 +126,7 @@ style={
       <label className="form-label">Phone number <span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
-        <input type="text" required  name={"tlp"} className={classNames("form-control")} onChange={onChangeHandler}/>
+        <input type="text" required  name={"tel"} className={classNames("form-control")} onChange={onChangeHandler}/>
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -164,6 +136,7 @@ style={
     </div>
     </Col>
   </Row>
+  <ToastContainer />
   <Row>
     <Col 
     md="4"
@@ -270,6 +243,7 @@ style={
       onChange={onChangeHandler}
       placeholder="Message"
       style={{height:"100px"}}
+      required
       />
     </Col>
   </Row>
@@ -291,7 +265,8 @@ style={
             name="disinfection"
             type="checkbox"
             value="Automatic spray"
-        onChange={onChangeHandlerDistfection}
+            required
+        
           />
           <label className="custom-control-label" htmlFor="automaticspray">
           I consent to XGENBOX storing my submitted information so they can respond to my inquiry.
@@ -304,7 +279,8 @@ style={
             id="UVsterilization"
             type="checkbox"
             value={"UV sterilization"}
-            onChange={onChangeHandlerDistfection}
+            required
+           
           />
           <label className="custom-control-label" htmlFor="UVsterilization">
           Subscribe to our newsletter ?
@@ -318,7 +294,14 @@ style={
   <Row>
     <Col>
     <button type="submit" className="btn btn-outline-primary">
-                  Submit <i className="fa-solid fa-floppy-disk"></i>
+    {isLoad ? (
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden"></span>
+        </div>
+      ) : (
+        'Submit'
+      )}
+                  <i className="fa-solid fa-floppy-disk"></i>
                 </button></Col>
   </Row>
 </form>

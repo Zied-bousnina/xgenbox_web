@@ -23,6 +23,8 @@ import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
 import RequestsMunicpal from "./components/RequestsMunicpal";
+import ListOfUsers from "components/ListOfUsers";
+import UserDetails from "components/UserDetails";
 
 
 var routes = [
@@ -40,6 +42,14 @@ var routes = [
     component: RequestsMunicpal,
     layout: "/admin"
   },
+  {
+    path: "/List-Users",
+    name: "List Of users",
+    icon: "ni ni-planet text-blue",
+    component: ListOfUsers,
+    layout: "/admin"
+  },
+  
   {
     path: "/icons",
     name: "Icons",
