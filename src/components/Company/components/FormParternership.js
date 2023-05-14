@@ -36,7 +36,7 @@ function FormParternership() {
         console.log(error);
       });
   }, []);
-  console.log(countries)
+  // console.log(countries)
   
   
   const [form, setForm] = useState({

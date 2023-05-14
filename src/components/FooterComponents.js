@@ -20,6 +20,7 @@ import { color } from 'framer-motion';
 import { ReactNode } from 'react';
 import { Col, Row } from 'reactstrap';
 import ContactUs from './ContactUs';
+import Chat from './Chat';
 // import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 // import { BiMailSend } from 'react-icons/bi';
 
@@ -71,6 +72,7 @@ export default function FooterComponent() {
   return (
     <>
      <ContactUs/>
+     <Chat/>
     <Box
       // bg={useColorModeValue('gray.50', 'gray.900')}
       bg={"#172B4D"}
