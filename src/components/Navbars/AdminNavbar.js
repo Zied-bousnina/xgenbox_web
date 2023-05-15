@@ -1,5 +1,6 @@
 
-import {  useSelector } from "react-redux";
+import { LogOut } from "Redux/actions/authActions";
+import {  useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -22,8 +23,12 @@ import {
 const AdminNavbar = (props) => {
   const user = useSelector(state=>state?.auth?.user)
   const profile = useSelector(state=>state?.profile?.profile)
- 
+ const dispatch = useDispatch()
+  const handleLogout = ()=>{
+    dispatch(LogOut())
+
   
+  }
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -85,7 +90,11 @@ const AdminNavbar = (props) => {
                   <i className="ni ni-support-16" />
                   <span>Support</span>
                 </DropdownItem>
-               
+                <DropdownItem divider />
+              <DropdownItem  onClick={handleLogout}>
+                <i className="ni ni-user-run" />
+                <span>Logout</span>
+              </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

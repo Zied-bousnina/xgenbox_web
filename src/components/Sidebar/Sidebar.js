@@ -188,7 +188,7 @@ const Sidebar = (props) => {
                 <span>Support</span>
               </DropdownItem>
               <DropdownItem divider />
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+              <DropdownItem  onClick={handleLogout}>
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
               </DropdownItem>
@@ -249,14 +249,14 @@ const Sidebar = (props) => {
           {/* <h6 className="navbar-heading text-muted">Documentation</h6> */}
           {/* Navigation */}
           {/* {/* <Nav className="mb-md-3" navbar> */}
-            <NavItem
+            {/* <NavItem
             onClick={handleLogout}
             >
               
             <i  className="ni ni-user-run ml-2" />
                   <span >Logout</span>
               
-            </NavItem>
+            </NavItem> */}
            
            
           </Nav>

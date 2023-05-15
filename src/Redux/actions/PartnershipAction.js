@@ -1,6 +1,7 @@
 import { SET_BIN_STATISTIQUES } from "Redux/types"
 import { SET_DEMANDES_MUNICIPAL } from "Redux/types"
 import { SET_IS_SECCESS } from "Redux/types"
+import { SET_PARTNERSHIP_LIST } from "Redux/types"
 import { SET_IS_LOADING } from "Redux/types"
 import { SET_ERRORS } from "Redux/types"
 import { SET_STATISTIQUES } from "Redux/types"
@@ -66,47 +67,27 @@ dispatch({
   )
 }
 
-export const UpadeteRequest = (data, navigation)=> (dispatch) => {
-  console.log(data)
-  axios.put(`https://genbox.onrender.com/api/demande-municipal/AcceptDemande/${data.id}`
-  ,{status:data.status}
-  )
-  .then(async(res) => {
-    
-    // dispatch({
-    //   type: SET_DEMANDES_MUNICIPAL,
-    //   payload: res.data,
-      
-    // })
-   
-    
-  })
-  
-  
-  .catch( (err) =>{
-     
-         dispatch({
-            type: SET_ERRORS,
-            payload: err?.response?.data
-          })
-      }
-     
-  
-      
-  )
 
-}
+export const FetchAllPartnership = (data)=>dispatch=>{
+  
 
-export const getBinsCount = (navigation)=>dispatch=>{
+
+
    
-  axios.get(`https://genbox.onrender.com/api/bin/getBinsCount`)
+  axios.get(`https://genbox.onrender.com/api/site/partnerShip/fetchAll`,data )
   .then(res => {
-      // console.log(res)
-      dispatch({
-          type: SET_BIN_STATISTIQUES,
-          payload: res?.data
-      })
+      console.log(res)
 
+      dispatch({
+        type: SET_PARTNERSHIP_LIST,
+        payload: res.data
+    })
+      
+   
+   
+ 
+
+  
 
       // dispatch(registerGoogleUser(data))
 
@@ -115,10 +96,15 @@ export const getBinsCount = (navigation)=>dispatch=>{
   .catch(err => 
      { 
       // console.log("err in authAction.js line 366",err)
-      // dispatch({
-      //     type: SET_ERRORS,
-      //     payload: err?.response?.data
-      // })
+      dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+  
       // dispatch(registerGoogleUser(data))
   }
   )

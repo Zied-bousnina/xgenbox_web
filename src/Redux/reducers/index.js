@@ -10,6 +10,7 @@ import binsStatistiquesReducers from './binsStatistiques.reducers';
 import requestsMunicipal from './requestsMunicipal';
 import AllUsersReducers from './AllUsers.reducers';
 import UserDetailsReducer from './userDetails.reducers';
+import PartnerShipListReducer from './PartnerShipList.reducer';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -20,6 +21,7 @@ export default combineReducers({
     binStatistiques : binsStatistiquesReducers,
     MunicipaRequest : requestsMunicipal,
     users: AllUsersReducers,
-    UsersDetails: UserDetailsReducer
+    UsersDetails: UserDetailsReducer,
+    partnerShipList: PartnerShipListReducer
     
 })

@@ -25,6 +25,10 @@ import Icons from "views/examples/Icons.js";
 import RequestsMunicpal from "./components/RequestsMunicpal";
 import ListOfUsers from "components/ListOfUsers";
 import UserDetails from "components/UserDetails";
+import PartnershipList from "components/PartnershipList";
+import QuoteList from "components/QuoteList";
+import TechnicalAssistanceList from "components/TechnicalAssistanceList";
+import ContactsList from "components/ContactsList";
 
 
 var routes = [
@@ -57,6 +61,35 @@ var routes = [
     layout: "/admin"
   },
   
+ 
+  {
+    path: "/partnership-list",
+    name: "Partnership requests",
+    icon: "ni ni-planet text-blue",
+    component: PartnershipList,
+    layout: "/admin"
+  },
+  {
+    path: "/quote-list",
+    name: "quote requests",
+    icon: "ni ni-planet text-blue",
+    component: QuoteList,
+    layout: "/admin"
+  },
+  {
+    path: "/tech-assist-list",
+    name: "technical assistance list",
+    icon: "ni ni-planet text-blue",
+    component: TechnicalAssistanceList,
+    layout: "/admin"
+  },
+  {
+    path: "/contact-lists",
+    name: "Contact List",
+    icon: "ni ni-planet text-blue",
+    component: ContactsList,
+    layout: "/admin"
+  },
   {
     path: "/icons",
     name: "Icons",
