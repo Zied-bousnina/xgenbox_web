@@ -1,5 +1,3 @@
-
-
 import { SET_DEMANDES_MUNICIPAL } from "../types"
 
 const initialState = {

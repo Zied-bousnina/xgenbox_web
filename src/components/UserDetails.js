@@ -1,22 +1,4 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// reactstrap components
 import {
   Button,
   Card,
@@ -27,19 +9,62 @@ import {
   Input,
   Container,
   Row,
-  Col
+  Col,
+  CardTitle,
+  UncontrolledPopover,
+  PopoverBody,
+  Modal
 } from "reactstrap";
 // core components
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserHeader from "./Headers/UserHeader";
 import UserDetailsHeader from "./Headers/UserDetailsHeader";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GetAllUserDetails } from "Redux/actions/userAction";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BlockUser } from "Redux/actions/userAction";
+import { UnBlockUser } from "Redux/actions/userAction";
+
 const UserDetails = () => {
-  const profile = useSelector(state=>state?.profile?.profile)
+  const profile = useSelector(state=>state?.profile?.[0]?.profile)
   const user = useSelector(state=>state.auth?.user)
+  const userDetails = useSelector(state=>state?.UsersDetails?.UsersDetails)
+  const [notificationModal, setnotificationModal] = useState(false)
   const { id } = useParams();
-  console.log(":", id)
+ 
+  const isLoad = useSelector(state=>state?.isLoading?.isLoading)
+  const isSuccess = useSelector(state=>state?.success?.success)
+  const dispatch = useDispatch()
+
+  const showToastMessage = () => {
+    toast.success('Request sent successfully.', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+    });
+  }
+  useEffect(() => {
+   dispatch(GetAllUserDetails(id))
+  }, [userDetails])
+  useEffect(() => {
+    if (isSuccess) {
+      
+      showToastMessage()
+    }
+  }, [isSuccess])
+
+  const block = (id)=>{
+    console.log('block')
+    dispatch(BlockUser(id))
+  }
+  const Unblock = (id)=>{
+    console.log("Unblock")
+    dispatch(UnBlockUser(id))
+  }
+  console.log("userDetails :", userDetails?.users?.accessListBins?.length)
+
   return (
     <>
       <UserDetailsHeader />
@@ -55,7 +80,7 @@ const UserDetails = () => {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src={profile?.avatar}
+                        src={userDetails?.profile?.[0]?.avatar}
                       />
                     </a>
                   </div>
@@ -87,12 +112,12 @@ const UserDetails = () => {
                 
                 <div className="text-center mt-md-5">
                   <h3>
-                  {user?.name}
+                  {userDetails?.users?.name}
                     {/* <span className="font-weight-light">, 27</span> */}
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
-                    {profile?. address}, {profile?.city}, {profile?.country}
+                    {userDetails?.profile?.[0]?.address}, {userDetails?.profile?.[0]?.city}, {userDetails?.profile?.[0]?.country}
                   </div>
                   {/* <div className="h5 mt-4">
                     <i className="ni business_briefcase-24 mr-2" />
@@ -104,11 +129,102 @@ const UserDetails = () => {
                   </div> */}
                   <hr className="my-4" />
                   <p>
-                    {profile?.Bio}
+                    {userDetails?.profile?.[0]?.Bio}
                   </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
+                  <Row>
+
+        <div style={{ width: "18rem" }}>
+          <Card className="card-stats mb-4 mb-lg-0">
+            <CardBody>
+              <Row>
+                <div className="col">
+                  <CardTitle className="text-uppercase text-muted mb-0">
+                    Total Cleaning Service request
+                  </CardTitle>
+                  <span className="h2 font-weight-bold mb-0"> {userDetails?.cleaningServiced?.length}</span>
+                </div>
+                <Col className="col-auto">
+                  <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i className="fas fa-chart-bar" />
+                  </div>
+                </Col>
+              </Row>
+              <ToastContainer />
+              <Modal
+              className="modal-dialog-centered modal-danger"
+              contentClassName="bg-gradient-danger"
+              isOpen={notificationModal}
+              // toggle={() => this.toggleModal("notificationModal")}
+            >
+              <div className="modal-header">
+                <h6 className="modal-title" id="modal-title-notification">
+                  Your attention is required
+                </h6>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  <span aria-hidden={true}>×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="py-3 text-center">
+                  <i className="ni ni-bell-55 ni-3x" />
+                  <h4 className="heading mt-4">You should read this!</h4>
+                  <p>
+                    When you click on "Ok , Got it" <big className="text-title">{userDetails?.users?.name}</big> will be deleted
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <Button className="btn-white" color="default" type="button"
+                // onClick={()=>PutRequest("denied", request?._id)}
+                >
+                  Ok, Got it
+                </Button>
+                <Button
+                  className="text-white ml-auto"
+                  color="link"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </Modal>
+              
+            </CardBody>
+          </Card>
+        </div>
+      
+        </Row>
+        <Row>
+        <div style={{ width: "18rem" }}>
+          <Card className="card-stats mb-4 mb-lg-0">
+            <CardBody>
+              <Row>
+                <div className="col">
+                  <CardTitle className="text-uppercase text-muted mb-0">
+                    Total Access bin
+                  </CardTitle>
+                  <span className="h2 font-weight-bold mb-0"> {userDetails?.users?.accessListBins?.length}</span>
+                </div>
+                <Col className="col-auto">
+                  <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
+                    <i className="fas fa-chart-bar" />
+                  </div>
+                </Col>
+              </Row>
+              
+            </CardBody>
+          </Card>
+        </div>
+      
+        </Row>
                 </div>
               </CardBody>
             </Card>
@@ -122,12 +238,19 @@ const UserDetails = () => {
                   </Col>
                   <Col className="text-right" xs="4">
                     <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      color={`${userDetails?.users?.isBlocked ? "success" : "danger"}`}
+                      // href="#pablo"
+                      onClick={(e) => userDetails?.users?.isBlocked ? Unblock( userDetails?.users?._id) : block( userDetails?.users?._id) }
                       size="sm"
                     >
-                      Settings
+                      {isLoad ? (
+        <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden"></span>
+        </div>
+      ) : (
+        
+                    userDetails?.users?.isBlocked ? "Unblock" : "Block"
+      )}
                     </Button>
                   </Col>
                 </Row>
@@ -147,13 +270,17 @@ const UserDetails = () => {
                           >
                             Username
                           </label>
-                          <Input
+                          {/* <Input
+                          // readOnly
                             className="form-control-alternative"
-                            defaultValue={user?.name}
+                            defaultValue={userDetails?.users?.name}
                             id="input-username"
                             placeholder="Username"
                             type="text"
-                          />
+                          /> */}
+                          <div>
+                            <small>{userDetails?.users?.name}</small>
+                          </div>
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -164,13 +291,19 @@ const UserDetails = () => {
                           >
                             Email address
                           </label>
-                          <Input
+                          {/* <Input
+                          // readOnly
                             className="form-control-alternative"
                             id="input-email"
                             placeholder="jesse@example.com"
-                            defaultValue={user?.email}
+                            defaultValue={userDetails?.users?.email}
                             type="email"
-                          />
+                          /> */}
+                          <div>
+
+                          <small>{userDetails?.users?.email}</small>
+                          </div>
+                         
                         </FormGroup>
                       </Col>
                     </Row>
@@ -184,6 +317,7 @@ const UserDetails = () => {
                             First name
                           </label>
                           <Input
+                          // readOnly
                             className="form-control-alternative"
                             defaultValue="Lucky"
                             id="input-first-name"
@@ -201,6 +335,7 @@ const UserDetails = () => {
                             Last name
                           </label>
                           <Input
+                          // readOnly
                             className="form-control-alternative"
                             defaultValue="Jesse"
                             id="input-last-name"
@@ -226,13 +361,17 @@ const UserDetails = () => {
                           >
                             Address
                           </label>
-                          <Input
+                          {/* <Input
+                          // readOnly
                             className="form-control-alternative"
-                            defaultValue={profile?.address}
+                            defaultValue={userDetails?.profile?.[0]?.address}
                             id="input-address"
                             placeholder="Home Address"
                             type="text"
-                          />
+                          /> */}
+                          <div>
+                            <small>{userDetails?.profile?.[0]?.address}</small>
+                          </div>
                         </FormGroup>
                       </Col>
                     </Row>
@@ -245,13 +384,17 @@ const UserDetails = () => {
                           >
                             City
                           </label>
-                          <Input
+                          {/* <Input
+                          // readOnly
                             className="form-control-alternative"
-                            defaultValue={profile?.city}
+                            defaultValue={userDetails?.profile?.[0]?.city}
                             id="input-city"
                             placeholder="City"
                             type="text"
-                          />
+                          /> */}
+                          <div>
+                            <small>{userDetails?.profile?.[0]?.city}</small>
+                          </div>
                         </FormGroup>
                       </Col>
                       <Col lg="4">
@@ -262,13 +405,19 @@ const UserDetails = () => {
                           >
                             Country
                           </label>
-                          <Input
+                          {/* <Input
+                          // readOnly
                             className="form-control-alternative"
-                            defaultValue={profile?.country}
+                            defaultValue={userDetails?.profile?.[0]?.country}
                             id="input-country"
                             placeholder="Country"
                             type="text"
-                          />
+                          /> */}
+                          <div>
+                            <small>
+                            {userDetails?.profile?.[0]?.country}
+                            </small>
+                          </div>
                         </FormGroup>
                       </Col>
                       <Col lg="4">
@@ -279,13 +428,19 @@ const UserDetails = () => {
                           >
                             Postal code
                           </label>
-                          <Input
+                          {/* <Input
+                          // readOnly
                             className="form-control-alternative"
                             id="input-postal-code"
                             placeholder="Postal code"
-                            defaultValue={profile?.postalCode}
+                            defaultValue={userDetails?.profile?.[0]?.postalCode}
                             type="number"
-                          />
+                          /> */}
+                          <div>
+                            <small>
+                            {userDetails?.profile?.[0]?.postalCode}
+                            </small>
+                          </div>
                         </FormGroup>
                       </Col>
                     </Row>
@@ -297,6 +452,7 @@ const UserDetails = () => {
                     <FormGroup>
                       <label>About Me</label>
                       <Input
+                      // readOnly
                         className="form-control-alternative"
                         placeholder="A few words about you ..."
                         rows="4"

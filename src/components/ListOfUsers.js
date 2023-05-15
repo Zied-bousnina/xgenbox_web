@@ -118,8 +118,22 @@ function ListOfUsers() {
                     <td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-success" />
-                        connected
+                      {request?.user?.isBlocked ? (
+                        <>
+<i className="bg-danger" />
+                        is Blocked
+                        </>
+                        
+                      ) : (
+                        <>
+
+<i className="bg-success" />
+                        Active
+                        </>
+                        
+                      )
+                        }
+                        {/* <i className="bg-success" /> */}
                       </Badge>
                     </td>
                     </td>
@@ -168,7 +182,7 @@ function ListOfUsers() {
                   className="close"
                   data-dismiss="modal"
                   type="button"
-                  onClick={() => this.toggleModal("notificationModal")}
+                  onClick={() => setnotificationModal(false)}
                 >
                   <span aria-hidden={true}>×</span>
                 </button>

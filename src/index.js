@@ -23,7 +23,7 @@ import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/font-awesome/css/font-awesome.min.css";
 import "assets/scss/argon-design-system-react.scss?v1.1.0";
 // import "./index.css"
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeProvider  } from '@chakra-ui/react'
 
 
 
@@ -39,7 +39,10 @@ root.render(
   <Provider store={store}>
 
   <ChakraProvider>
+  <ColorModeProvider options={{ initialColorMode: "light" }}>
+
  <App/>
+  </ColorModeProvider>
   </ChakraProvider>
   </Provider>
 );
