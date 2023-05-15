@@ -38,6 +38,7 @@ import {
   Col,
   UncontrolledTooltip
 } from "reactstrap";
+import ColorModeToggle from "components/ColorModeToggle";
 
 class DemoNavbar extends React.Component {
   componentDidMount() {
@@ -71,6 +72,7 @@ class DemoNavbar extends React.Component {
             expand="lg"
             id="navbar-main"
           >
+            <ColorModeToggle/>
             <Container>
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 <img

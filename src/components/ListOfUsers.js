@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from "react";
 // react component that copies the given text inside your clipboard
-import { CopyToClipboard } from "react-copy-to-clipboard";
-// reactstrap components
+
 import {
   Card,
   CardHeader,
@@ -137,12 +136,17 @@ function ListOfUsers() {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
+                          
+                          <Link
+                          to={`/admin/user-details/${request?.user?._id}`}
+                          >
                           <DropdownItem
-                            href="#pablo"
-                            onClick={()=>PutRequest("valid", request?._id)}
+                            // href="#pablo"
+                            // onClick={()=>PutRequest("valid", request?._id)}
                           >
                             Show details
                           </DropdownItem>
+                            </Link>
                           <DropdownItem
                             href="#pablo"
                             onClick={() => setnotificationModal(true)}

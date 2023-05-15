@@ -49,6 +49,13 @@ var routes = [
     component: ListOfUsers,
     layout: "/admin"
   },
+  {
+    path: "/user-details/:id",
+    name: "user details",
+    icon: "ni ni-planet text-blue",
+    component: UserDetails,
+    layout: "/admin"
+  },
   
   {
     path: "/icons",

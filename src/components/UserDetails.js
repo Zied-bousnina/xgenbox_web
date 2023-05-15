@@ -33,13 +33,16 @@ import {
 
 import { useSelector } from "react-redux";
 import UserHeader from "./Headers/UserHeader";
-
+import UserDetailsHeader from "./Headers/UserDetailsHeader";
+import { useParams } from "react-router-dom";
 const UserDetails = () => {
   const profile = useSelector(state=>state?.profile?.profile)
   const user = useSelector(state=>state.auth?.user)
+  const { id } = useParams();
+  console.log(":", id)
   return (
     <>
-      <UserHeader />
+      <UserDetailsHeader />
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>

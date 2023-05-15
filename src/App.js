@@ -29,11 +29,15 @@ import { SetAuthToken } from "utils/SetAuthToken.js";
 import { GetProfile } from "Redux/actions/profile.actions.js";
 import { setCurrentUser } from "Redux/actions/authActions.js";
 import UserDetails from "components/UserDetails.js";
+
+
 function App() {
   // const user= {
   //   isConnected:false,
   //   role:"ADMIN"
   // }
+
+  
   const user = useSelector(state=>state.auth)
   const profile = useSelector(state=>state?.profile?.profile)
   const dispatch = useDispatch()
@@ -77,6 +81,8 @@ function App() {
            <Route  path="/admin"   render={(props) => 
            <PrivateRouter user={user}>
             <AdminLayout {...props} />
+            
+           
 
            </PrivateRouter>
           } />
