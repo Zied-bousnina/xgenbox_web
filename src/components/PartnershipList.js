@@ -35,7 +35,7 @@ import {Link} from "react-router-dom"
 import { FetchAllPartnership } from 'Redux/actions/PartnershipAction';
 function PartnershipList() {
   const [copiedText, setCopiedText] = useState();
-  const partnerShipLists = useSelector(state=>state?.partnerShipList?.PartnershipList)
+  const partnerShipLists = useSelector(state=>state?.partnerShipList?.PartnerShipList)
   const requestsMunicipal = useSelector(state=>state?.MunicipaRequest?.MunicipalRequest )
   const ListOfUsers = useSelector(state=>state?.users?.users)
   console.log(ListOfUsers)
@@ -49,6 +49,7 @@ function PartnershipList() {
     dispatch(FetchAllPartnership())
    
   }, [partnerShipLists])
+  console.log("partner:",partnerShipLists)
   
   const PutRequest = (status, id)=> {
     // alert("accept", status)
