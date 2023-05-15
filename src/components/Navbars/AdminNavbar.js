@@ -1,22 +1,5 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import { LogOut } from "Redux/actions/authActions";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // reactstrap components
 import {
@@ -39,12 +22,8 @@ import {
 const AdminNavbar = (props) => {
   const user = useSelector(state=>state?.auth?.user)
   const profile = useSelector(state=>state?.profile?.profile)
-  // console
-  const dispatch = useDispatch()
-
-  const logout = _=>{
-    dispatch(LogOut())
-  }
+ 
+  
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -102,15 +81,11 @@ const AdminNavbar = (props) => {
                   <i className="ni ni-calendar-grid-58" />
                   <span>Activity</span>
                 </DropdownItem>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
+                <DropdownItem to="/" tag={Link}>
                   <i className="ni ni-support-16" />
                   <span>Support</span>
                 </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={logout}>
-                  <i className="ni ni-user-run" />
-                  <span>Logout</span>
-                </DropdownItem>
+               
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

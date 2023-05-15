@@ -51,11 +51,13 @@ import {
   Row,
   Col
 } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LogOut } from "Redux/actions/authActions";
 
 var ps;
 
 const Sidebar = (props) => {
+  const dispatch = useDispatch()
   const [collapseOpen, setCollapseOpen] = useState();
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
@@ -65,6 +67,9 @@ const Sidebar = (props) => {
   const toggleCollapse = () => {
     setCollapseOpen((data) => !data);
   };
+  const handleLogout=()=>{
+    dispatch(LogOut())
+  }
   // closes the collapse
   const closeCollapse = () => {
     setCollapseOpen(false);
@@ -237,32 +242,24 @@ const Sidebar = (props) => {
             </InputGroup>
           </Form>
           {/* Navigation */}
-          <Nav navbar>{createLinks(routes)}</Nav>
+          <Nav navbar>{createLinks(routes)}
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
           {/* <h6 className="navbar-heading text-muted">Documentation</h6> */}
           {/* Navigation */}
-          {/* <Nav className="mb-md-3" navbar>
-            <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
-                <i className="ni ni-spaceship" />
-                Getting started
-              </NavLink>
+          {/* {/* <Nav className="mb-md-3" navbar> */}
+            <NavItem
+            onClick={handleLogout}
+            >
+              
+            <i  className="ni ni-user-run ml-2" />
+                  <span >Logout</span>
+              
             </NavItem>
-            <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette" />
-                Foundation
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="ni ni-ui-04" />
-                Components
-              </NavLink>
-            </NavItem>
-          </Nav> */}
+           
+           
+          </Nav>
           {/* <Nav className="mb-md-3" navbar>
             <NavItem className="active-pro active">
               <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adr-admin-sidebar">
