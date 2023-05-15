@@ -182,6 +182,7 @@ function QuoteForm() {
     console.log(formdata)
   
     dispatch(createQuote(formdata));
+    e.target.reset();
   };
   
   useEffect(() => {
