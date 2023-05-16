@@ -32,9 +32,11 @@ import { UpadeteRequest } from 'Redux/actions/MunicipalRequest.Action';
 import { GetAllUsers } from 'Redux/actions/userAction';
 // core components
 import {Link} from "react-router-dom"
+import { FetchAllTechAssist } from 'Redux/actions/TechAssistanceAction';
 function TechnicalAssistanceList() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
+  const ListTechAssist = useSelector(state=>state?.TechAssistList?.TechAssistList?.techAssist)
   const requestsMunicipal = useSelector(state=>state?.MunicipaRequest?.MunicipalRequest )
   const ListOfUsers = useSelector(state=>state?.users?.users)
   console.log(ListOfUsers)
@@ -45,9 +47,9 @@ function TechnicalAssistanceList() {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    dispatch(GetAllUsers())
+    dispatch(FetchAllTechAssist())
    
-  }, [ListOfUsers])
+  }, [ListTechAssist])
   
   const PutRequest = (status, id)=> {
     // alert("accept", status)
@@ -73,7 +75,7 @@ function TechnicalAssistanceList() {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">User</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">E-mail</th>
                     <th scope="col">Tel</th>
                     <th scope="col">city & country</th>
                     <th scope="col">Status</th>
@@ -81,7 +83,7 @@ function TechnicalAssistanceList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ListOfUsers &&ListOfUsers?.map((request) => (
+                  {ListTechAssist &&ListTechAssist?.map((request) => (
                     
                     
                   <tr>
@@ -89,25 +91,16 @@ function TechnicalAssistanceList() {
                     <th scope="row">
                     <Media className="align-items-center">
                       
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={request?.avatar}
-                          />
-                        </a>
+                        
                         <Media>
                           <span className="mb-0 text-sm">
-                            {request?.user?.name}
+                            {request?.name}
                           </span>
                         </Media>
                       </Media>
                     </th>
                     <td>
-                    {request?.address}
+                    {request?.email}
                       </td>
                     <td>
                     {request?.tel}
@@ -118,17 +111,17 @@ function TechnicalAssistanceList() {
                     <td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                      {request?.user?.isBlocked ? (
+                      {request?.status ==='unreaded' ?  (
                         <>
 <i className="bg-danger" />
-                        is Blocked
+                        unreaded
                         </>
                         
                       ) : (
                         <>
 
-<i className="bg-success" />
-                        Active
+<i className="bg-primary" />
+                        Readed
                         </>
                         
                       )
@@ -152,7 +145,7 @@ function TechnicalAssistanceList() {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           
                           <Link
-                          to={`/admin/user-details/${request?.user?._id}`}
+                          to={`/admin/tech-assist-detail/${request?._id}`}
                           >
                           <DropdownItem
                             // href="#pablo"
@@ -161,12 +154,12 @@ function TechnicalAssistanceList() {
                             Show details
                           </DropdownItem>
                             </Link>
-                          <DropdownItem
+                          {/* <DropdownItem
                             href="#pablo"
                             onClick={() => setnotificationModal(true)}
                           >
                             Block
-                          </DropdownItem>
+                          </DropdownItem> */}
                           <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"

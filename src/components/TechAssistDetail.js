@@ -32,14 +32,17 @@ import { UpdatePartnerShipStatus } from "Redux/actions/PartnershipAction";
 import { GetQuoteById } from "Redux/actions/QuoteAction";
 import { FileViewer } from "react-file-viewer";
 import { UpdateQuoteStatus } from "Redux/actions/QuoteAction";
+import { GetTechAssistDetailsById } from "Redux/actions/TechAssistanceAction";
+import { UpdateTechAssistStatus } from "Redux/actions/TechAssistanceAction";
 import axios from "axios";
 import { saveAs } from 'file-saver';
-const QuoteDetail = () => {
+const TechAssistDetail = () => {
   const profile = useSelector(state=>state?.profile?.[0]?.profile)
   const user = useSelector(state=>state.auth?.user)
   const userDetails = useSelector(state=>state?.UsersDetails?.UsersDetails)
   const PartnerDetails = useSelector(state=>state?.partnerDetails?.partnerDetails)
   const QuoteDetails = useSelector(state=>state?.quoteDetails?.quoteDetails?.quote)
+  const TechAssistDetails = useSelector(state=>state?.TechAssistDetails?.TechAssistDetails?.TechAssist)
   const [notificationModal, setnotificationModal] = useState(false)
   const { id } = useParams();
  
@@ -54,8 +57,8 @@ const QuoteDetail = () => {
     });
   }
   useEffect(() => {
-   dispatch(GetQuoteById(id))
-  }, [QuoteDetails])
+   dispatch(GetTechAssistDetailsById(id))
+  }, [TechAssistDetails])
   useEffect(() => {
     if (isSuccess) {
       
@@ -65,12 +68,12 @@ const QuoteDetail = () => {
 
   const block = (id)=>{
     console.log('block')
-    dispatch(UpdateQuoteStatus(id))
+    dispatch(UpdateTechAssistStatus(id))
   }
   const Unblock = (id)=>{
     console.log("Unblock")
     // dispatch(UnBlockUser(id))
-    dispatch(UpdateQuoteStatus(id))
+    dispatch(UpdateTechAssistStatus(id))
 
   }
   console.log("userDetails :", PartnerDetails)
@@ -124,7 +127,7 @@ const QuoteDetail = () => {
                 </div> */}
                 <h4>
 
-                Company Name :{QuoteDetails?.companyName}
+                Company Name :{TechAssistDetails?.companyName}
                 </h4>
             </CardHeader>
             <CardBody className="pt-0 pt-md-4">
@@ -136,7 +139,7 @@ const QuoteDetail = () => {
                 </h3>
                 <div className="h5 font-weight-300">
                   <i className="ni location_pin mr-2" />
-                  {QuoteDetails?.country}, {QuoteDetails?.city}
+                  {TechAssistDetails?.country}, {TechAssistDetails?.city}
                 </div>
                 {/* <div className="h5 mt-4">
                   <i className="ni business_briefcase-24 mr-2" />
@@ -160,7 +163,7 @@ const QuoteDetail = () => {
                 <CardTitle className="text-uppercase text-muted mb-0">
                   Telephone number
                 </CardTitle>
-                <span className="h2 font-weight-bold mb-0"> {QuoteDetails?.tel}</span>
+                <span className="h2 font-weight-bold mb-0"> {TechAssistDetails?.tel}</span>
               </div>
               <Col className="col-auto">
                 <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -194,7 +197,7 @@ const QuoteDetail = () => {
                 <i className="ni ni-bell-55 ni-3x" />
                 <h4 className="heading mt-4">You should read this!</h4>
                 <p>
-                  When you click on "Ok , Got it" <big className="text-title">{userDetails?.users?.name}</big> will be deleted
+                  When you click on "Ok , Got it" <big className="text-title">{TechAssistDetails?.name}</big> will be deleted
                 </p>
               </div>
             </div>
@@ -228,9 +231,9 @@ const QuoteDetail = () => {
             <Row>
               <div className="col">
                 <CardTitle className="text-uppercase text-muted mb-0">
-                  Company presentation
+                  Created At
                 </CardTitle>
-                <span className="h2 font-weight-bold mb-0"> {QuoteDetails?.companyPresentation}</span>
+                <span className="h2 font-weight-bold mb-0"> {TechAssistDetails?.createdAt}</span>
               </div>
               <Col className="col-auto">
                 <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -257,9 +260,9 @@ const QuoteDetail = () => {
                 </Col>
                 <Col className="text-right" xs="4">
                   <Button
-                    color={`${QuoteDetails?.status ==='unreaded' ?  "success":"primary" }`}
+                    color={`${TechAssistDetails?.status ==='unreaded' ?  "success":"primary" }`}
                     // href="#pablo"
-                    onClick={(e) => QuoteDetails?.status ==='unreaded' ? Unblock(QuoteDetails?._id) : block( QuoteDetails?._id) }
+                    onClick={(e) => TechAssistDetails?.status ==='unreaded' ? Unblock(TechAssistDetails?._id) : block( TechAssistDetails?._id) }
                     size="sm"
                   >
                     {isLoad ? (
@@ -298,7 +301,7 @@ const QuoteDetail = () => {
                           type="text"
                         /> */}
                         <div>
-                          <small>{QuoteDetails?.name}</small>
+                          <small>{TechAssistDetails?.name}</small>
                         </div>
                       </FormGroup>
                     </Col>
@@ -320,7 +323,7 @@ const QuoteDetail = () => {
                         /> */}
                         <div>
 
-                        <small>{QuoteDetails?.email}</small>
+                        <small>{TechAssistDetails?.email}</small>
                         </div>
                        
                       </FormGroup>
@@ -389,7 +392,7 @@ const QuoteDetail = () => {
                           type="text"
                         /> */}
                         <div>
-                          <small>{QuoteDetails?.companyWebSite}</small>
+                          <small>{ TechAssistDetails?.companyWebSite ? TechAssistDetails?.companyWebSite : "No Web-site" }</small>
                         </div>
                       </FormGroup>
                     </Col>
@@ -412,7 +415,7 @@ const QuoteDetail = () => {
                           type="text"
                         /> */}
                         <div>
-                          <small>{QuoteDetails?.jobTitle}</small>
+                          <small>{TechAssistDetails?.jobTitle ? TechAssistDetails?.jobTitle : "No Job Title"  }</small>
                         </div>
                       </FormGroup>
                     </Col>
@@ -422,7 +425,7 @@ const QuoteDetail = () => {
                           className="form-control-label"
                           htmlFor="input-country"
                         >
-                          Caracteristique
+                          product Serial Number
                         </label>
                         {/* <Input
                         // readOnly
@@ -432,12 +435,12 @@ const QuoteDetail = () => {
                           placeholder="Country"
                           type="text"
                         /> */}
+                        <spann>
+
+                        {TechAssistDetails?.productSerialNumber ? TechAssistDetails?.productSerialNumber : "..."  }
+                        </spann>
                         <div>
-                        {QuoteDetails?.caracteristique.map(r=>(
-                              <small>
-                              {r}, {" "}
-                            </small>
-                              ))}
+                        
                         </div>
                       </FormGroup>
                     </Col>
@@ -447,7 +450,7 @@ const QuoteDetail = () => {
                           className="form-control-label"
                           htmlFor="input-country"
                         >
-                          Disinfinfection
+                          description
                         </label>
                         {/* <Input
                         // readOnly
@@ -458,11 +461,7 @@ const QuoteDetail = () => {
                           type="number"
                         /> */}
                         <div>
-                        {QuoteDetails?.disinfection.map(r=>(
-                              <small>
-                              {r}, {" "}
-                            </small>
-                              ))}
+                          <small>{TechAssistDetails?.description ? TechAssistDetails?.description : "..."  }</small>
                         </div>
                       </FormGroup>
                     </Col>
@@ -473,138 +472,7 @@ const QuoteDetail = () => {
                 {/* <h6 className="heading-small text-muted mb-4">
                   Contact information
                 </h6> */}
-                <div className="pl-lg-4">
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-address"
-                        >
-                         Sensors
-                        </label>
-                        {/* <Input
-                        // readOnly
-                          className="form-control-alternative"
-                          defaultValue={userDetails?.profile?.[0]?.address}
-                          id="input-address"
-                          placeholder="Home Address"
-                          type="text"
-                        /> */}
-                        <div>
-                            {QuoteDetails?.sensors.map(r=>(
-                              <small>
-                              {r}, {" "}
-                            </small>
-                              ))}
-                        </div>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {/* <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-city"
-                        >
-                          Projects For Which You Plan To Use The Solution
-                        </label>
-                       
-                        <div>
-                          <small>{QuoteDetails?.ProjectsForWhichYouPlanToUseTheSolution}</small>
-                        </div>
-                      </FormGroup>
-                    </Col> */}
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-country"
-                        >
-                          Power Supply
-                        </label>
-                        {/* <Input
-                        // readOnly
-                          className="form-control-alternative"
-                          defaultValue={userDetails?.profile?.[0]?.country}
-                          id="input-country"
-                          placeholder="Country"
-                          type="text"
-                        /> */}
-                        <div>
-                          <small>
-                          {QuoteDetails?.powerSupply}
-                          </small>
-                        </div>
-                      </FormGroup>
-                    </Col>
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-country"
-                        >
-                          Connectivity
-                        </label>
-                        {/* <Input
-                        // readOnly
-                          className="form-control-alternative"
-                          id="input-postal-code"
-                          placeholder="Postal code"
-                          defaultValue={userDetails?.profile?.[0]?.postalCode}
-                          type="number"
-                        /> */}
-                        <div>
-                          <small>
-                          {QuoteDetails?.connectivity}
-                          </small>
-                        </div>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    {/* <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-city"
-                        >
-                          Projects For Which You Plan To Use The Solution
-                        </label>
-                       
-                        <div>
-                          <small>{QuoteDetails?.ProjectsForWhichYouPlanToUseTheSolution}</small>
-                        </div>
-                      </FormGroup>
-                    </Col> */}
-                    
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-country"
-                        >
-                          Size
-                        </label>
-                        {/* <Input
-                        // readOnly
-                          className="form-control-alternative"
-                          id="input-postal-code"
-                          placeholder="Postal code"
-                          defaultValue={userDetails?.profile?.[0]?.postalCode}
-                          type="number"
-                        /> */}
-                        <div>
-                          <small>
-                          {QuoteDetails?.size}
-                          </small>
-                        </div>
-                      </FormGroup>
-                    </Col>
-                  </Row>
-
-                </div>
+                
                 <hr className="my-4" />
                  <h6 className="heading-small text-muted mb-4">Attachments</h6>
                 <Row>
@@ -623,7 +491,7 @@ const QuoteDetail = () => {
                       </FormGroup>
                     </Col> */}
                     {
-                      QuoteDetails?.graphicWraps && (
+                      TechAssistDetails?.attachment && (
                      
                     <Col lg="4">
                       <FormGroup>
@@ -631,7 +499,7 @@ const QuoteDetail = () => {
                           className="form-control-label"
                           htmlFor="input-country"
                         >
-                          Graphic wraps
+                         
                         </label>
                         {/* <Input
                         // readOnly
@@ -646,7 +514,8 @@ const QuoteDetail = () => {
                           {/* {QuoteDetails?.powerSupply} */}
                           {/* <button onClick={handleDownload}>Download File</button> */}
                           <Button className="btn-icon btn-2" color="primary" type="button"
-          onClick={()=>handleDownload(QuoteDetails?.graphicWraps)}
+          onClick={()=>handleDownload(TechAssistDetails?.attachment)
+          }
                           >
           {/* <span className="btn-inner--icon"> */}
             <i className="ni ni-cloud-download-95" />
@@ -662,46 +531,7 @@ const QuoteDetail = () => {
                     </Col>
                      )
                     }
-                    {
-                      QuoteDetails?.advertisementSignage && (
-                     
-                    <Col lg="4">
-                      <FormGroup>
-                        <label
-                          className="form-control-label"
-                          htmlFor="input-country"
-                        >
-                          Advertisement Signage
-                        </label>
-                        {/* <Input
-                        // readOnly
-                          className="form-control-alternative"
-                          defaultValue={userDetails?.profile?.[0]?.country}
-                          id="input-country"
-                          placeholder="Country"
-                          type="text"
-                        /> */}
-                        <div>
-                          {/* <small> */}
-                          {/* {QuoteDetails?.powerSupply} */}
-                          {/* <button onClick={handleDownload}>Download File</button> */}
-                          <Button className="btn-icon btn-2" color="primary" type="button"
-          onClick={()=>handleDownload(QuoteDetails?.advertisementSignage)}
-                          >
-          {/* <span className="btn-inner--icon"> */}
-            <i className="ni ni-cloud-download-95" />
-          {/* </span> */}
-        </Button>
-                           
-
-                          
-                          {/* </small> */}
-                          
-                        </div>
-                      </FormGroup>
-                    </Col>
-                     )
-                    }
+                    
                     <Col lg="4">
                       <FormGroup>
                         <label
@@ -752,4 +582,4 @@ const QuoteDetail = () => {
   );
 };
 
-export default QuoteDetail;
+export default TechAssistDetail;

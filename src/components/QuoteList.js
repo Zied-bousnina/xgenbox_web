@@ -156,12 +156,12 @@ function QuoteList() {
                             Show details
                           </DropdownItem>
                             </Link>
-                          <DropdownItem
+                          {/* <DropdownItem
                             href="#pablo"
                             onClick={() => setnotificationModal(true)}
                           >
                             Block
-                          </DropdownItem>
+                          </DropdownItem> */}
                           <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"

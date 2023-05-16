@@ -31,6 +31,8 @@ import TechnicalAssistanceList from "components/TechnicalAssistanceList";
 import ContactsList from "components/ContactsList";
 import PartnerDetails from "components/DetailsPartnership";
 import QuoteDetail from "components/QuoteDetails";
+import TechAssistDetail from "components/TechAssistDetail";
+import ContactDetails from "components/ContactDetails";
 
 
 var routes = [
@@ -100,10 +102,24 @@ var routes = [
     layout: "/admin"
   },
   {
+    path: "/tech-assist-detail/:id",
+    name: "technical assistance list",
+    icon: "ni ni-planet text-blue",
+    component: TechAssistDetail,
+    layout: "/admin"
+  },
+  {
     path: "/contact-lists",
     name: "Contact List",
     icon: "ni ni-planet text-blue",
     component: ContactsList,
+    layout: "/admin"
+  },
+  {
+    path: "/contact-detail/:id",
+    name: "Contact List",
+    icon: "ni ni-planet text-blue",
+    component: ContactDetails,
     layout: "/admin"
   },
   {

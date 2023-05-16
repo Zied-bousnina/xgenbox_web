@@ -14,6 +14,10 @@ import PartnerShipListReducer from './PartnerShipList.reducer';
 import PartnerDetaisReducer from './PartnerDetais.reducer';
 import QuotefetchAllReducers from './QuotefetchAll.reducers';
 import quoteDetailsReducers from './quoteDetails.reducers';
+import TechAssistListReducer from './TechAssistList.reducer';
+import TechAssistDetailsReducer from './TechAssistDetails.reducer';
+import ContactListReducers from './ContactList.reducers';
+import ContactDetailsReducer from './ContactDetails.reducer';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -29,5 +33,9 @@ export default combineReducers({
     partnerDetails: PartnerDetaisReducer,
     quote: QuotefetchAllReducers,
     quoteDetails: quoteDetailsReducers,
+    TechAssistList : TechAssistListReducer,
+    TechAssistDetails : TechAssistDetailsReducer,
+    contactList : ContactListReducers,
+    ContactDetails : ContactDetailsReducer
     
 })
