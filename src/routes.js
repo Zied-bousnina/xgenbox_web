@@ -29,6 +29,8 @@ import PartnershipList from "components/PartnershipList";
 import QuoteList from "components/QuoteList";
 import TechnicalAssistanceList from "components/TechnicalAssistanceList";
 import ContactsList from "components/ContactsList";
+import PartnerDetails from "components/DetailsPartnership";
+import QuoteDetail from "components/QuoteDetails";
 
 
 var routes = [
@@ -60,6 +62,13 @@ var routes = [
     component: UserDetails,
     layout: "/admin"
   },
+  {
+    path: "/partner-details/:id",
+    name: "Partner details",
+    icon: "ni ni-planet text-blue",
+    component: PartnerDetails,
+    layout: "/admin"
+  },
   
  
   {
@@ -74,6 +83,13 @@ var routes = [
     name: "quote requests",
     icon: "ni ni-planet text-blue",
     component: QuoteList,
+    layout: "/admin"
+  },
+  {
+    path: "/quote-details/:id",
+    name: "quote requests",
+    icon: "ni ni-planet text-blue",
+    component: QuoteDetail,
     layout: "/admin"
   },
   {

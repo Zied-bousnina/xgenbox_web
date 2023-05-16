@@ -14,22 +14,12 @@ export function setLoading(isLoading) {
     };
   }
 
-
-     
-
-
-
-
-        
-
-
 export const setCurrentUser = (decoded) => {
     return {
         type: SET_USER,
         payload: decoded
     }
 }
-
 
 export const loginUser = (userData) => dispatch => {
     // console.log("--------------userData-----------------------------")
@@ -87,8 +77,6 @@ export const loginUser = (userData) => dispatch => {
             
         )
 }
-
-  
 
 export const LogOut = (navigation)=>dispatch=>{
     // AsyncStorage.removeItem("jwtToken")

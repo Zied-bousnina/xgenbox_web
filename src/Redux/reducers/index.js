@@ -11,6 +11,9 @@ import requestsMunicipal from './requestsMunicipal';
 import AllUsersReducers from './AllUsers.reducers';
 import UserDetailsReducer from './userDetails.reducers';
 import PartnerShipListReducer from './PartnerShipList.reducer';
+import PartnerDetaisReducer from './PartnerDetais.reducer';
+import QuotefetchAllReducers from './QuotefetchAll.reducers';
+import quoteDetailsReducers from './quoteDetails.reducers';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -22,6 +25,9 @@ export default combineReducers({
     MunicipaRequest : requestsMunicipal,
     users: AllUsersReducers,
     UsersDetails: UserDetailsReducer,
-    partnerShipList: PartnerShipListReducer
+    partnerShipList: PartnerShipListReducer,
+    partnerDetails: PartnerDetaisReducer,
+    quote: QuotefetchAllReducers,
+    quoteDetails: quoteDetailsReducers,
     
 })

@@ -32,6 +32,7 @@ import { UpadeteRequest } from 'Redux/actions/MunicipalRequest.Action';
 import { GetAllUsers } from 'Redux/actions/userAction';
 // core components
 import {Link} from "react-router-dom"
+import { BlockUser } from 'Redux/actions/userAction';
 function ListOfUsers() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
@@ -56,6 +57,7 @@ function ListOfUsers() {
     setnotificationModal(false)
 
   }
+  
   
   return (
     <>
@@ -161,13 +163,13 @@ function ListOfUsers() {
                             Show details
                           </DropdownItem>
                             </Link>
-                          <DropdownItem
+                          {/* <DropdownItem
                             href="#pablo"
                             onClick={() => setnotificationModal(true)}
                           >
                             Block
-                          </DropdownItem>
-                          <Modal
+                          </DropdownItem> */}
+                          {/* <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"
               isOpen={notificationModal}
@@ -198,7 +200,7 @@ function ListOfUsers() {
               </div>
               <div className="modal-footer">
                 <Button className="btn-white" color="default" type="button"
-                onClick={()=>PutRequest("denied", request?._id)}
+                onClick={()=>block( request?._id)}
                 >
                   Ok, Got it
                 </Button>
@@ -212,7 +214,7 @@ function ListOfUsers() {
                   Close
                 </Button>
               </div>
-            </Modal>
+            </Modal> */}
                           {/* <DropdownItem
                             href="#pablo"
                             onClick={() => this.toggleModal("notificationModal")}

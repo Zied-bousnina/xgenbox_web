@@ -111,17 +111,17 @@ function PartnershipList() {
                     <td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                      {!request?.status ==='valid' ?  (
+                      {request?.status ==='unreaded' ?  (
                         <>
-<i className="bg-success" />
-                        Valid
+<i className="bg-danger" />
+                        unreaded
                         </>
                         
                       ) : (
                         <>
 
 <i className="bg-primary" />
-                        In progress
+                        Readed
                         </>
                         
                       )
@@ -145,7 +145,7 @@ function PartnershipList() {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           
                           <Link
-                          to={`/admin/user-details/${request?.user?._id}`}
+                          to={`/admin/partner-details/${request?._id}`}
                           >
                           <DropdownItem
                             // href="#pablo"
@@ -154,12 +154,12 @@ function PartnershipList() {
                             Show details
                           </DropdownItem>
                             </Link>
-                          <DropdownItem
+                          {/* <DropdownItem
                             href="#pablo"
                             onClick={() => setnotificationModal(true)}
                           >
                             Block
-                          </DropdownItem>
+                          </DropdownItem> */}
                           <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"

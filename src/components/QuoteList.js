@@ -32,11 +32,13 @@ import { UpadeteRequest } from 'Redux/actions/MunicipalRequest.Action';
 import { GetAllUsers } from 'Redux/actions/userAction';
 // core components
 import {Link} from "react-router-dom"
+import { FetchAllQuote } from 'Redux/actions/QuoteAction';
 function QuoteList() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
   const requestsMunicipal = useSelector(state=>state?.MunicipaRequest?.MunicipalRequest )
   const ListOfUsers = useSelector(state=>state?.users?.users)
+  const ListOfQuote= useSelector(state=>state?.quote?.quote?.quotes)
   console.log(ListOfUsers)
     const [notificationModal, setnotificationModal] = useState(false)
   console.log(requestsMunicipal)
@@ -45,9 +47,11 @@ function QuoteList() {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    dispatch(GetAllUsers())
+    dispatch(FetchAllQuote())
    
-  }, [ListOfUsers])
+  }, [ListOfQuote])
+
+  console.log(ListOfQuote)
   
   const PutRequest = (status, id)=> {
     // alert("accept", status)
@@ -67,13 +71,13 @@ function QuoteList() {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">List Of all users</h3>
+                <h3 className="mb-0">List Of all Quote request</h3>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">User</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">E-mail</th>
                     <th scope="col">Tel</th>
                     <th scope="col">city & country</th>
                     <th scope="col">Status</th>
@@ -81,7 +85,7 @@ function QuoteList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ListOfUsers &&ListOfUsers?.map((request) => (
+                  {ListOfQuote &&ListOfQuote?.map((request) => (
                     
                     
                   <tr>
@@ -89,25 +93,16 @@ function QuoteList() {
                     <th scope="row">
                     <Media className="align-items-center">
                       
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={request?.avatar}
-                          />
-                        </a>
+                        
                         <Media>
                           <span className="mb-0 text-sm">
-                            {request?.user?.name}
+                            {request?.name}
                           </span>
                         </Media>
                       </Media>
                     </th>
                     <td>
-                    {request?.address}
+                    {request?.email}
                       </td>
                     <td>
                     {request?.tel}
@@ -118,17 +113,17 @@ function QuoteList() {
                     <td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                      {request?.user?.isBlocked ? (
+                      {request?.status ==="readed" ? (
                         <>
-<i className="bg-danger" />
-                        is Blocked
+<i className="bg-primary" />
+                        Readed
                         </>
                         
                       ) : (
                         <>
 
-<i className="bg-success" />
-                        Active
+<i className="bg-danger" />
+                        Unreaded
                         </>
                         
                       )
@@ -152,7 +147,7 @@ function QuoteList() {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           
                           <Link
-                          to={`/admin/user-details/${request?.user?._id}`}
+                          to={`/admin/quote-details/${request?._id}`}
                           >
                           <DropdownItem
                             // href="#pablo"
