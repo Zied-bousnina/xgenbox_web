@@ -71,7 +71,7 @@ function ListOfBins() {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">List Of all users</h3>
+                <h3 className="mb-0">List Of all Bins</h3>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
