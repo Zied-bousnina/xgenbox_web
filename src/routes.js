@@ -34,6 +34,7 @@ import QuoteDetail from "components/QuoteDetails";
 import TechAssistDetail from "components/TechAssistDetail";
 import ContactDetails from "components/ContactDetails";
 import CreateBin from "components/CreateBin";
+import ListOfBins from "components/ListOfBins";
 
 
 var routes = [
@@ -149,6 +150,13 @@ var routes = [
     name: "create Bin",
     icon: "ni ni-building text-red",
     component: CreateBin,
+    layout: "/admin"
+  },
+  {
+    path: "/List-bins",
+    name: "List Of bins",
+    icon: "ni ni-building text-red",
+    component: ListOfBins,
     layout: "/admin"
   },
   // {

@@ -40,7 +40,7 @@ import classNames from "classnames";
 import { AddBin } from "Redux/actions/BinAction";
 const CreateBin = () => {
   const profile = useSelector(state=>state?.profile?.profile)
-  const user = useSelector(state=>state.auth?.user)
+  const error = useSelector(state=>state.error?.errors)
   
 
 const isLoad = useSelector(state=>state?.isLoading?.isLoading)
@@ -52,6 +52,8 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
         autoClose: 3000,
     });
   }
+  
+ 
  
   
   
@@ -82,6 +84,9 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
     e.preventDefault();
     console.log(form)
   dispatch(AddBin(form))
+
+  // !error?.success ? showErrorToastMessage() : null
+ 
 
     
    
@@ -363,14 +368,33 @@ style={
       <div className="input-group">
         
         <input type="text" required  name={"topicOuv"} className={classNames("form-control")} onChange={onChangeHandler} />
+        <br/>
         {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
+          error?.success && (<div  className="invalid-feedback">
+          {error?.error}
         </div>)
         } */}
+        
       </div>
     </div>
     </Col>
+  </Row>
+  <Row>
+    <Col 
+    md="4"
+    >
+       <div className=" mb-3">
+      {
+          !error?.success && (<span style={{color:"red"}}>
+{error?.success ? "" : error?.error}
+          </span>)
+        }
+        <div   >
+          {/* {errors}dfds */}
+        </div>
+    </div>
+    </Col>
+    
   </Row>
  
  
