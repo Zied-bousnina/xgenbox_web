@@ -33,6 +33,7 @@ import PartnerDetails from "components/DetailsPartnership";
 import QuoteDetail from "components/QuoteDetails";
 import TechAssistDetail from "components/TechAssistDetail";
 import ContactDetails from "components/ContactDetails";
+import CreateBin from "components/CreateBin";
 
 
 var routes = [
@@ -147,7 +148,7 @@ var routes = [
     path: "/AddBin",
     name: "create Bin",
     icon: "ni ni-building text-red",
-    component: Maps,
+    component: CreateBin,
     layout: "/admin"
   },
   // {
