@@ -130,9 +130,23 @@ var routes = [
   //   layout: "/admin"
   // },
   {
+    path: "/user-profile",
+    name: "Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: Profile,
+    layout: "/admin"
+  },
+  {
     path: "/maps",
     name: "Maps",
     icon: "ni ni-pin-3 text-orange",
+    component: Maps,
+    layout: "/admin"
+  },
+  {
+    path: "/AddBin",
+    name: "create Bin",
+    icon: "ni ni-building text-red",
     component: Maps,
     layout: "/admin"
   },
