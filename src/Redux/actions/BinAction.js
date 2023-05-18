@@ -17,7 +17,7 @@ dispatch({
 
 
    
-  axios.post(`https://genbox.onrender.com/api/bin/createBin`,data )
+  axios.post(`${process.env.API_URL}/api/bin/createBin`,data )
   .then(res => {
       console.log(res)
       dispatch({
@@ -69,7 +69,7 @@ dispatch({
 }
 
 export const FetchAllBins = (data)=>dispatch=>{
-  axios.get(`https://genbox.onrender.com/api/bin/FetchAllBins`,data )
+  axios.get(`${process.env.API_URL}/api/bin/FetchAllBins`,data )
   .then(res => {
       console.log(res)
 
@@ -114,7 +114,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://genbox.onrender.com/api/bin/updateStatus/${id}`)
+  axios.put(`${process.env.API_URL}/api/bin/updateStatus/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,

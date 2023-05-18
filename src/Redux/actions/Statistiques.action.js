@@ -4,7 +4,7 @@ import axios from "axios"
 
 export const getUsersCounts = (navigation)=>dispatch=>{
    
-  axios.get(`https://genbox.onrender.com/api/users/getUserCounts`)
+  axios.get(`${process.env.API_URL}/api/users/getUserCounts`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -32,7 +32,7 @@ export const getUsersCounts = (navigation)=>dispatch=>{
 
 export const getBinsCount = (navigation)=>dispatch=>{
    
-  axios.get(`https://genbox.onrender.com/api/bin/getBinsCount`)
+  axios.get(`${process.env.API_URL}/api/bin/getBinsCount`)
   .then(res => {
       // console.log(res)
       dispatch({
