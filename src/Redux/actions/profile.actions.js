@@ -16,7 +16,7 @@ export const AddProfile =  (userData, navigation ) => (dispatch) => {
     payload:true
 })
   
-  axios.post(`https://frail-crab-waistcoat.cyclic.app/api/profile/upload-profile`, userData, {
+  axios.post(`https://genbox.onrender.com/api/profile/upload-profile`, userData, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data'
@@ -69,7 +69,7 @@ export const AddProfile =  (userData, navigation ) => (dispatch) => {
 }
 
 export const GetProfile =  () => (dispatch) => {
-  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/profile`)
+  axios.get(`https://genbox.onrender.com/api/profile`)
       .then(async(res) => {
         // console.log(res.data)
         dispatch({

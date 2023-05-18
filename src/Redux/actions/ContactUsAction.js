@@ -21,7 +21,7 @@ dispatch({
 
 
    
-  axios.post(`https://frail-crab-waistcoat.cyclic.app/api/site/AddContactUs`,data )
+  axios.post(`https://genbox.onrender.com/api/site/AddContactUs`,data )
   .then(res => {
       console.log(res)
       dispatch({
@@ -69,7 +69,7 @@ dispatch({
 }
 
 export const FetchAllContact = (data)=>dispatch=>{
-  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/site/contactUs/fetchAll`,data )
+  axios.get(`https://genbox.onrender.com/api/site/contactUs/fetchAll`,data )
   .then(res => {
       console.log(res)
 
@@ -107,7 +107,7 @@ export const FetchAllContact = (data)=>dispatch=>{
 
 export const GetContactUsById = (id,navigation)=>dispatch=>{
    
-  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/site/contactUs/fetchByID/${id}`)
+  axios.get(`https://genbox.onrender.com/api/site/contactUs/fetchByID/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -141,7 +141,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://frail-crab-waistcoat.cyclic.app/api/site/contactUs/readed/${id}`)
+  axios.put(`https://genbox.onrender.com/api/site/contactUs/readed/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
