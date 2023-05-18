@@ -6,7 +6,7 @@ import axios from "axios"
 
 export const findDemandeInProgress = (navigation)=>dispatch=>{
    
-  axios.get(`${process.env.API_URL}/api/demande-municipal/findDemandeInProgress`)
+  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/demande-municipal/findDemandeInProgress`)
   .then(res => {
       console.log(res)
       dispatch({
@@ -33,7 +33,7 @@ export const findDemandeInProgress = (navigation)=>dispatch=>{
 
 export const UpadeteRequest = (data, navigation)=> (dispatch) => {
   console.log(data)
-  axios.put(`${process.env.API_URL}/api/demande-municipal/AcceptDemande/${data.id}`
+  axios.put(`https://frail-crab-waistcoat.cyclic.app/api/demande-municipal/AcceptDemande/${data.id}`
   ,{status:data.status}
   )
   .then(async(res) => {
@@ -64,7 +64,7 @@ export const UpadeteRequest = (data, navigation)=> (dispatch) => {
 
 export const getBinsCount = (navigation)=>dispatch=>{
    
-  axios.get(`${process.env.API_URL}/api/bin/getBinsCount`)
+  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/bin/getBinsCount`)
   .then(res => {
       // console.log(res)
       dispatch({

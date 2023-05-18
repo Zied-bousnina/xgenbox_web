@@ -48,7 +48,7 @@ function ListOfBins() {
   const isSuccess = useSelector(state=>state?.success?.success)
   const [selectedItem, setselectedItem] = useState(null)
   const dispatch = useDispatch()
-  const [count, setCount] = useState(20);
+  const [count, setCount] = useState(10);
 
   useEffect(() => {
     if (count > 0) {
@@ -60,7 +60,7 @@ function ListOfBins() {
   }, [count]);
 
   const startTimer = () => {
-    setCount(20);
+    setCount(10);
   };
   
 

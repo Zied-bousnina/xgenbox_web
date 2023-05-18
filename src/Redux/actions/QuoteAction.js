@@ -24,7 +24,7 @@ dispatch({
 
 
    
-  axios.post(`${process.env.API_URL}/api/site/createQuote`,data, {   
+  axios.post(`https://frail-crab-waistcoat.cyclic.app/api/site/createQuote`,data, {   
     headers: { "Content-Type": "multipart/form-data" } 
 } )
   
@@ -75,7 +75,7 @@ dispatch({
 }
 
 export const FetchAllQuote = (data)=>dispatch=>{
-  axios.get(`${process.env.API_URL}/api/site/quote/fetchAll`,data )
+  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/site/quote/fetchAll`,data )
   .then(res => {
       console.log(res)
 
@@ -113,7 +113,7 @@ export const FetchAllQuote = (data)=>dispatch=>{
 
 export const GetQuoteById = (id,navigation)=>dispatch=>{
    
-  axios.get(`${process.env.API_URL}/api/site/quote/fetchByID/${id}`)
+  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/site/quote/fetchByID/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -147,7 +147,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`${process.env.API_URL}/api/site/Quote/readed/${id}`)
+  axios.put(`https://frail-crab-waistcoat.cyclic.app/api/site/Quote/readed/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,

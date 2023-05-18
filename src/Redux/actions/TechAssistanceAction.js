@@ -24,7 +24,7 @@ dispatch({
 
 
    
-  axios.post(`${process.env.API_URL}/api/site/createTechAssist`,data, {   
+  axios.post(`https://frail-crab-waistcoat.cyclic.app/api/site/createTechAssist`,data, {   
     headers: { "Content-Type": "multipart/form-data" } 
 } )
   
@@ -69,7 +69,7 @@ dispatch({
 }
 
 export const FetchAllTechAssist = (data)=>dispatch=>{
-  axios.get(`${process.env.API_URL}/api/site/TechAssist/fetchAll`,data )
+  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/site/TechAssist/fetchAll`,data )
   .then(res => {
       console.log(res)
 
@@ -107,7 +107,7 @@ export const FetchAllTechAssist = (data)=>dispatch=>{
 
 export const GetTechAssistDetailsById = (id,navigation)=>dispatch=>{
    
-  axios.get(`${process.env.API_URL}/api/site/techAssist/fetchByID/${id}`)
+  axios.get(`https://frail-crab-waistcoat.cyclic.app/api/site/techAssist/fetchByID/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -141,7 +141,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`${process.env.API_URL}/api/site/TechAssist/readed/${id}`)
+  axios.put(`https://frail-crab-waistcoat.cyclic.app/api/site/TechAssist/readed/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,

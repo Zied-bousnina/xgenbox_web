@@ -35,7 +35,7 @@ export const loginUser = (userData) => dispatch => {
     })
     dispatch(LogOut())
     axios
-        .post(`${process.env.API_URL}/api/users/login`, {email:userData.email, password:userData.password})
+        .post(`https://frail-crab-waistcoat.cyclic.app/api/users/login`, {email:userData.email, password:userData.password})
         .then(res => {
             
             const { token } = res.data
@@ -114,7 +114,7 @@ const data = {email, name:familyName+' '+givenName,avatar:photo, googleId:id, to
     // console.log(data.email )
     // email, name, googleId, tokenId
     // console.log("email", info.user.email)
-    axios.get(`${process.env.API_URL}/api/users/getUserByEmail/${info.user.email}`)
+    axios.get(`https://frail-crab-waistcoat.cyclic.app/api/users/getUserByEmail/${info.user.email}`)
     .then(res => {
         // console.log(res)
         dispatch({
