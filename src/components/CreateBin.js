@@ -38,6 +38,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import classNames from "classnames";
 import { AddBin } from "Redux/actions/BinAction";
+import { SET_IS_SECCESS } from "Redux/types";
 const CreateBin = () => {
   const profile = useSelector(state=>state?.profile?.profile)
   const error = useSelector(state=>state.error?.errors)
@@ -46,6 +47,14 @@ const CreateBin = () => {
 const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const isSuccess = useSelector(state=>state?.success?.success)
   const dispatch = useDispatch()
+
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+})
+
+ 
+ 
   const showToastMessage = () => {
     toast.success('Bin created successfully.', {
         position: toast.POSITION.TOP_RIGHT,

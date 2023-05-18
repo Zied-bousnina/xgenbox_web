@@ -34,18 +34,42 @@ import { GetAllUsers } from 'Redux/actions/userAction';
 import {Link} from "react-router-dom"
 import { BlockUser } from 'Redux/actions/userAction';
 import { FetchAllBins } from 'Redux/actions/BinAction';
+import { UpdateBinStatus } from 'Redux/actions/BinAction';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function ListOfBins() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
   const listOfBins = useSelector(state=>state?.ListOfBins?.ListOfBins?.bins)
   const requestsMunicipal = useSelector(state=>state?.MunicipaRequest?.MunicipalRequest )
   const ListOfUsers = useSelector(state=>state?.users?.users)
+  const isLoad = useSelector(state=>state?.isLoading?.isLoading)
+  const isSuccess = useSelector(state=>state?.success?.success)
+  const [selectedItem, setselectedItem] = useState(null)
+  const dispatch = useDispatch()
+  const [count, setCount] = useState(10);
+
+  useEffect(() => {
+    if (count > 0) {
+      const timer = setTimeout(() => {
+        setCount(count - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [count]);
+
+  const startTimer = () => {
+    setCount(10);
+  };
+  
+
   console.log(ListOfUsers)
     const [notificationModal, setnotificationModal] = useState(false)
   console.log(requestsMunicipal)
 
 
-  const dispatch = useDispatch()
+
   
   useEffect(() => {
     dispatch(FetchAllBins())
@@ -59,6 +83,42 @@ function ListOfBins() {
     setnotificationModal(false)
 
   }
+  const showToastMessage = () => {
+    toast.success('Request sent successfully.', {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+    });
+  }
+  useEffect(() => {
+    if (isSuccess) {
+      
+      showToastMessage()
+    }
+  }, [isSuccess])
+  const block = (id)=>{
+    console.log('block')
+    setselectedItem(id)
+    dispatch(UpdateBinStatus(id))
+    if(isSuccess){
+
+      startTimer()
+    }
+  }
+  const Unblock = (id)=>{
+    console.log("Unblock")
+    // dispatch(UnBlockUser(id))
+    setselectedItem(id)
+    dispatch(UpdateBinStatus(id))
+    // startTimer()
+    if(isSuccess){
+
+      startTimer()
+    }
+
+    
+
+  }
+  
   
   
   return (
@@ -71,7 +131,31 @@ function ListOfBins() {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
+                <Row>
+                  <Col 
+                  // lg="6"
+                    md="10" 
+                  >
                 <h3 className="mb-0">List Of all Bins</h3>
+                  </Col>
+                  <Col 
+                  // lg="6"
+                    md="2" 
+                  >
+                     <Link
+                          to={`/admin/AddBin`}
+                          >
+                            <Button
+                            className="float-right"
+                            color="primary"
+                            >
+
+
+                Add bin
+                            </Button>
+                          </Link>
+                  </Col>
+                </Row>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
@@ -81,6 +165,7 @@ function ListOfBins() {
                     <th scope="col">gaz</th>
                     <th scope="col">level</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Action</th>
                     <th scope="col" />
                   </tr>
                 </thead>
@@ -114,23 +199,47 @@ function ListOfBins() {
                     <td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                      {request?.user?.isBlocked ? (
+                      {request?.status ? (
                         <>
-<i className="bg-danger" />
-                        is Blocked
+<i className="bg-success" />
+is open now
                         </>
                         
                       ) : (
                         <>
 
-<i className="bg-success" />
-                        Active
+<i className="bg-danger" />
+is Closed
                         </>
                         
                       )
                         }
                         {/* <i className="bg-success" /> */}
                       </Badge>
+                    </td>
+                    </td>
+                    <td>
+                    <td>
+              <Button
+  color={`${!request?.status ? "success" : "primary"}`}
+  onClick={request?.status ? () => Unblock(request?._id) : () => block(request?._id)}
+  size="sm"
+  disabled={request?.status }
+>
+  {isLoad && selectedItem === request?._id ? (
+    <div className="spinner-border text-light" role="status">
+      <span className="visually-hidden"></span>
+    </div>
+  ) : (
+    request?.status ? (
+      <div>
+        {count}
+      </div>
+    ) : (
+      "Open It"
+    )
+  )}
+</Button>
                     </td>
                     </td>
                     <td className="text-right">
