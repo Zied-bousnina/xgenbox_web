@@ -233,7 +233,8 @@ is Closed
   ) : (
     request?.status ? (
       <div>
-        {count}
+        {/* {count} */}
+        Closing in 10s
       </div>
     ) : (
       "Open It"
