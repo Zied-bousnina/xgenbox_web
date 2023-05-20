@@ -229,7 +229,7 @@ function ListOfBins() {
                       
                     <td>
                       <Badge color="" className="badge-dot mr-4">
-                      {request?.status ? (
+                      {!request?.status ? (
                         <>
 <i className="bg-success" />
 is open now
@@ -251,17 +251,17 @@ is Closed
                     <td>
                     <td>
               <Button
-  color={`${!request?.status ? "success" : "primary"}`}
+  color={`${request?.status ? "success" : "primary"}`}
   onClick={request?.status ? () => Unblock(request?._id) : () => block(request?._id)}
   size="sm"
-  disabled={request?.status }
+  disabled={!request?.status }
 >
   {isLoad && selectedItem === request?._id ? (
     <div className="spinner-border text-light" role="status">
       <span className="visually-hidden"></span>
     </div>
   ) : (
-    request?.status ? (
+    !request?.status ? (
       <div>
         {/* {count} */}
         Closing in 10s
