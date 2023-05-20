@@ -94,6 +94,7 @@
     "react-lottie": "^1.2.3",
     "react-mobile-app-button": "^1.0.13",
     "react-pdf": "^6.2.2",
+    "react-qr-code": "^2.0.11",
     "react-redux": "^8.0.5",
     "react-router-dom": "5.1.2",
     "react-scripts": "5.0.1",
