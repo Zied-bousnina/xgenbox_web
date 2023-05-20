@@ -1,5 +1,7 @@
 import { SET_IS_LOADING } from "Redux/types"
 import { SET_BINS_LIST } from "Redux/types"
+import { SET_POINT_BINS } from "Redux/types"
+import { SET_BINS_LIST_NOT_IN_POINT_BIN } from "Redux/types"
 import { SET_IS_SECCESS } from "Redux/types"
 import { SET_ERRORS } from "Redux/types"
 import axios from "axios"
@@ -150,6 +152,145 @@ dispatch({
     type:SET_IS_SECCESS,
     payload:false
 })
+      // dispatch(registerGoogleUser(data))
+  }
+  )
+}
+
+export const FetchAllBinsNotInUse = (data)=>dispatch=>{
+  axios.get(`http://localhost:3000/api/bin/FetchAllBinsNotInPointBin`,data )
+  .then(res => {
+      // console.log(res)
+
+      dispatch({
+        type: SET_BINS_LIST_NOT_IN_POINT_BIN,
+        payload: res.data
+    })
+      
+   
+   
+ 
+
+  
+
+      // dispatch(registerGoogleUser(data))
+
+      // dispatch(loginUser(data))
+  })
+  .catch(err => 
+     { 
+      // console.log("err in authAction.js line 366",err)
+      dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+  
+      // dispatch(registerGoogleUser(data))
+  }
+  )
+}
+
+
+export const AddPointBin = (data)=>dispatch=>{
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+
+
+
+   
+  axios.post(`http://localhost:3000/api/Pointbin/CreatePointBin`,data )
+  .then(res => {
+      console.log(res)
+      dispatch({
+        type: SET_ERRORS,
+        payload: []
+    })
+    dispatch({
+        type:SET_IS_LOADING,
+        payload:false
+    })
+
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:true
+  })
+
+  setTimeout(() => {
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:false
+  })
+  }, 3000);
+
+  
+
+      // dispatch(registerGoogleUser(data))
+
+      // dispatch(loginUser(data))
+  })
+  .catch(err => 
+     { 
+      // console.log("err in authAction.js line 366",err)
+      dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+    dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+  
+      // dispatch(registerGoogleUser(data))
+  }
+  )
+}
+
+export const FetchAllPointBins= (data)=>dispatch=>{
+  axios.get(`http://localhost:3000/api/bin/fetchAllPointBins`,data )
+  .then(res => {
+      // console.log(res)
+
+      dispatch({
+        type: SET_POINT_BINS,
+        payload: res.data
+    })
+      
+   
+   
+ 
+
+  
+
+      // dispatch(registerGoogleUser(data))
+
+      // dispatch(loginUser(data))
+  })
+  .catch(err => 
+     { 
+      // console.log("err in authAction.js line 366",err)
+      dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+  
       // dispatch(registerGoogleUser(data))
   }
   )

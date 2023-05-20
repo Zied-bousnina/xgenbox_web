@@ -77,7 +77,7 @@ dispatch({
 export const FetchAllQuote = (data)=>dispatch=>{
   axios.get(`https://genbox.onrender.com/api/site/quote/fetchAll`,data )
   .then(res => {
-      console.log(res)
+      // console.log(res)
 
       dispatch({
         type: SET_QUOTE,

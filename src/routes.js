@@ -35,6 +35,8 @@ import TechAssistDetail from "components/TechAssistDetail";
 import ContactDetails from "components/ContactDetails";
 import CreateBin from "components/CreateBin";
 import ListOfBins from "components/ListOfBins";
+import ListOfPointBin from "components/ListOfPointBin";
+import CreateBinPoint from "components/CreatePointBin";
 
 
 var routes = [
@@ -132,17 +134,17 @@ var routes = [
   //   layout: "/admin"
   // },
   {
-    path: "/user-profile",
-    name: "Profile",
-    icon: "ni ni-single-02 text-yellow",
-    component: Profile,
+    path: "/List-bins",
+    name: "List Of bins",
+    icon: "ni ni-building text-red",
+    component: ListOfBins,
     layout: "/admin"
   },
   {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    component: Maps,
+    path: "/List-Point-bins",
+    name: "List Of bins Point",
+    icon: "ni ni-building text-green",
+    component: ListOfPointBin,
     layout: "/admin"
   },
   {
@@ -153,12 +155,28 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/List-bins",
-    name: "List Of bins",
-    icon: "ni ni-building text-red",
-    component: ListOfBins,
+    path: "/user-profile",
+    name: "Profile",
+    icon: "ni ni-single-02 text-yellow",
+    component: Profile,
     layout: "/admin"
   },
+  {
+    path: "/Add-Point-Bin",
+    name: "create Point Bin",
+    icon: "ni ni-building text-red",
+    component: CreateBinPoint,
+    layout: "/admin"
+  },
+ 
+  {
+    path: "/maps",
+    name: "Maps",
+    icon: "ni ni-pin-3 text-orange",
+    component: Maps,
+    layout: "/admin"
+  },
+
   // {
   //   path: "/user-profile",
   //   name: "User Profile",

@@ -40,14 +40,19 @@ import classNames from "classnames";
 import { AddBin } from "Redux/actions/BinAction";
 import { SET_IS_SECCESS } from "Redux/types";
 import {Link} from "react-router-dom"
-
-const CreateBin = () => {
+import { FetchAllQuote } from "Redux/actions/QuoteAction";
+import { FetchAllBinsNotInUse } from "Redux/actions/BinAction";
+import { AddPointBin } from "Redux/actions/BinAction";
+const CreateBinPoint = () => {
   const profile = useSelector(state=>state?.profile?.profile)
   const error = useSelector(state=>state.error?.errors)
   
-
+  
 const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const isSuccess = useSelector(state=>state?.success?.success)
+  const ListOfQuote= useSelector(state=>state?.quote?.quote?.quotes)
+  const ListOfBinsNotInUse= useSelector(state=>state?.ListOfBinsNotInPointBin?.ListOfBinsNotInPointBin)
+  const [selectedBins, setSelectedBins] = useState([]);
   const dispatch = useDispatch()
 
   dispatch({
@@ -55,6 +60,10 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
     payload:false
 })
 
+useEffect(() => {
+  dispatch(FetchAllQuote())
+ 
+}, [ListOfQuote])
  
  
   const showToastMessage = () => {
@@ -65,23 +74,29 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   }
   
  
- 
+  
   
   
   
   const [form, setForm] = useState({
+    bins:[]
   })
   
   const onChangeHandler = (e) => {
     const { name, checked, value } = e.target;
+
   
-   
+    if (name === "bin1" || name === "bin2" || name === "bin3" || name === "bin4") {
+      
+      setForm({ ...form, bins: [...form.bins, value] });
+    } else {
       setForm({
         ...form,
-        [name]: value
+        [name]: value,
       });
-      
-      
+    }
+  
+    console.log(form);
   };
   useEffect(() => {
     if (isSuccess) {
@@ -90,11 +105,21 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
     }
   }, [isSuccess])
 
+  useEffect(() => {
+    dispatch(FetchAllBinsNotInUse())
+   
+  }, [ListOfBinsNotInUse])
+
+  // console.log(ListOfBinsNotInUse)
+  
+
   const onSubmit = (e)=>{
     
     e.preventDefault();
     console.log(form)
-  dispatch(AddBin(form))
+
+    
+  dispatch(AddPointBin(form))
 
   // !error?.success ? showErrorToastMessage() : null
  
@@ -102,11 +127,29 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
     
    
       // showToastMessage()
-      
+      setSelectedBins([])
       e.target.reset();
    
   
   }
+
+  const handleBinChange = (selectedBin, index) => {
+    // Update selected bins
+    const updatedBins = [...selectedBins];
+    updatedBins[index] = selectedBin;
+    setSelectedBins(updatedBins);
+  };
+
+  const renderBinOptions = (index) => {
+    const availableBins = ListOfBinsNotInUse?.filter(
+      (bin) => !selectedBins?.includes(bin._id)
+    );
+    return availableBins?.map((bin) => (
+      <option key={bin._id}   value={bin._id}>
+        {bin.type}
+      </option>
+    ));
+  };
   return (
     <>
       <UserHeader />
@@ -159,18 +202,18 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Create Trash bin</h3>
+                    <h3 className="mb-0">Create Point bin</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Link
-                      to="/admin/Add-Point-Bin"
-                    >
+                  <Link
+                          to={`/admin/AddBin`}
+                          >
+
                     <Button
                       // color="primary"
                     
                       size="md"
-                      >
-                      Create Point Bin
+                      >  create bin
                       <i className=" ml-2 fas fa-arrow-right" />
                     </Button>
                       </Link>
@@ -193,40 +236,10 @@ style={
 }
 >
   <Row>
+    
+    
     <Col 
-    md="4"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Name<span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        <input type="text" required  name={"name"} className={classNames("form-control")} onChange={onChangeHandler}/>
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      </div>
-    </div>
-    </Col>
-    <Col 
-    md="4"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Location<span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        <input type="text" required  name={"location"} className={classNames("form-control")} onChange={onChangeHandler}/>
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      </div>
-    </div>
-    </Col>
-    <Col 
-    md="4"
+    md="12"
     >
        <div className=" mb-3">
       <label className="form-label">address <span style={{color:"red"}}>*</span></label>
@@ -291,10 +304,10 @@ style={
   </Row>
   <Row>
     <Col 
-    md="6"
+    md="12"
     >
        <div className=" mb-3">
-      <label className="form-label">Type<span style={{color:"red"}}>*</span></label>
+      <label className="form-label">Quote request<span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
         
@@ -303,95 +316,119 @@ style={
           {errors}
         </div>)
         } */}
-      <select name={"type"} required className={classNames("form-control")} onChange={onChangeHandler}>
+      <select name={"quoteDemande"} required className={classNames("form-control")} onChange={onChangeHandler}>
         
-            <option value={"plastique"}>Plastique</option>
-            <option value={"glass"}>Glass</option>
-            <option value={"paper"}>Paper</option>
-            <option value={"other"}>Other</option>
-
-        
-      </select>
-      </div>
-    </div>
-    </Col>
-    <Col 
-    md="6"
-    >
-       <div className=" mb-3">
-      <label className="form-label">capacity<span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      <select name={"type"} required className={classNames("form-control")} onChange={onChangeHandler}>
-        
-            <option value={"plastique"}>140 Litres (750 x 900 x 1400 mm)</option>
-            <option value={"glass"}>240 Litres (900 x 1000 x 1500 mm)</option>
-            <option value={"paper"}>360 Litres (1050 x 1050 x 1500 mm)</option>
-            {/* <option value={"other"}>Other</option> */}
-
+            <option value={""}>--Select Quote request ---</option>
+            {
+              ListOfQuote?.map(l=>{
+                return(
+                  <option value={l._id}>{l.name}/ {l.email}/ {l.city}/ {l.country}</option>
+                )
+              })
+            }
+            
         
       </select>
       </div>
     </div>
     </Col>
     
+    
   </Row>
+  <hr/>
+  <h3>Bins</h3>
   <Row>
-    <Col 
-    md="4"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Gaz Topic<span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        <input type="text" required  name={"topicGaz"} className={classNames("form-control")} onChange={onChangeHandler}/>
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      </div>
-    </div>
-    </Col>
-    <Col 
-    md="4"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Topic Niveau<span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        <input type="text" required  name={"topicNiv"} className={classNames("form-control")} onChange={onChangeHandler}/>
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      </div>
-    </div>
-    </Col>
-    <Col 
-    md="4"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Topic Open <span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        <input type="text" required  name={"topicOuv"} className={classNames("form-control")} onChange={onChangeHandler} />
-        <br/>
-        {/* {
-          error?.success && (<div  className="invalid-feedback">
-          {error?.error}
-        </div>)
-        } */}
-        
-      </div>
-    </div>
+        <Col md="12">
+          <div className="mb-3">
+            <label className="form-label">
+              Bin 1
+              {selectedBins[0] && (
+                <span style={{ color: "red" }}>*</span>
+              )}
+            </label>
+            <div className="input-group">
+              <select
+                name="bin1"
+                required
+                className="form-control"
+                onChange={(e) => {handleBinChange(e.target.value, 0)
+
+
+                   onChangeHandler(e)}}
+              >
+                <option value="0">-- Select Bin 1 --</option>
+                {renderBinOptions(0)}
+              </select>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md="12">
+          <div className="mb-3">
+            <label className="form-label">Bin 2</label>
+            <div className="input-group">
+              <select
+                name="bin2"
+                className="form-control"
+                onChange={(e) => {handleBinChange(e.target.value, 1)
+                  onChangeHandler(e)
+                }}
+                disabled={!selectedBins[0]}
+              >
+                <option value="">-- Select Bin 2 --</option>
+                {renderBinOptions(1)}
+              </select>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md="12">
+          <div className="mb-3">
+            <label className="form-label">Bin 3</label>
+            <div className="input-group">
+              <select
+                name="bin3"
+                className="form-control"
+                onChange={(e) => {handleBinChange(e.target.value, 2)
+                  onChangeHandler(e)
+                }}
+                disabled={!selectedBins[1]}
+              >
+                <option value="">-- Select Bin 3 --</option>
+                {renderBinOptions(2)}
+              </select>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md="12">
+          <div className="mb-3">
+            <label className="form-label">Bin 4</label>
+            <div className="input-group">
+              <select
+                name="bin4"
+                className="form-control"
+                onChange={(e) => {handleBinChange(e.target.value, 3)
+                  onChangeHandler(e)
+                }}
+                disabled={!selectedBins[2]}
+              >
+                <option value="">-- Select Bin 4 --</option>
+                {renderBinOptions(3)}
+              </select>
+            </div>
+          </div>
+        </Col>
+      </Row>
+  <Row>
+    <Col>
+    
     </Col>
   </Row>
   <Row>
@@ -441,4 +478,4 @@ style={
   );
 };
 
-export default CreateBin;
+export default CreateBinPoint;

@@ -37,13 +37,15 @@ import { FetchAllBins } from 'Redux/actions/BinAction';
 import { UpdateBinStatus } from 'Redux/actions/BinAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FetchAllPointBins } from 'Redux/actions/BinAction';
 
-function ListOfBins() {
+function ListOfPointBin() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
   const listOfBins = useSelector(state=>state?.ListOfBins?.ListOfBins?.bins)
   const requestsMunicipal = useSelector(state=>state?.MunicipaRequest?.MunicipalRequest )
   const ListOfUsers = useSelector(state=>state?.users?.users)
+  const ListOfPointBins = useSelector(state=>state?.ListOfPointBins?.ListOfPointBins?.pointBins)
   const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const isSuccess = useSelector(state=>state?.success?.success)
   const [selectedItem, setselectedItem] = useState(null)
@@ -64,17 +66,18 @@ function ListOfBins() {
   };
   
 
-  console.log(ListOfUsers)
+  // console.log(ListOfUsers)
     const [notificationModal, setnotificationModal] = useState(false)
-  console.log(requestsMunicipal)
+  // console.log(requestsMunicipal)
 
 
 
   
   useEffect(() => {
-    dispatch(FetchAllBins())
+    dispatch(FetchAllPointBins())
    
-  }, [listOfBins])
+  }, [ListOfPointBins])
+  // console.log(ListOfPointBins)
   
   const PutRequest = (status, id)=> {
     // alert("accept", status)
@@ -134,16 +137,16 @@ function ListOfBins() {
                 <Row>
                   <Col 
                   // lg="6"
-                    md="10" 
+                    md="9" 
                   >
-                <h3 className="mb-0">List Of all Bins</h3>
+                <h3 className="mb-0">List Of all Point Bins</h3>
                   </Col>
                   <Col 
                   // lg="6"
-                    md="2" 
+                    md="3" 
                   >
                      <Link
-                          to={`/admin/AddBin`}
+                          to={`/admin/Add-Point-Bin`}
                           >
                             <Button
                             className="float-right"
@@ -151,8 +154,7 @@ function ListOfBins() {
                             >
 
 
-                Add bin
-                <i className=" ml-2 fas fa-arrow-right" />
+                Add Bin Point<i className=" ml-2 fas fa-arrow-right" />
                             </Button>
                           </Link>
                   </Col>
@@ -161,17 +163,17 @@ function ListOfBins() {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Name</th>
+                    <th scope="col">Name/ Company Name</th>
                     <th scope="col">Address</th>
-                    <th scope="col">gaz</th>
+                    <th scope="col">Tel</th>
                     <th scope="col">level</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Type Of bins</th>
                     <th scope="col">Action</th>
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                  {listOfBins &&listOfBins?.map((request) => (
+                  {ListOfPointBins &&ListOfPointBins?.map((request) => (
                     
                     
                   <tr>
@@ -183,7 +185,7 @@ function ListOfBins() {
                        
                         <Media>
                           <span className="mb-0 text-sm">
-                            {request?.name}
+                            {request?.quoteDemande?.name} / {request?.quoteDemande?.companyName}
                           </span>
                         </Media>
                       </Media>
@@ -192,31 +194,20 @@ function ListOfBins() {
                     {request?.address}
                       </td>
                     <td>
-                    {request?.gaz}
+                    {request?.quoteDemande?.tel}
                     </td>
                     <td>
-                    {request?.niv} 
+                    {request?.quoteDemande?.email} 
                     </td>
                     <td>
                     <td>
-                      <Badge color="" className="badge-dot mr-4">
-                      {request?.status ? (
-                        <>
-<i className="bg-success" />
-is open now
-                        </>
-                        
-                      ) : (
-                        <>
-
-<i className="bg-danger" />
-is Closed
-                        </>
-                        
-                      )
-                        }
-                        {/* <i className="bg-success" /> */}
-                      </Badge>
+                      {
+                        request?.bins?.map((bin)=>(
+                          <div>
+                            {bin?.type}
+                          </div>
+                        ))
+                      }
                     </td>
                     </td>
                     <td>
@@ -225,21 +216,14 @@ is Closed
   color={`${!request?.status ? "success" : "primary"}`}
   onClick={request?.status ? () => Unblock(request?._id) : () => block(request?._id)}
   size="sm"
-  disabled={request?.status }
+  
 >
   {isLoad && selectedItem === request?._id ? (
     <div className="spinner-border text-light" role="status">
       <span className="visually-hidden"></span>
     </div>
   ) : (
-    request?.status ? (
-      <div>
-        {/* {count} */}
-        Closing in 10s
-      </div>
-    ) : (
-      "Open It"
-    )
+   "Download details"
   )}
 </Button>
                     </td>
@@ -399,4 +383,4 @@ is Closed
   )
 }
 
-export default ListOfBins
+export default ListOfPointBin

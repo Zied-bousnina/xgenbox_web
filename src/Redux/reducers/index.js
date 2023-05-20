@@ -19,6 +19,8 @@ import TechAssistDetailsReducer from './TechAssistDetails.reducer';
 import ContactListReducers from './ContactList.reducers';
 import ContactDetailsReducer from './ContactDetails.reducer';
 import ListOfBinsReducers from './ListOfBins.reducers';
+import BinsNotInPointBinReducers from './BinsNotInPointBin.reducers';
+import ListPointBinsReducer from './ListPointBins.reducer';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -38,6 +40,8 @@ export default combineReducers({
     TechAssistDetails : TechAssistDetailsReducer,
     contactList : ContactListReducers,
     ContactDetails : ContactDetailsReducer,
-    ListOfBins : ListOfBinsReducers
+    ListOfBins : ListOfBinsReducers,
+    ListOfBinsNotInPointBin : BinsNotInPointBinReducers,
+    ListOfPointBins : ListPointBinsReducer
     
 })
