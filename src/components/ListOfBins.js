@@ -39,9 +39,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import QRCode, { QRCodeSVG } from 'qrcode.react';
 import { PDFDownloadLink, Document, Page, Text, Image, View } from '@react-pdf/renderer';
-import { QRCodeSVG } from 'qrcode.react';
-// import QRCode from 'qrcode.react';
-import QRCode from "react-qr-code";
+
 function ListOfBins() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
@@ -93,12 +91,7 @@ function ListOfBins() {
       <Page>
         {/* {data?.map(item => ( */}
         <View>
-        <QRCode
-    size={256}
-    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-    value={"value"}
-    viewBox={`0 0 256 256`}
-    />
+      
         </View>
 
 
@@ -282,12 +275,7 @@ is Closed
                     <td>
                       <div>
 
-                    <QRCode
-    size={10}
-    style={{ height: "auto", maxWidth: "10%", width: "10%" }}
-    value={request?._id}
-    viewBox={`0 0 256 256`}
-    />
+                  
     </div>
                     </td>
                     </td>
