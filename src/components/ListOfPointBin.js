@@ -68,16 +68,22 @@ const PDFDocument = ({data}) => {
     <Document>
     <Page>
       {/* {data?.map(item => ( */}
-      <h6 className="heading-small text-muted mb-4">
-                  User information
-                </h6>
-                <label
-                          className="form-control-label"
-                          htmlFor="input-username"
-                        >
-                          Username
-                        </label>
-
+     {/* <QRCodeSVG
+  value={"https://picturesofpeoplescanningqrcodes.tumblr.com/"}
+  size={128}
+  bgColor={"#ffffff"}
+  fgColor={"#000000"}
+  level={"L"}
+  includeMargin={false}
+  imageSettings={{
+    src: "https://static.zpao.com/favicon.png",
+    x: undefined,
+    y: undefined,
+    height: 24,
+    width: 24,
+    excavate: true,
+  }}
+/> */}
         {/* ))} */}
     </Page>
   </Document>
@@ -199,7 +205,7 @@ const PDFDocument = ({data}) => {
                     <th scope="col">Name/ Company Name</th>
                     <th scope="col">Address</th>
                     <th scope="col">Tel</th>
-                    <th scope="col">level</th>
+                    <th scope="col">Access code</th>
                     <th scope="col">Type Of bins</th>
                     <th scope="col">Action</th>
                     <th scope="col" />
@@ -230,7 +236,7 @@ const PDFDocument = ({data}) => {
                     {request?.quoteDemande?.tel}
                     </td>
                     <td>
-                    {request?.quoteDemande?.email} 
+                    {request?.code} 
                     </td>
                     <td>
                     <td>

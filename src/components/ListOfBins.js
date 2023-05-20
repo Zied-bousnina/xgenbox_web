@@ -37,7 +37,11 @@ import { FetchAllBins } from 'Redux/actions/BinAction';
 import { UpdateBinStatus } from 'Redux/actions/BinAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+// import QRCode, { QRCodeSVG } from 'qrcode.react';
+import { PDFDownloadLink, Document, Page, Text, Image, View } from '@react-pdf/renderer';
+import { QRCodeSVG } from 'qrcode.react';
+// import QRCode from 'qrcode.react';
+import QRCode from "react-qr-code";
 function ListOfBins() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
@@ -49,6 +53,9 @@ function ListOfBins() {
   const [selectedItem, setselectedItem] = useState(null)
   const dispatch = useDispatch()
   const [count, setCount] = useState(10);
+
+
+  
 
   useEffect(() => {
     if (count > 0) {
@@ -66,7 +73,7 @@ function ListOfBins() {
 
   console.log(ListOfUsers)
     const [notificationModal, setnotificationModal] = useState(false)
-  console.log(requestsMunicipal)
+  // console.log(requestsMunicipal)
 
 
 
@@ -75,6 +82,33 @@ function ListOfBins() {
     dispatch(FetchAllBins())
    
   }, [listOfBins])
+  
+
+
+  const PDFDocument = ({data}) => {
+    // console.table(data)
+  
+    return  (
+      <Document>
+      <Page>
+        {/* {data?.map(item => ( */}
+        <View>
+        <QRCode
+    size={256}
+    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+    value={"value"}
+    viewBox={`0 0 256 256`}
+    />
+        </View>
+
+
+          {/* ))} */}
+
+      </Page>
+    </Document>
+  );
+  
+  }
   
   const PutRequest = (status, id)=> {
     // alert("accept", status)
@@ -137,6 +171,7 @@ function ListOfBins() {
                     md="10" 
                   >
                 <h3 className="mb-0">List Of all Bins</h3>
+                
                   </Col>
                   <Col 
                   // lg="6"
@@ -198,6 +233,7 @@ function ListOfBins() {
                     {request?.niv} 
                     </td>
                     <td>
+                      
                     <td>
                       <Badge color="" className="badge-dot mr-4">
                       {request?.status ? (
@@ -243,6 +279,17 @@ is Closed
   )}
 </Button>
                     </td>
+                    <td>
+                      <div>
+
+                    <QRCode
+    size={10}
+    style={{ height: "auto", maxWidth: "10%", width: "10%" }}
+    value={request?._id}
+    viewBox={`0 0 256 256`}
+    />
+    </div>
+                    </td>
                     </td>
                     <td className="text-right">
                       <UncontrolledDropdown>
@@ -258,17 +305,30 @@ is Closed
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           
-                          <Link
-                          to={`/admin/user-details/${request?.user?._id}`}
-                          >
                           <DropdownItem
                             // href="#pablo"
                             // onClick={()=>PutRequest("valid", request?._id)}
-                            disabled
+                            // disabled
+                          >
+                          <Link
+                          to={`/admin/bin-details/${request?._id}`}
                           >
                             Show details
+                          </Link>
                           </DropdownItem>
-                            </Link>
+                          <DropdownItem
+                            // href="#pablo"
+                            onClick={()=>console.log("hkhkh")}
+                            // disabled
+                          >
+                            <PDFDownloadLink document={<PDFDocument data={request} />} fileName={request?.quoteDemande?.name}>
+{({ blob, url, loading, error }) =>
+// loading ? 'Loading document...' : 'Download Pdf'
+'Download details'
+ 
+}
+</PDFDownloadLink>
+                          </DropdownItem>
                           {/* <DropdownItem
                             href="#pablo"
                             onClick={() => setnotificationModal(true)}

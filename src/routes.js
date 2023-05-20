@@ -37,6 +37,7 @@ import CreateBin from "components/CreateBin";
 import ListOfBins from "components/ListOfBins";
 import ListOfPointBin from "components/ListOfPointBin";
 import CreateBinPoint from "components/CreatePointBin";
+import ShowBinDetails from "components/ShowBinDetails";
 
 
 var routes = [
@@ -159,6 +160,13 @@ var routes = [
     name: "Profile",
     icon: "ni ni-single-02 text-yellow",
     component: Profile,
+    layout: "/admin"
+  },
+  {
+    path: "/bin-details/:id",
+    name: "binDetails",
+    icon: "ni ni-single-02 text-yellow",
+    component: ShowBinDetails,
     layout: "/admin"
   },
   {
