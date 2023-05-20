@@ -293,17 +293,17 @@ is Closed
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           
+                          <Link
+                          to={`/admin/bin-details/${request?._id}`}
+                          >
                           <DropdownItem
                             // href="#pablo"
                             // onClick={()=>PutRequest("valid", request?._id)}
                             // disabled
                           >
-                          <Link
-                          to={`/admin/bin-details/${request?._id}`}
-                          >
                             Show details
-                          </Link>
                           </DropdownItem>
+                          </Link>
                           <DropdownItem
                             // href="#pablo"
                             onClick={()=>console.log("hkhkh")}
