@@ -38,6 +38,8 @@ import { UpdateBinStatus } from 'Redux/actions/BinAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FetchAllPointBins } from 'Redux/actions/BinAction';
+import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer';
+
 
 function ListOfPointBin() {
   const [copiedText, setCopiedText] = useState();
@@ -51,6 +53,37 @@ function ListOfPointBin() {
   const [selectedItem, setselectedItem] = useState(null)
   const dispatch = useDispatch()
   const [count, setCount] = useState(10);
+
+  const data = [
+    { id: 1, name: 'John Doe', age: 25 },
+    { id: 2, name: 'Jane Smith', age: 30 },
+    // Add more data as needed
+  ];
+  
+  // PDF component
+const PDFDocument = ({data}) => {
+  // console.table(data)
+
+  return  (
+    <Document>
+    <Page>
+      {/* {data?.map(item => ( */}
+      <h6 className="heading-small text-muted mb-4">
+                  User information
+                </h6>
+                <label
+                          className="form-control-label"
+                          htmlFor="input-username"
+                        >
+                          Username
+                        </label>
+
+        {/* ))} */}
+    </Page>
+  </Document>
+);
+
+}
 
   useEffect(() => {
     if (count > 0) {
@@ -214,17 +247,17 @@ function ListOfPointBin() {
                     <td>
               <Button
   color={`${!request?.status ? "success" : "primary"}`}
-  onClick={request?.status ? () => Unblock(request?._id) : () => block(request?._id)}
+  // onClick={request?.status ? () => Unblock(request?._id) : () => block(request?._id)}
   size="sm"
   
 >
-  {isLoad && selectedItem === request?._id ? (
-    <div className="spinner-border text-light" role="status">
-      <span className="visually-hidden"></span>
-    </div>
-  ) : (
-   "Download details"
-  )}
+  <PDFDownloadLink document={<PDFDocument data={request} />} fileName={request?.quoteDemande?.name}>
+{({ blob, url, loading, error }) =>
+// loading ? 'Loading document...' : 'Download Pdf'
+'Download details'
+ 
+}
+</PDFDownloadLink>
 </Button>
                     </td>
                     </td>

@@ -39,7 +39,7 @@ const user = userStatistiques?.byRole?.filter(el => el.role === "USER") || [];
 const municipal = userStatistiques?.byRole?.filter(el => el.role === "MUNICIPAL") || [];
 
 const allUser = userStatistiques?.total
-console.log(user[0]?.currentDayCount)
+// console.log(user[0]?.currentDayCount)
 
 
   return (

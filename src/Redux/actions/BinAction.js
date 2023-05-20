@@ -158,7 +158,7 @@ dispatch({
 }
 
 export const FetchAllBinsNotInUse = (data)=>dispatch=>{
-  axios.get(`http://localhost:3000/api/bin/FetchAllBinsNotInPointBin`,data )
+  axios.get(`https://genbox.onrender.com/api/bin/FetchAllBinsNotInPointBin`,data )
   .then(res => {
       // console.log(res)
 
@@ -260,7 +260,7 @@ dispatch({
 }
 
 export const FetchAllPointBins= (data)=>dispatch=>{
-  axios.get(`http://localhost:3000/api/bin/fetchAllPointBins`,data )
+  axios.get(`https://genbox.onrender.com/api/bin/fetchAllPointBins`,data )
   .then(res => {
       // console.log(res)
 
