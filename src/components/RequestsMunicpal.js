@@ -117,13 +117,13 @@ function RequestsMunicpal() {
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           <DropdownItem
-                            href="#pablo"
+                            // href="#pablo"
                             onClick={()=>PutRequest("valid", request?._id)}
                           >
                             Accept
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
+                          
                             onClick={() => setnotificationModal(true)}
                           >
                             Deny
