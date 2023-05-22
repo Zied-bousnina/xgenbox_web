@@ -333,3 +333,51 @@ export const FetchBinByID= (data)=>dispatch=>{
   }
   )
 }
+
+export const DeleteBinByID = (id)=>dispatch=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+
+  axios.delete(`https://genbox.onrender.com/api/bin/deleteBinById/${id}`)
+  .then(res => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: []
+  })
+  dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:true
+  })
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+})
+  })
+
+  .catch(err =>
+      {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+    dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+  })
+  
+}

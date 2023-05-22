@@ -31,7 +31,7 @@ import { GetPartnerDetailsById } from "Redux/actions/PartnershipAction";
 import { UpdatePartnerShipStatus } from "Redux/actions/PartnershipAction";
 import { FetchBinByID } from "Redux/actions/BinAction";
 import QRCode from "react-qr-code";
-
+import {Link} from "react-router-dom"
 const ShowBinDetails = () => {
   const profile = useSelector(state=>state?.profile?.[0]?.profile)
   const user = useSelector(state=>state.auth?.user)
@@ -236,24 +236,22 @@ const ShowBinDetails = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Partner Details</h3>
+                    <h3 className="mb-0">Bin Details</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    {/* <Button
-                      color={`${PartnerDetails?.partnership?.status ==='unreaded' ?  "success":"primary" }`}
-                      // href="#pablo"
-                      onClick={(e) => PartnerDetails?.partnership?.status ==='unreaded' ? Unblock(PartnerDetails?.partnership?._id) : block( PartnerDetails?.partnership?._id) }
-                      size="sm"
+                    <Link
+                    to={`/admin/edit-bin/${id}`}
                     >
-                      {isLoad ? (
-        <div className="spinner-border text-light" role="status">
-          <span className="visually-hidden"></span>
-        </div>
-      ) : (
-        
-        PartnerDetails?.partnership?.status ==='unreaded' ?  "Mark as Read" :"Mark Unread"
-      )}
-                    </Button> */}
+                       
+                    <Button
+                      color={`primary`}
+                      // href="#pablo"
+                      // onClick={(e) => e.preventDefault()}
+                      size="sm"
+                      >
+                     Edit
+                    </Button>
+                      </Link>
                   </Col>
                 </Row>
               </CardHeader>

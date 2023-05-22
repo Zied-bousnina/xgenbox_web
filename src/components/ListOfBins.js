@@ -39,6 +39,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import QRCode, { QRCodeSVG } from 'qrcode.react';
 import { PDFDownloadLink, Document, Page, Text, Image, View } from '@react-pdf/renderer';
+import { DeleteBinByID } from 'Redux/actions/BinAction';
 
 function ListOfBins() {
   const [copiedText, setCopiedText] = useState();
@@ -130,6 +131,16 @@ function ListOfBins() {
 
       startTimer()
     }
+  }
+
+  const deleteBin = (id)=> {
+    console.log("delete")
+    alert("delete :", id)
+    dispatch(DeleteBinByID(id))
+    // if(isSuccess){
+
+    //   startTimer()
+    // }
   }
   const Unblock = (id)=>{
     console.log("Unblock")
@@ -306,6 +317,18 @@ is Closed
                           </Link>
                           <DropdownItem
                             // href="#pablo"
+                            onClick={()=>{
+
+                              setnotificationModal(true)
+                              setselectedItem(request?._id)
+                            } 
+                            }
+                            // disabled
+                          >
+                            Delete Bin
+                          </DropdownItem>
+                          <DropdownItem
+                            // href="#pablo"
                             onClick={()=>console.log("hkhkh")}
                             // disabled
                           >
@@ -323,7 +346,7 @@ is Closed
                           >
                             Block
                           </DropdownItem> */}
-                          {/* <Modal
+                          <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"
               isOpen={notificationModal}
@@ -348,15 +371,23 @@ is Closed
                   <i className="ni ni-bell-55 ni-3x" />
                   <h4 className="heading mt-4">You should read this!</h4>
                   <p>
-                    When you click on "Ok , Got it" the request will be deleted
+                    When you click on "Ok , Got it" the request will be deleted {selectedItem}
                   </p>
                 </div>
               </div>
               <div className="modal-footer">
                 <Button className="btn-white" color="default" type="button"
-                onClick={()=>block( request?._id)}
+                onClick={()=>deleteBin(selectedItem)}
                 >
-                  Ok, Got it
+                  {isLoad ? (
+    <div className="spinner-border text-light" role="status">
+      <span className="visually-hidden"></span>
+    </div>
+  )
+                  :
+                  "Ok, Got it"
+                  }
+                  {/* Ok, Got it */}
                 </Button>
                 <Button
                   className="text-white ml-auto"
@@ -368,7 +399,7 @@ is Closed
                   Close
                 </Button>
               </div>
-            </Modal> */}
+            </Modal>
                           {/* <DropdownItem
                             href="#pablo"
                             onClick={() => this.toggleModal("notificationModal")}
