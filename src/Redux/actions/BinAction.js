@@ -381,3 +381,55 @@ dispatch({
   })
   
 }
+
+
+export const updateBin = (id,data)=>dispatch=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+axios.put(`https://genbox.onrender.com/api/bin/updateBin/${id}`,data)
+.then(res => {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:false
+})
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:true
+})
+setTimeout(() => {
+  
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+  })
+}, 3000);
+})
+.catch(err =>
+
+
+    {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err?.response?.data
+    })
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:false
+  })
+  dispatch({
+    type:SET_IS_LOADING,
+    payload:false
+})
+})
+
+}
