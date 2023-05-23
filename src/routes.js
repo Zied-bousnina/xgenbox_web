@@ -39,6 +39,8 @@ import ListOfPointBin from "components/ListOfPointBin";
 import CreateBinPoint from "components/CreatePointBin";
 import ShowBinDetails from "components/ShowBinDetails";
 import EditBin from "components/EditBin";
+import PointBinDetails from "components/PointBinDetails";
+import EditPointBin from "components/EditPointBins";
 
 
 var routes = [
@@ -126,6 +128,20 @@ var routes = [
     name: "Contact List",
     icon: "ni ni-planet text-blue",
     component: ContactDetails,
+    layout: "/admin"
+  },
+  {
+    path: "/edit-Point-bin/:id",
+    name: "Edit point bin",
+    icon: "ni ni-planet text-blue",
+    component: EditPointBin,
+    layout: "/admin"
+  },
+  {
+    path: "/point-bin-details/:id",
+    name: "Point bin details",
+    icon: "ni ni-planet text-blue",
+    component: PointBinDetails,
     layout: "/admin"
   },
   {

@@ -1,6 +1,7 @@
 import { SET_IS_LOADING } from "Redux/types"
 import { SET_BINS_LIST } from "Redux/types"
 import { SET_POINT_BINS } from "Redux/types"
+import { SET_POINTBIN_DETAILS } from "Redux/types"
 import { SET_BIN_DETAILS } from "Redux/types"
 import { SET_BINS_LIST_NOT_IN_POINT_BIN } from "Redux/types"
 import { SET_IS_SECCESS } from "Redux/types"
@@ -393,6 +394,195 @@ dispatch({
     payload:true
 })
 axios.put(`https://genbox.onrender.com/api/bin/updateBin/${id}`,data)
+.then(res => {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:false
+})
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:true
+})
+setTimeout(() => {
+  
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+  })
+}, 3000);
+})
+.catch(err =>
+
+
+    {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err?.response?.data
+    })
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:false
+  })
+  dispatch({
+    type:SET_IS_LOADING,
+    payload:false
+})
+})
+
+}
+
+
+export const DeletePointBinByID = (id)=>dispatch=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+// console.log(id)
+// alert(id)
+
+  axios.delete(`https://genbox.onrender.com/api/Pointbin/deletePointBinById/${id}`)
+  .then(res => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: []
+  })
+  dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:true
+  })
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+})
+  })
+
+  .catch(err =>
+      {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+    dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+  })
+  
+}
+
+export const FetchPointBinByID= (data)=>dispatch=>{
+  axios.get(`https://genbox.onrender.com/api/Pointbin/fetchPointBinByID/${data}` )
+  .then(res => {
+      // console.log(res)
+
+      dispatch({
+        type: SET_POINTBIN_DETAILS,
+        payload: res.data
+    })
+      
+   
+   
+ 
+
+  
+
+      // dispatch(registerGoogleUser(data))
+
+      // dispatch(loginUser(data))
+  })
+  .catch(err => 
+     { 
+      // console.log("err in authAction.js line 366",err)
+      dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+  
+      // dispatch(registerGoogleUser(data))
+  }
+  )
+}
+
+export const DeletePointBinByIDFromPointBin = (binId, pointBinId)=>dispatch=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+// console.log(id)
+// alert(id)
+
+  axios.put(`http://localhost:3000/api/Pointbin/deleteBinFromPointBin/${pointBinId}/${binId}`)
+  .then(res => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: []
+  })
+  dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+    dispatch({
+      type:SET_IS_SECCESS,
+      payload:true
+  })
+  dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+})
+  })
+
+  .catch(err =>
+      {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+    dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
+  })
+  
+}
+
+export const updatePointBin = (id,data)=>dispatch=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+axios.put(`http://localhost:3000/api/Pointbin/UpdatePointBin/${id}`,data)
 .then(res => {
   dispatch({
     type: SET_ERRORS,

@@ -43,7 +43,12 @@ import {Link} from "react-router-dom"
 import { FetchAllQuote } from "Redux/actions/QuoteAction";
 import { FetchAllBinsNotInUse } from "Redux/actions/BinAction";
 import { AddPointBin } from "Redux/actions/BinAction";
-const CreateBinPoint = () => {
+import { FetchPointBinByID } from "Redux/actions/BinAction";
+import { useParams } from "react-router-dom";
+import { SET_POINTBIN_DETAILS } from "Redux/types";
+import { updatePointBin } from "Redux/actions/BinAction";
+
+const EditPointBin = () => {
   const profile = useSelector(state=>state?.profile?.profile)
   const error = useSelector(state=>state.error?.errors)
   
@@ -51,22 +56,30 @@ const CreateBinPoint = () => {
 const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const isSuccess = useSelector(state=>state?.success?.success)
   const ListOfQuote= useSelector(state=>state?.quote?.quote?.quotes)
+  const PointBinDetails= useSelector(state=>state?.PointBinDetails?.PointBinDetails)
   const ListOfBinsNotInUse= useSelector(state=>state?.ListOfBinsNotInPointBin?.ListOfBinsNotInPointBin)
   const [selectedBins, setSelectedBins] = useState([]);
   const [governorates, setgovernorates] = useState([]);
-const [selectedValue, setSelectedValue] = useState('Tunis');
-  const [selectedMunicipal, setMunicipal] = useState('Tunis');
+const [selectedValue, setSelectedValue] = useState(PointBinDetails?.governorate ? PointBinDetails?.governorate : 'Tunis');
+  const [selectedMunicipal, setMunicipal] = useState(PointBinDetails?.municipale ? PointBinDetails?.municipale : 'Tunis');
   const dispatch = useDispatch()
 
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch({
+      type: SET_POINTBIN_DETAILS,
+      payload: {}
+  })
+  }, [])
   dispatch({
     type:SET_IS_SECCESS,
     payload:false
 })
 
 useEffect(() => {
-  dispatch(FetchAllQuote())
+  dispatch(FetchPointBinByID(id))
  
-}, [ListOfQuote])
+}, [PointBinDetails])
  
  
   const showToastMessage = () => {
@@ -119,10 +132,11 @@ useEffect(() => {
   const onSubmit = (e)=>{
     
     e.preventDefault();
-    console.log({...form, governorate: selectedValue, municipale: selectedMunicipal})
+    console.log({...form.bins,...PointBinDetails?.bins })
+    console.log({...form,bins:[...form.bins,...PointBinDetails?.bins], governorate: selectedValue, municipale: selectedMunicipal})
 
     
-  dispatch(AddPointBin({...form, governorate: selectedValue, municipale: selectedMunicipal}))
+  dispatch(updatePointBin(id,{...form,bins:[...form.bins,...PointBinDetails?.bins], governorate: selectedValue, municipale: selectedMunicipal}))
 
   // !error?.success ? showErrorToastMessage() : null
  
@@ -217,22 +231,22 @@ useEffect(() => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">Create Point bin</h3>
+                    <h3 className="mb-0">Edit Point bin</h3>
                   </Col>
-                  <Col className="text-right" xs="4">
+                  {/* <Col className="text-right" xs="4">
                   <Link
                           to={`/admin/AddBin`}
                           >
 
                     <Button
-                      // color="primary"
+                     
                     
                       size="md"
                       >  create bin
                       <i className=" ml-2 fas fa-arrow-right" />
                     </Button>
                       </Link>
-                  </Col>
+                  </Col> */}
                 </Row>
               </CardHeader>
               <CardBody>
@@ -260,7 +274,7 @@ style={
       <label className="form-label">address <span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
-        <input type="text" required  name={"address"} className={classNames("form-control")} onChange={onChangeHandler} />
+        <input type="text" required defaultValue={PointBinDetails&&PointBinDetails?.address} name={"address"} className={classNames("form-control")} onChange={onChangeHandler} />
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -338,7 +352,7 @@ style={
       <label className="form-label">latitude <span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
-        <input type="text" required name={"lat"} className={classNames("form-control")} onChange={onChangeHandler}/>
+        <input type="text" required  defaultValue={PointBinDetails?.lat} name={"lat"} className={classNames("form-control")} onChange={onChangeHandler}/>
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -354,7 +368,7 @@ style={
       <label className="form-label">Longitude<span style={{color:"red"}}>*</span></label>
       <div className="input-group">
         
-        <input type="text" required  name={"long"} className={classNames("form-control")} onChange={onChangeHandler}/>
+        <input type="text" required defaultValue={PointBinDetails?.long}  name={"long"} className={classNames("form-control")} onChange={onChangeHandler}/>
         {/* {
           errors && (<div  className="invalid-feedback">
           {errors}
@@ -376,39 +390,7 @@ style={
     </div>
     </Col> */}
   </Row>
-  <Row>
-    <Col 
-    md="12"
-    >
-       <div className=" mb-3">
-      <label className="form-label">Quote request<span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      <select name={"quoteDemande"} required className={classNames("form-control")} onChange={onChangeHandler}>
-        
-            <option value={""}>--Select Quote request ---</option>
-            {
-              ListOfQuote?.map(l=>{
-                return(
-                  <option value={l._id}>{l.name}/ {l.email}/ {l.city}/ {l.country}</option>
-                )
-              })
-            }
-            
-        
-      </select>
-      </div>
-    </div>
-    </Col>
-    
-    
-  </Row>
+  
   <hr/>
   <h3>Bins</h3>
   <Row>
@@ -536,7 +518,7 @@ style={
           <span className="visually-hidden"></span>
         </div>
       ) : (
-        'Submit'
+        'Update'
       )}
 
                   <i className="fa-solid fa-floppy-disk"></i>
@@ -552,4 +534,4 @@ style={
   );
 };
 
-export default CreateBinPoint;
+export default EditPointBin;

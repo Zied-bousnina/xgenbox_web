@@ -39,6 +39,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FetchAllPointBins } from 'Redux/actions/BinAction';
 import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer';
+import { DeletePointBinByID } from 'Redux/actions/BinAction';
+import { SET_POINTBIN_DETAILS } from 'Redux/types';
 
 
 function ListOfPointBin() {
@@ -53,6 +55,7 @@ function ListOfPointBin() {
   const [selectedItem, setselectedItem] = useState(null)
   const dispatch = useDispatch()
   const [count, setCount] = useState(10);
+  const PointBinDetails= useSelector(state=>state?.PointBinDetails?.PointBinDetails)
 
   const data = [
     { id: 1, name: 'John Doe', age: 25 },
@@ -125,6 +128,13 @@ const PDFDocument = ({data}) => {
     setnotificationModal(false)
 
   }
+  useEffect(() => {
+    dispatch({
+      type: SET_POINTBIN_DETAILS,
+      payload: {}
+  })
+  }, [])
+  
   const showToastMessage = () => {
     toast.success('Request sent successfully.', {
         position: toast.POSITION.TOP_RIGHT,
@@ -137,31 +147,18 @@ const PDFDocument = ({data}) => {
       showToastMessage()
     }
   }, [isSuccess])
-  const block = (id)=>{
-    console.log('block')
-    setselectedItem(id)
-    dispatch(UpdateBinStatus(id))
-    if(isSuccess){
-
-      startTimer()
-    }
-  }
-  const Unblock = (id)=>{
-    console.log("Unblock")
-    // dispatch(UnBlockUser(id))
-    setselectedItem(id)
-    dispatch(UpdateBinStatus(id))
-    // startTimer()
-    if(isSuccess){
-
-      startTimer()
-    }
-
-    
-
-  }
   
   
+  
+  const deleteBin = ()=> {
+    console.log("delete")
+    // alert("delete :", selectedItem)
+    dispatch(DeletePointBinByID(selectedItem))
+    // if(isSuccess){
+
+    //   startTimer()
+    // }
+  }
   
   return (
     <>
@@ -225,6 +222,7 @@ const PDFDocument = ({data}) => {
                         <Media>
                           <span className="mb-0 text-sm">
                             {request?.quoteDemande?.name} / {request?.quoteDemande?.companyName}
+                           
                           </span>
                         </Media>
                       </Media>
@@ -267,6 +265,60 @@ const PDFDocument = ({data}) => {
 </Button>
                     </td>
                     </td>
+                    <Modal
+              className="modal-dialog-centered modal-danger"
+              contentClassName="bg-gradient-danger"
+              isOpen={notificationModal}
+              // toggle={() => this.toggleModal("notificationModal")}
+            >
+              <div className="modal-header">
+                <h6 className="modal-title" id="modal-title-notification">
+                  Your attention is required
+                </h6>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  <span aria-hidden={true}>×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="py-3 text-center">
+                  <i className="ni ni-bell-55 ni-3x" />
+                  <h4 className="heading mt-4">You should read this!</h4>
+                  <p>
+                    When you click on "Ok , Got it" the Point bin will be deleted {selectedItem}
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <Button className="btn-white" color="default" type="button"
+                onClick={()=>deleteBin(selectedItem)}
+                >
+                  {isLoad ? (
+    <div className="spinner-border text-light" role="status">
+      <span className="visually-hidden"></span>
+    </div>
+  )
+                  :
+                  "Ok, Got it"
+                  }
+                  {/* Ok, Got it */}
+                </Button>
+                <Button
+                  className="text-white ml-auto"
+                  color="link"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </Modal>
                     <td className="text-right">
                       <UncontrolledDropdown>
                         <DropdownToggle
@@ -282,22 +334,25 @@ const PDFDocument = ({data}) => {
                         <DropdownMenu className="dropdown-menu-arrow" right>
                           
                           <Link
-                          to={`/admin/user-details/${request?.user?._id}`}
+                          to={`/admin/point-bin-details/${request?._id}`}
                           >
                           <DropdownItem
                             // href="#pablo"
                             // onClick={()=>PutRequest("valid", request?._id)}
-                            disabled
+                            // disabled
                           >
                             Show details
                           </DropdownItem>
                             </Link>
-                          {/* <DropdownItem
-                            href="#pablo"
-                            onClick={() => setnotificationModal(true)}
+                          <DropdownItem
+                            // href="#pablo"
+                            onClick={() => {setnotificationModal(true)
+                              setselectedItem(request?._id)
+                              // console.log(request?._id)
+                            }}
                           >
-                            Block
-                          </DropdownItem> */}
+                            delete
+                          </DropdownItem>
                           {/* <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"
@@ -362,54 +417,7 @@ const PDFDocument = ({data}) => {
               </Table>
               <CardFooter className="py-4">
                 <nav aria-label="...">
-                  {/* <Pagination
-                    className="pagination justify-content-end mb-0"
-                    listClassName="justify-content-end mb-0"
-                  >
-                  <PaginationItem className="disabled">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        tabIndex="-1"
-                      >
-                        <i className="fas fa-angle-left" />
-                        <span className="sr-only">Previous</span>
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem className="active">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        1
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        2 <span className="sr-only">(current)</span>
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        3
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        <i className="fas fa-angle-right" />
-                        <span className="sr-only">Next</span>
-                      </PaginationLink>
-                    </PaginationItem>
-                  </Pagination> */}
+                 
                 </nav>
               </CardFooter>
             </Card>
