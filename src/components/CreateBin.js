@@ -44,8 +44,9 @@ import {Link} from "react-router-dom"
 const CreateBin = () => {
   const profile = useSelector(state=>state?.profile?.profile)
   const error = useSelector(state=>state.error?.errors)
-  
-
+  const [governorates, setgovernorates] = useState([]);
+const [selectedValue, setSelectedValue] = useState('Tunis');
+  const [selectedMunicipal, setMunicipal] = useState('Tunis');
 const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const isSuccess = useSelector(state=>state?.success?.success)
   const dispatch = useDispatch()
@@ -57,6 +58,19 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
 
  
  
+useEffect(() => {
+    axios
+      .get(`https://genbox.onrender.com/api/governorates`)
+      .then(res => {
+        setgovernorates(res.data[0]);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+   const municipales = governorates?.governorates?.filter(
+    (item, index) => item.name === selectedValue,
+  );
+
   const showToastMessage = () => {
     toast.success('Bin created successfully.', {
         position: toast.POSITION.TOP_RIGHT,
@@ -93,8 +107,8 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const onSubmit = (e)=>{
     
     e.preventDefault();
-    console.log(form)
-  dispatch(AddBin(form))
+    console.log({...form, governorate: selectedValue, municipale:selectedMunicipal})
+  dispatch(AddBin({...form, governorate: selectedValue, municipale:selectedMunicipal}))
 
   // !error?.success ? showErrorToastMessage() : null
  
@@ -243,6 +257,65 @@ style={
     </Col>
   </Row>
   <ToastContainer />
+  <Row>
+    <Col 
+    md="6"
+    >
+       <div className=" mb-3">
+      <label className="form-label">Governorate<span style={{color:"red"}}>*</span></label>
+      <div className="input-group">
+        
+        
+        {/* {
+          errors && (<div  className="invalid-feedback">
+          {errors}
+        </div>)
+        } */}
+      <select name={"governorate"} required defaultValue={selectedValue} className={classNames("form-control")} onChange={e=>setSelectedValue(e.target.value)}>
+      {governorates?.governorates?.map((gov, index) => (
+            <option key={index} value={gov._id}>
+              {gov.name}
+            </option>
+          ))}
+            
+
+        
+      </select>
+      </div>
+    </div>
+    </Col>
+    <Col 
+    md="6"
+    >
+       <div className=" mb-3">
+      <label className="form-label">Municipal<span style={{color:"red"}}>*</span></label>
+      <div className="input-group">
+        
+        
+        {/* {
+          errors && (<div  className="invalid-feedback">
+          {errors}
+        </div>)
+        } */}
+      <select name={"municipal"} required defaultValue={selectedMunicipal} className={classNames("form-control")} onChange={e=>setMunicipal(e.target.value)}>
+        
+      {municipales &&
+                          municipales[0]?.municipalities?.map(
+                            (municipal, index) => (
+                              <option key={index} value={municipal._id}>
+                                {municipal}
+                              </option>
+                            )
+                          )}
+           
+
+        
+      </select>
+      </div>
+    </div>
+    </Col>
+    
+  </Row>
   <Row>
     <Col 
     md="6"
