@@ -535,7 +535,7 @@ dispatch({
 // console.log(id)
 // alert(id)
 
-  axios.put(`http://localhost:3000/api/Pointbin/deleteBinFromPointBin/${pointBinId}/${binId}`)
+  axios.put(`https://genbox.onrender.com/api/Pointbin/deleteBinFromPointBin/${pointBinId}/${binId}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,

@@ -197,6 +197,7 @@ function ListOfBins() {
                   </Col>
                 </Row>
               </CardHeader>
+              
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
