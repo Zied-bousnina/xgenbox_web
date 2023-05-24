@@ -582,7 +582,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-axios.put(`http://localhost:3000/api/Pointbin/UpdatePointBin/${id}`,data)
+axios.put(`https://genbox.onrender.com/api/Pointbin/UpdatePointBin/${id}`,data)
 .then(res => {
   dispatch({
     type: SET_ERRORS,
