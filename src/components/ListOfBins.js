@@ -135,7 +135,7 @@ function ListOfBins() {
 
   const deleteBin = (id)=> {
     console.log("delete")
-    alert("delete :", id)
+   
     dispatch(DeleteBinByID(id))
     // if(isSuccess){
 
