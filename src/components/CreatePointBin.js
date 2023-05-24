@@ -312,6 +312,11 @@ style={
         </div>)
         } */}
       <select name={"municipal"} required defaultValue={selectedMunicipal} className={classNames("form-control")} onChange={e=>setMunicipal(e.target.value)}>
+        <option
+          value=""
+        >
+          ---select municipal---
+        </option>
         
       {municipales &&
                           municipales[0]?.municipalities?.map(

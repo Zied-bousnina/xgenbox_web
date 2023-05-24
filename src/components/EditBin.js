@@ -50,7 +50,7 @@ const EditBin = () => {
   const binDetails = useSelector(state=>state?.binDetails?.BinDetails)
   const [governorates, setgovernorates] = useState([]);
   const [selectedValue, setSelectedValue] = useState(binDetails?.governorate ? binDetails?.governorate : 'Tunis');
-    const [selectedMunicipal, setMunicipal] = useState(binDetails?.municipale ? binDetails?.municipale : 'Tunis');
+    const [selectedMunicipal, setMunicipal] = useState('');
 const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const isSuccess = useSelector(state=>state?.success?.success)
   const dispatch = useDispatch()
@@ -304,7 +304,9 @@ style={
         </div>)
         } */}
       <select name={"municipal"} required defaultValue={selectedMunicipal} className={classNames("form-control")} onChange={e=>setMunicipal(e.target.value)}>
-        
+        <option value=''>
+          ---Select Municipal---
+        </option>
       {municipales &&
                           municipales[0]?.municipalities?.map(
                             (municipal, index) => (

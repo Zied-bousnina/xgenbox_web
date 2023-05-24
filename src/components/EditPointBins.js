@@ -60,8 +60,8 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const ListOfBinsNotInUse= useSelector(state=>state?.ListOfBinsNotInPointBin?.ListOfBinsNotInPointBin)
   const [selectedBins, setSelectedBins] = useState([]);
   const [governorates, setgovernorates] = useState([]);
-const [selectedValue, setSelectedValue] = useState(PointBinDetails?.governorate ? PointBinDetails?.governorate : 'Tunis');
-  const [selectedMunicipal, setMunicipal] = useState(PointBinDetails?.municipale ? PointBinDetails?.municipale : 'Tunis');
+const [selectedValue, setSelectedValue] = useState( 'Tunis');
+  const [selectedMunicipal, setMunicipal] = useState('');
   const dispatch = useDispatch()
 
   const { id } = useParams();
@@ -145,7 +145,7 @@ useEffect(() => {
    
       // showToastMessage()
       setSelectedBins([])
-      e.target.reset();
+      // e.target.reset();
    
   
   }
@@ -179,6 +179,7 @@ useEffect(() => {
    const municipales = governorates?.governorates?.filter(
     (item, index) => item.name === selectedValue,
   );
+  
   return (
     <>
       <UserHeader />
@@ -325,7 +326,14 @@ style={
           {errors}
         </div>)
         } */}
-      <select name={"municipal"} required defaultValue={selectedMunicipal} className={classNames("form-control")} onChange={e=>setMunicipal(e.target.value)}>
+        
+      <select name={"municipale"} required defaultValue={selectedMunicipal} className={classNames("form-control")} onChange={e=>{
+        setMunicipal(e.target.value)
+        console.log(e.target.value)
+        }}>
+          <option value={''}>
+            select municipal
+          </option>
         
       {municipales &&
                           municipales[0]?.municipalities?.map(
