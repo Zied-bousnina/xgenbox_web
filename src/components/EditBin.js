@@ -113,8 +113,8 @@ useEffect(() => {
   const onSubmit = (e)=>{
     
     e.preventDefault();
-    console.log(form)
-  dispatch(updateBin(id,form))
+    console.log({...form, governorate: selectedValue, municipale: selectedMunicipal})
+  dispatch(updateBin(id,{...form, governorate: selectedValue, municipale: selectedMunicipal}))
 
   // !error?.success ? showErrorToastMessage() : null
  
