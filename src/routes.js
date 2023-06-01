@@ -48,12 +48,19 @@ var routes = [
     path: "/index",
     name: "Dashboard",
     icon: "ni ni-tv-2 text-primary",
-    component: Index,
+    component: ListOfBins,
     layout: "/admin"
   },
   {
     path: "/requests",
     name: "Requests Municipal",
+    icon: "ni ni-planet text-blue",
+    component: RequestsMunicpal,
+    layout: "/admin"
+  },
+  {
+    path: "/Report",
+    name: "Report List",
     icon: "ni ni-planet text-blue",
     component: RequestsMunicpal,
     layout: "/admin"
@@ -205,6 +212,13 @@ var routes = [
     path: "/maps",
     name: "Maps",
     icon: "ni ni-pin-3 text-orange",
+    component: Maps,
+    layout: "/admin"
+  },
+  {
+    path: "/feedbacks",
+    name: "Feedbacks",
+    icon: "ni ni-pin-3 text-red",
     component: Maps,
     layout: "/admin"
   },
