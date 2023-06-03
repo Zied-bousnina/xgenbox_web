@@ -24,7 +24,7 @@ dispatch({
 
 
    
-  axios.post(`https://xgenbox.azurewebsites.net/api/site/createTechAssist`,data, {   
+  axios.post(`https://genbox.onrender.com/api/site/createTechAssist`,data, {   
     headers: { "Content-Type": "multipart/form-data" } 
 } )
   
@@ -69,7 +69,7 @@ dispatch({
 }
 
 export const FetchAllTechAssist = (data)=>dispatch=>{
-  axios.get(`https://xgenbox.azurewebsites.net/api/site/TechAssist/fetchAll`,data )
+  axios.get(`https://genbox.onrender.com/api/site/TechAssist/fetchAll`,data )
   .then(res => {
       console.log(res)
 
@@ -107,7 +107,7 @@ export const FetchAllTechAssist = (data)=>dispatch=>{
 
 export const GetTechAssistDetailsById = (id,navigation)=>dispatch=>{
    
-  axios.get(`https://xgenbox.azurewebsites.net/api/site/techAssist/fetchByID/${id}`)
+  axios.get(`https://genbox.onrender.com/api/site/techAssist/fetchByID/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -141,7 +141,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://xgenbox.azurewebsites.net/api/site/TechAssist/readed/${id}`)
+  axios.put(`https://genbox.onrender.com/api/site/TechAssist/readed/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
