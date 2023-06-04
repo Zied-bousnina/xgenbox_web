@@ -234,6 +234,7 @@ const actionBodyTemplate = (rowData) => {
           <Btn icon="pi pi-trash" rounded outlined severity="danger" onClick={()=>{
 
 setnotificationModal(true)
+
 setselectedItem(rowData?._id)
 } } />
       </React.Fragment>
@@ -485,6 +486,60 @@ is Closed
                 
                 </tbody>
               </Table> */}
+              <Modal
+              className="modal-dialog-centered modal-danger"
+              contentClassName="bg-gradient-danger"
+              isOpen={notificationModal}
+            
+            >
+              <div className="modal-header">
+                <h6 className="modal-title" id="modal-title-notification">
+                  Your attention is required
+                </h6>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  <span aria-hidden={true}>×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="py-3 text-center">
+                  <i className="ni ni-bell-55 ni-3x" />
+                  <h4 className="heading mt-4">You should read this!</h4>
+                  <p>
+                    When you click on "Ok , Got it" the request will be deleted {selectedItem}
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <Button className="btn-white" color="default" type="button"
+                onClick={()=>deleteBin(selectedItem)}
+                >
+                  {isLoad ? (
+    <div className="spinner-border text-light" role="status">
+      <span className="visually-hidden"></span>
+    </div>
+  )
+                  :
+                  "Ok, Got it"
+                  }
+                 
+                </Button>
+                <Button
+                  className="text-white ml-auto"
+                  color="link"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </Modal>
               <Tooltip target=".export-buttons>button" position="bottom" />
               <DataTable paginator rows={5} rowsPerPageOptions={[5, 10, 25]} ref={dt} value={listOfBins} header={header} selection={selectedProduct}
               selectionMode={true}
