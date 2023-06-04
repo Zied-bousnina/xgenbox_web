@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from "react";
 // react component that copies the given text inside your clipboard
 
@@ -23,7 +23,8 @@ import {
   PaginationItem,
   PaginationLink,
   Button,
-  Modal
+  Modal,
+  Alert
 } from "reactstrap";
 import Header from './Headers/Header';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,7 +41,11 @@ import 'react-toastify/dist/ReactToastify.css';
 // import QRCode, { QRCodeSVG } from 'qrcode.react';
 import { PDFDownloadLink, Document, Page, Text, Image, View } from '@react-pdf/renderer';
 import { DeleteBinByID } from 'Redux/actions/BinAction';
-
+import { Button as Btn} from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Tooltip } from 'primereact/tooltip';
+import { useHistory } from 'react-router-dom';
 function ListOfBins() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
@@ -52,9 +57,20 @@ function ListOfBins() {
   const [selectedItem, setselectedItem] = useState(null)
   const dispatch = useDispatch()
   const [count, setCount] = useState(10);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  const history = useHistory();
+  const dt = useRef(null);
 
+  const cols = [
+      { field: 'code', header: 'Code' },
+      { field: 'name', header: 'Name' },
+      { field: 'category', header: 'Category' },
+      { field: 'quantity', header: 'Quantity' }
+  ];
 
-  
+  const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
+
 
   useEffect(() => {
     if (count > 0) {
@@ -157,8 +173,72 @@ function ListOfBins() {
 
   }
   
-  
-  
+  const exportCSV = (selectionOnly) => {
+    dt.current.exportCSV({ selectionOnly });
+};
+
+const exportPdf = () => {
+    import('jspdf').then((jsPDF) => {
+        import('jspdf-autotable').then(() => {
+            const doc = new jsPDF.default(0, 0);
+
+            doc.autoTable(exportColumns, products);
+            doc.save('products.pdf');
+        });
+    });
+};
+
+const exportExcel = () => {
+    import('xlsx').then((xlsx) => {
+        const worksheet = xlsx.utils.json_to_sheet(products);
+        const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+        const excelBuffer = xlsx.write(workbook, {
+            bookType: 'xlsx',
+            type: 'array'
+        });
+
+        saveAsExcelFile(excelBuffer, 'products');
+    });
+};
+
+const saveAsExcelFile = (buffer, fileName) => {
+    import('file-saver').then((module) => {
+        if (module && module.default) {
+            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+            let EXCEL_EXTENSION = '.xlsx';
+            const data = new Blob([buffer], {
+                type: EXCEL_TYPE
+            });
+
+            module.default.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        }
+    });
+};
+
+  const header = (
+    <div className="flex align-items-center justify-content-end gap-2">
+        <Btn type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
+        <Btn type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+        <Btn type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
+    </div>
+);
+const actionBodyTemplate = (rowData) => {
+  return (
+      <React.Fragment>
+        <Link
+                          to={`/admin/edit-bin/${rowData?._id}`}
+                          >
+
+          <Btn icon="pi pi-pencil" rounded outlined className="mr-2"  />
+                          </Link>
+          <Btn icon="pi pi-trash" rounded outlined severity="danger" onClick={()=>{
+
+setnotificationModal(true)
+setselectedItem(rowData?._id)
+} } />
+      </React.Fragment>
+  );
+};
   return (
     <>
     <Header />
@@ -198,7 +278,7 @@ function ListOfBins() {
                 </Row>
               </CardHeader>
               
-              <Table className="align-items-center table-flush" responsive>
+              {/* <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Name</th>
@@ -256,7 +336,7 @@ is Closed
                         
                       )
                         }
-                        {/* <i className="bg-success" /> */}
+                        
                       </Badge>
                     </td>
                     </td>
@@ -275,7 +355,7 @@ is Closed
   ) : (
     !request?.status ? (
       <div>
-        {/* {count} */}
+       
         Closing in 10s
       </div>
     ) : (
@@ -309,49 +389,42 @@ is Closed
                           to={`/admin/bin-details/${request?._id}`}
                           >
                           <DropdownItem
-                            // href="#pablo"
-                            // onClick={()=>PutRequest("valid", request?._id)}
-                            // disabled
+                          
                           >
                             Show details
                           </DropdownItem>
                           </Link>
                           <DropdownItem
-                            // href="#pablo"
+                           
                             onClick={()=>{
 
                               setnotificationModal(true)
                               setselectedItem(request?._id)
                             } 
                             }
-                            // disabled
+                           
                           >
                             Delete Bin
                           </DropdownItem>
                           <DropdownItem
-                            // href="#pablo"
+                            
                             onClick={()=>console.log("hkhkh")}
-                            // disabled
+                            
                           >
                             <PDFDownloadLink document={<PDFDocument data={request} />} fileName={request?.quoteDemande?.name}>
 {({ blob, url, loading, error }) =>
-// loading ? 'Loading document...' : 'Download Pdf'
+
 'Download details'
  
 }
 </PDFDownloadLink>
                           </DropdownItem>
-                          {/* <DropdownItem
-                            href="#pablo"
-                            onClick={() => setnotificationModal(true)}
-                          >
-                            Block
-                          </DropdownItem> */}
+                       
                           <Modal
               className="modal-dialog-centered modal-danger"
               contentClassName="bg-gradient-danger"
               isOpen={notificationModal}
-              // toggle={() => this.toggleModal("notificationModal")}
+            
             >
               <div className="modal-header">
                 <h6 className="modal-title" id="modal-title-notification">
@@ -388,7 +461,7 @@ is Closed
                   :
                   "Ok, Got it"
                   }
-                  {/* Ok, Got it */}
+                 
                 </Button>
                 <Button
                   className="text-white ml-auto"
@@ -401,12 +474,7 @@ is Closed
                 </Button>
               </div>
             </Modal>
-                          {/* <DropdownItem
-                            href="#pablo"
-                            onClick={() => this.toggleModal("notificationModal")}
-                            >
-                            Something else here
-                          </DropdownItem> */}
+                          
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -416,7 +484,29 @@ is Closed
                  
                 
                 </tbody>
-              </Table>
+              </Table> */}
+              <Tooltip target=".export-buttons>button" position="bottom" />
+              <DataTable paginator rows={5} rowsPerPageOptions={[5, 10, 25]} ref={dt} value={listOfBins} header={header} selection={selectedProduct}
+              selectionMode={true}
+              onSelectionChange={(e) => setSelectedProduct(e.data)}
+              onRowClick={
+                (e) => {
+             
+                  const url = `/admin/bin-details/${e.data._id}`;
+  history.push(url);
+                }
+              }
+              
+             
+               sortMode="multiple"className="thead-light" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="name" header="Name" sortable className="thead-light" ></Column>
+                <Column field="address" header="Address" sortable style={{ width: '25%' }}></Column>
+                <Column field="gaz" header="Gaz" sortable style={{ width: '25%' }}></Column>
+                <Column field="niv" header="Level" sortable style={{ width: '25%' }}>
+                  hjh
+                </Column>
+                <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+            </DataTable>
               <CardFooter className="py-4">
                 <nav aria-label="...">
                   {/* <Pagination
