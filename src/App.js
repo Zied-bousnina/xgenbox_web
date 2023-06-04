@@ -36,7 +36,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 //core
 import "primereact/resources/primereact.min.css";  
 import 'primeicons/primeicons.css'
-import 'primeflex/primeflex.css';  
+// import 'primeflex/primeflex.css';  
 function App() {
   // const user= {
   //   isConnected:false,
