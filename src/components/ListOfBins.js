@@ -46,6 +46,9 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tooltip } from 'primereact/tooltip';
 import { useHistory } from 'react-router-dom';
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { InputNumber } from 'primereact/inputnumber';
+import { InputText } from 'primereact/inputtext';
 function ListOfBins() {
   const [copiedText, setCopiedText] = useState();
   const profile = useSelector(state=>state?.profile?.profile)
@@ -214,13 +217,47 @@ const saveAsExcelFile = (buffer, fileName) => {
         }
     });
 };
+const onGlobalFilterChange = (e) => {
+  const value = e.target.value;
+  let _filters = { ...filters };
 
+  _filters['global'].value = value;
+
+  setFilters(_filters);
+  setGlobalFilterValue(value);
+};
+
+const [filters, setFilters] = useState({
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+  'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+  representative: { value: null, matchMode: FilterMatchMode.IN },
+  date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+  balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+  status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+  activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
+});
+
+const [globalFilterValue, setGlobalFilterValue] = useState('');
   const header = (
-    <div className="flex align-items-center justify-content-end gap-2">
+    <>
+    <Row>
+        <Col >
+        <span className="p-input-icon-left">
+                    <i className="pi pi-search" />
+                    <InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
+                </span>
+        </Col>
+        <Col xs="auto">
+        {/* <div className="flex align-items-center justify-content-end gap-2"> */}
         <Btn type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
         <Btn type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
         <Btn type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
-    </div>
+        {/* </div> */}
+        </Col>
+    </Row>
+   
+    </>
 );
 const actionBodyTemplate = (rowData) => {
   return (
@@ -540,10 +577,13 @@ is Closed
                 </Button>
               </div>
             </Modal>
+            <div className="card">
+              
               <Tooltip target=".export-buttons>button" position="bottom" />
               <DataTable paginator rows={5} rowsPerPageOptions={[5, 10, 25]} ref={dt} value={listOfBins} header={header} selection={selectedProduct}
               selectionMode={true}
               onSelectionChange={(e) => setSelectedProduct(e.data)}
+              filters={filters} filterDisplay="menu" globalFilterFields={['_id','name', 'address', 'gaz', 'niv', 'status']}
               onRowClick={
                 (e) => {
              
@@ -554,6 +594,7 @@ is Closed
               
              
                sortMode="multiple"className="thead-light" tableStyle={{ minWidth: '50rem' }}>
+                <Column field="_id" header="ID" sortable className="thead-light" ></Column>
                 <Column field="name" header="Name" sortable className="thead-light" ></Column>
                 <Column field="address" header="Address" sortable style={{ width: '25%' }}></Column>
                 <Column field="gaz" header="Gaz" sortable style={{ width: '25%' }}></Column>
@@ -562,6 +603,7 @@ is Closed
                 </Column>
                 <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
             </DataTable>
+                </div>
               <CardFooter className="py-4">
                 <nav aria-label="...">
                   {/* <Pagination

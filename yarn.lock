@@ -11298,6 +11298,11 @@ pretty-hrtime@^1.0.0:
   resolved "https://registry.npmjs.org/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz"
   integrity sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==
 
+primeflex@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.npmjs.org/primeflex/-/primeflex-3.3.1.tgz"
+  integrity sha512-zaOq3YvcOYytbAmKv3zYc+0VNS9Wg5d37dfxZnveKBFPr7vEIwfV5ydrpiouTft8MVW6qNjfkaQphHSnvgQbpQ==
+
 primeicons@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/primeicons/-/primeicons-6.0.1.tgz"
