@@ -64,12 +64,23 @@ function ListOfBins() {
   const [products, setProducts] = useState([]);
   const history = useHistory();
   const dt = useRef(null);
-
+const [filters, setFilters] = useState({
+  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+  'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+  representative: { value: null, matchMode: FilterMatchMode.IN },
+  date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+  balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+  status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+  activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
+});
+const [globalFilterValue, setGlobalFilterValue] = useState('');
   const cols = [
-      { field: 'code', header: 'Code' },
+      { field: '_id', header: 'Id' },
       { field: 'name', header: 'Name' },
-      { field: 'category', header: 'Category' },
-      { field: 'quantity', header: 'Quantity' }
+      { field: 'address', header: 'Address' },
+      { field: 'gaz', header: 'gaz' },
+      { field: 'niv', header: 'lavel' }
   ];
 
   const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));
@@ -84,9 +95,7 @@ function ListOfBins() {
     }
   }, [count]);
 
-  const startTimer = () => {
-    setCount(10);
-  };
+  
   
 
   console.log(ListOfUsers)
@@ -103,33 +112,7 @@ function ListOfBins() {
   
 
 
-  const PDFDocument = ({data}) => {
-    // console.table(data)
-  
-    return  (
-      <Document>
-      <Page>
-        {/* {data?.map(item => ( */}
-        <View>
-      
-        </View>
 
-
-          {/* ))} */}
-
-      </Page>
-    </Document>
-  );
-  
-  }
-  
-  const PutRequest = (status, id)=> {
-    // alert("accept", status)
-    dispatch(UpadeteRequest({status, id}))
-    console.log(status)
-    setnotificationModal(false)
-
-  }
   const showToastMessage = () => {
     toast.success('Request sent successfully.', {
         position: toast.POSITION.TOP_RIGHT,
@@ -142,15 +125,7 @@ function ListOfBins() {
       showToastMessage()
     }
   }, [isSuccess])
-  const block = (id)=>{
-    console.log('block')
-    setselectedItem(id)
-    dispatch(UpdateBinStatus(id))
-    if(isSuccess){
-
-      startTimer()
-    }
-  }
+ 
 
   const deleteBin = (id)=> {
     console.log("delete")
@@ -161,20 +136,7 @@ function ListOfBins() {
     //   startTimer()
     // }
   }
-  const Unblock = (id)=>{
-    console.log("Unblock")
-    // dispatch(UnBlockUser(id))
-    setselectedItem(id)
-    dispatch(UpdateBinStatus(id))
-    // startTimer()
-    if(isSuccess){
-
-      startTimer()
-    }
-
-    
-
-  }
+  
   
   const exportCSV = (selectionOnly) => {
     dt.current.exportCSV({ selectionOnly });
@@ -227,18 +189,9 @@ const onGlobalFilterChange = (e) => {
   setGlobalFilterValue(value);
 };
 
-const [filters, setFilters] = useState({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-  'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
-  representative: { value: null, matchMode: FilterMatchMode.IN },
-  date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
-  balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-  status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
-  activity: { value: null, matchMode: FilterMatchMode.BETWEEN }
-});
 
-const [globalFilterValue, setGlobalFilterValue] = useState('');
+
+
   const header = (
     <>
     <Row>
@@ -251,8 +204,8 @@ const [globalFilterValue, setGlobalFilterValue] = useState('');
         <Col xs="auto">
         {/* <div className="flex align-items-center justify-content-end gap-2"> */}
         <Btn type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
-        <Btn type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
-        <Btn type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" />
+        {/* <Btn type="button" icon="pi pi-file-excel" severity="success" rounded onClick={exportExcel} data-pr-tooltip="XLS" />
+        <Btn type="button" icon="pi pi-file-pdf" severity="warning" rounded onClick={exportPdf} data-pr-tooltip="PDF" /> */}
         {/* </div> */}
         </Col>
     </Row>
@@ -594,13 +547,18 @@ is Closed
               
              
                sortMode="multiple"className="thead-light" tableStyle={{ minWidth: '50rem' }}>
-                <Column field="_id" header="ID" sortable className="thead-light" ></Column>
+                {/* <Column field="_id" header="ID" sortable className="thead-light" ></Column>
                 <Column field="name" header="Name" sortable className="thead-light" ></Column>
                 <Column field="address" header="Address" sortable style={{ width: '25%' }}></Column>
                 <Column field="gaz" header="Gaz" sortable style={{ width: '25%' }}></Column>
                 <Column field="niv" header="Level" sortable style={{ width: '25%' }}>
                   hjh
-                </Column>
+                </Column> */}
+                {
+                  cols.map(e=>{
+                    return <Column field={e.field} header={e.header} sortable style={{ width: '25%' }}></Column>
+                  })
+                }
                 <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
             </DataTable>
                 </div>
