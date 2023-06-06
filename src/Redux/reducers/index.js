@@ -23,6 +23,8 @@ import BinsNotInPointBinReducers from './BinsNotInPointBin.reducers';
 import ListPointBinsReducer from './ListPointBins.reducer';
 import binDetailsReducers from './binDetails.reducers';
 import PointBinsDetailsReducer from './PointBinsDetails.reducer';
+import AllBinsReducer from './AllBins.reducer';
+import AllPointBinsReducer from './AllPointBins.reducer';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -46,6 +48,8 @@ export default combineReducers({
     ListOfBinsNotInPointBin : BinsNotInPointBinReducers,
     ListOfPointBins : ListPointBinsReducer,
     binDetails : binDetailsReducers,
-    PointBinDetails : PointBinsDetailsReducer
+    PointBinDetails : PointBinsDetailsReducer,
+    allBins : AllBinsReducer,
+    AllPointBins : AllPointBinsReducer
     
 })

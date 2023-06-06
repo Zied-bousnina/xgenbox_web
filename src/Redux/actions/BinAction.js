@@ -2,6 +2,8 @@ import { SET_IS_LOADING } from "Redux/types"
 import { SET_BINS_LIST } from "Redux/types"
 import { SET_POINT_BINS } from "Redux/types"
 import { SET_POINTBIN_DETAILS } from "Redux/types"
+import { SET_ALL_POINT_BINS } from "Redux/types"
+import { SET_ALL_BINS_ } from "Redux/types"
 import { SET_BIN_DETAILS } from "Redux/types"
 import { SET_BINS_LIST_NOT_IN_POINT_BIN } from "Redux/types"
 import { SET_IS_SECCESS } from "Redux/types"
@@ -622,4 +624,76 @@ setTimeout(() => {
 })
 })
 
+}
+
+export const fetchBin= (municipal)=>(dispatch)=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+
+  axios.get(`https://genbox.onrender.com/api/bin/FetchBinsNotInPointBins`)
+  .then(async(res) => {
+    // console.log(res.data)
+
+    dispatch({
+      type: SET_ALL_BINS_,
+      payload: res.data
+    })
+      dispatch({
+          type: SET_ERRORS,
+          payload: {}
+      })
+      dispatch({
+        type: SET_ERRORS,
+        payload: []
+    })
+   
+
+  })
+  .catch((err) => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err?.response?.data
+    })
+   
+  }
+  )
+  
+}
+
+export const fetchPointBin= (municipal)=>(dispatch)=> {
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+
+  axios.get(`https://genbox.onrender.com/api/Pointbin/fetchAllPointBin`)
+  .then(async(res) => {
+    // console.log(res.data)
+
+    dispatch({
+      type: SET_ALL_POINT_BINS,
+      payload: res.data
+    })
+      dispatch({
+          type: SET_ERRORS,
+          payload: {}
+      })
+      dispatch({
+        type: SET_ERRORS,
+        payload: []
+    })
+   
+
+  })
+  .catch((err) => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: err?.response?.data
+    })
+   
+  }
+  )
+  
 }
