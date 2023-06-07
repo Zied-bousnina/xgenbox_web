@@ -43,6 +43,11 @@ import {Link} from "react-router-dom"
 import { FetchAllQuote } from "Redux/actions/QuoteAction";
 import { FetchAllBinsNotInUse } from "Redux/actions/BinAction";
 import { AddPointBin } from "Redux/actions/BinAction";
+
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
+const animatedComponents = makeAnimated();
 const CreateBinPoint = () => {
   const profile = useSelector(state=>state?.profile?.profile)
   const error = useSelector(state=>state.error?.errors)
@@ -56,6 +61,7 @@ const isLoad = useSelector(state=>state?.isLoading?.isLoading)
   const [governorates, setgovernorates] = useState([]);
 const [selectedValue, setSelectedValue] = useState('Tunis');
   const [selectedMunicipal, setMunicipal] = useState('Tunis');
+  const [selectedValues, setSelectedValues] = useState([]);
   const dispatch = useDispatch()
 
   dispatch({
@@ -83,23 +89,21 @@ useEffect(() => {
   
   const [form, setForm] = useState({
     bins:[]
+  
   })
   
   const onChangeHandler = (e) => {
     const { name, checked, value } = e.target;
 
   
-    if (name === "bin1" || name === "bin2" || name === "bin3" || name === "bin4") {
-      
-      setForm({ ...form, bins: [...form.bins, value] });
-    } else {
+   
       setForm({
         ...form,
         [name]: value,
       });
-    }
+    
   
-    console.log(form);
+    // console.log(form);
   };
   useEffect(() => {
     if (isSuccess) {
@@ -119,8 +123,13 @@ useEffect(() => {
   const onSubmit = (e)=>{
     
     e.preventDefault();
+    // console.log("bins", selectedValues.value)
+    
+    selectedValues?.map(e=>{
+      console.log("map", e?.value)
+      setForm({ ...form, bins: [...form.bins, e?.value] });
+    })
     console.log({...form, governorate: selectedValue, municipale: selectedMunicipal})
-
     
   dispatch(AddPointBin({...form, governorate: selectedValue, municipale: selectedMunicipal}))
 
@@ -136,23 +145,9 @@ useEffect(() => {
   
   }
 
-  const handleBinChange = (selectedBin, index) => {
-    // Update selected bins
-    const updatedBins = [...selectedBins];
-    updatedBins[index] = selectedBin;
-    setSelectedBins(updatedBins);
-  };
+ 
 
-  const renderBinOptions = (index) => {
-    const availableBins = ListOfBinsNotInUse?.filter(
-      (bin) => !selectedBins?.includes(bin._id)
-    );
-    return availableBins?.map((bin) => (
-      <option key={bin._id}   value={bin._id}>
-        {bin.type}
-      </option>
-    ));
-  };
+  
   useEffect(() => {
     axios
       .get(`https://genbox.onrender.com/api/governorates`)
@@ -165,6 +160,22 @@ useEffect(() => {
    const municipales = governorates?.governorates?.filter(
     (item, index) => item.name === selectedValue,
   );
+
+  const colourOptions = []
+
+  ListOfBinsNotInUse?.map(e=>{
+    colourOptions.push({value:e._id, label:e.type})
+
+  })
+  
+
+  // Handle onChange event
+  const handleSelectChange = (selectedOptions) => {
+    
+   
+    setSelectedValues(selectedOptions);
+  };
+  // console.log("SelectedValues", selectedValues)
   return (
     <>
       <UserHeader />
@@ -416,95 +427,41 @@ style={
   </Row>
   <hr/>
   <h3>Bins</h3>
-  <Row>
-        <Col md="12">
-          <div className="mb-3">
-            <label className="form-label">
-              Bin 1
-              {selectedBins[0] && (
-                <span style={{ color: "red" }}>*</span>
-              )}
-            </label>
-            <div className="input-group">
-              <select
-                name="bin1"
-                required
-                className="form-control"
-                onChange={(e) => {handleBinChange(e.target.value, 0)
+  
+<Select
+      // closeMenuOnSelect={false}
+      components={animatedComponents}
+      
+      isMulti
+      
+      options={colourOptions}
+      onChange={handleSelectChange}
+      required
+       isLoading={colourOptions.length==0 ?  true: false}
+       isDisabled={selectedValues.length >3 ?true: false}
+      
+     
+      
+    />
+    {
+      selectedValues.length >3 &&
+      (
+        <Button
+        color="info"
+        outline
+        onClick={()=>{setSelectedValues([])
+          
+        }}
+      >
+        Deselect
+      </Button>
+      )
+    }
+
+      
 
 
-                   onChangeHandler(e)}}
-              >
-                <option value="0">-- Select Bin 1 --</option>
-                {renderBinOptions(0)}
-              </select>
-            </div>
-          </div>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col md="12">
-          <div className="mb-3">
-            <label className="form-label">Bin 2</label>
-            <div className="input-group">
-              <select
-                name="bin2"
-                className="form-control"
-                onChange={(e) => {handleBinChange(e.target.value, 1)
-                  onChangeHandler(e)
-                }}
-                disabled={!selectedBins[0]}
-              >
-                <option value="">-- Select Bin 2 --</option>
-                {renderBinOptions(1)}
-              </select>
-            </div>
-          </div>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col md="12">
-          <div className="mb-3">
-            <label className="form-label">Bin 3</label>
-            <div className="input-group">
-              <select
-                name="bin3"
-                className="form-control"
-                onChange={(e) => {handleBinChange(e.target.value, 2)
-                  onChangeHandler(e)
-                }}
-                disabled={!selectedBins[1]}
-              >
-                <option value="">-- Select Bin 3 --</option>
-                {renderBinOptions(2)}
-              </select>
-            </div>
-          </div>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col md="12">
-          <div className="mb-3">
-            <label className="form-label">Bin 4</label>
-            <div className="input-group">
-              <select
-                name="bin4"
-                className="form-control"
-                onChange={(e) => {handleBinChange(e.target.value, 3)
-                  onChangeHandler(e)
-                }}
-                disabled={!selectedBins[2]}
-              >
-                <option value="">-- Select Bin 4 --</option>
-                {renderBinOptions(3)}
-              </select>
-            </div>
-          </div>
-        </Col>
-      </Row>
+      
   <Row>
     <Col>
     
@@ -548,6 +505,8 @@ style={
                 </button></Col>
   </Row>
 </form>
+
+   
               </CardBody>
             </Card>
           </Col>
