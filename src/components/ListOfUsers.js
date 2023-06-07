@@ -84,8 +84,8 @@ function ListOfUsers() {
       { field: '_id', header: 'Id' },
       { field: 'address', header: 'Address' },
       { field: 'tel', header: 'Tel' },
-      { field: 'city', header: 'city ' },
-      { field: 'country', header: ' country' },
+      { field: 'city', header: 'City ' },
+      { field: 'country', header: ' Country' },
       // { field: 'status', header: 'Status' }
   ];
   const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));

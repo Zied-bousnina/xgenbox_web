@@ -149,7 +149,7 @@ const header = (
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">List Of all Partnership </h3>
+                <h3 className="mb-0">Partnerships list  </h3>
               </CardHeader>
               {/* <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">

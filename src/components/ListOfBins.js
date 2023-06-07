@@ -79,8 +79,8 @@ const [globalFilterValue, setGlobalFilterValue] = useState('');
       { field: '_id', header: 'Id' },
       { field: 'name', header: 'Name' },
       { field: 'address', header: 'Address' },
-      { field: 'gaz', header: 'gaz' },
-      { field: 'niv', header: 'lavel' }
+      { field: 'gaz', header: 'Gaz' },
+      { field: 'niv', header: 'Level' }
   ];
 
   const exportColumns = cols.map((col) => ({ title: col.header, dataKey: col.field }));

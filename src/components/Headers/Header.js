@@ -58,7 +58,7 @@ const allUser = userStatistiques?.total
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          All Bins
+                          Bins count
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
                          {BinStatistiques?.totalCount}
@@ -91,7 +91,7 @@ const allUser = userStatistiques?.total
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          all users
+                          Users Count
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">{allUser?.totalCount}</span>
                       </div>
@@ -119,7 +119,7 @@ const allUser = userStatistiques?.total
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          MUNICIPAL
+                          MUNICIPALs count
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">{municipal[0]?.totalCount}</span>
                       </div>

@@ -53,7 +53,7 @@ var routes = [
   },
   {
     path: "/requests",
-    name: "Requests Municipal",
+    name: " Municipal Requests ",
     icon: "ni ni-planet text-blue",
     component: RequestsMunicpal,
     layout: "/admin"
