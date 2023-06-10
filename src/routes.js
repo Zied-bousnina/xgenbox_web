@@ -52,101 +52,106 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/requests",
-    name: " Municipal Requests ",
-    icon: "ni ni-planet text-blue",
-    component: RequestsMunicpal,
-    layout: "/admin"
-  },
-  {
-    path: "/Report",
-    name: "Report List",
-    icon: "ni ni-planet text-blue",
-    component: RequestsMunicpal,
-    layout: "/admin"
-  },
-  {
     path: "/List-Users",
-    name: "List Of users",
-    icon: "ni ni-planet text-blue",
+    name: "List Of Users",
+    icon: "ni ni-folder-17 text-yellow",
     component: ListOfUsers,
     layout: "/admin"
   },
   {
+    path: "/List-bins",
+    name: "List Of Bins",
+    icon: "ni ni-folder-17 text-yellow",
+    component: ListOfBins,
+    layout: "/admin"
+  },
+  {
+    path: "/List-Point-bins",
+    name: "List Of Points",
+    icon: "ni ni-folder-17 text-yellow",
+    component: ListOfPointBin,
+    layout: "/admin"
+  },
+  {
     path: "/user-details/:id",
-    name: "user details",
-    icon: "ni ni-planet text-blue",
+    name: "User Details",
+    icon: "ni ni-single-copy-04 text-grey",
     component: UserDetails,
     layout: "/admin"
   },
   {
     path: "/partner-details/:id",
-    name: "Partner details",
-    icon: "ni ni-planet text-blue",
+    name: "Partner Details",
+    icon: "ni ni-single-copy-04 text-grey",
     component: PartnerDetails,
     layout: "/admin"
   },
-  
- 
+  {
+    path: "/requests",
+    name: " Municipal Requests ",
+    icon: "ni ni-single-copy-04 text-grey",
+    component: RequestsMunicpal,
+    layout: "/admin"
+  },
   {
     path: "/partnership-list",
-    name: "Partnership requests",
-    icon: "ni ni-planet text-blue",
+    name: "Partnership Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: PartnershipList,
     layout: "/admin"
   },
   {
     path: "/quote-list",
-    name: "quote requests",
-    icon: "ni ni-planet text-blue",
+    name: "Quote Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: QuoteList,
     layout: "/admin"
   },
   {
     path: "/quote-details/:id",
-    name: "quote requests",
-    icon: "ni ni-planet text-blue",
+    name: "Quote Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: QuoteDetail,
     layout: "/admin"
   },
   {
     path: "/tech-assist-list",
-    name: "technical assistance list",
-    icon: "ni ni-planet text-blue",
+    name: "Technical Assistance Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: TechnicalAssistanceList,
     layout: "/admin"
   },
   {
     path: "/tech-assist-detail/:id",
-    name: "technical assistance list",
-    icon: "ni ni-planet text-blue",
+    name: "Technical Assistance Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: TechAssistDetail,
     layout: "/admin"
   },
   {
     path: "/contact-lists",
-    name: "Contact List",
-    icon: "ni ni-planet text-blue",
+    name: "Contact Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: ContactsList,
     layout: "/admin"
   },
   {
     path: "/contact-detail/:id",
-    name: "Contact List",
-    icon: "ni ni-planet text-blue",
+    name: "Contact Requests",
+    icon: "ni ni-single-copy-04 text-grey",
     component: ContactDetails,
     layout: "/admin"
   },
   {
     path: "/edit-Point-bin/:id",
-    name: "Edit point bin",
+    name: "Edit Point of Bins",
     icon: "ni ni-planet text-blue",
     component: EditPointBin,
     layout: "/admin"
   },
   {
     path: "/point-bin-details/:id",
-    name: "Point bin details",
+    name: "Point of Bin Details",
     icon: "ni ni-planet text-blue",
     component: PointBinDetails,
     layout: "/admin"
@@ -165,20 +170,6 @@ var routes = [
   //   component: Icons,
   //   layout: "/admin"
   // },
-  {
-    path: "/List-bins",
-    name: "List Of bins",
-    icon: "ni ni-building text-red",
-    component: ListOfBins,
-    layout: "/admin"
-  },
-  {
-    path: "/List-Point-bins",
-    name: "List Of bins Point",
-    icon: "ni ni-building text-green",
-    component: ListOfPointBin,
-    layout: "/admin"
-  },
   {
     path: "/AddBin",
     name: "create Bin",
@@ -207,7 +198,6 @@ var routes = [
     component: CreateBinPoint,
     layout: "/admin"
   },
- 
   {
     path: "/maps",
     name: "Maps",
@@ -218,10 +208,18 @@ var routes = [
   {
     path: "/feedbacks",
     name: "Feedbacks",
-    icon: "ni ni-pin-3 text-red",
+    icon: "ni ni-books text-green",
     component: Maps,
     layout: "/admin"
   },
+  {
+    path: "/Report",
+    name: "Reports",
+    icon: "ni ni-curved-next text-red",
+    component: RequestsMunicpal,
+    layout: "/admin"
+  },
+  
 
   // {
   //   path: "/user-profile",

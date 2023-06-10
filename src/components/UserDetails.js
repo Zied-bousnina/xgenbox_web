@@ -145,7 +145,7 @@ const UserDetails = () => {
                 </div>
                 <Col className="col-auto">
                   <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                    <i className="fas fa-chart-bar" />
+                    <i className="fas fa-users" />
                   </div>
                 </Col>
               </Row>
@@ -209,7 +209,7 @@ const UserDetails = () => {
               <Row>
                 <div className="col">
                   <CardTitle className="text-uppercase text-muted mb-0">
-                    Total Access bin
+                    Total Accessed Bins
                   </CardTitle>
                   <span className="h2 font-weight-bold mb-0"> {userDetails?.users?.accessListBins?.length}</span>
                 </div>
@@ -234,7 +234,7 @@ const UserDetails = () => {
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
-                    <h3 className="mb-0">My account</h3>
+                    <h3 className="mb-0">User account</h3>
                   </Col>
                   <Col className="text-right" xs="4">
                     <Button

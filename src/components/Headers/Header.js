@@ -44,7 +44,7 @@ const allUser = userStatistiques?.total
 
   return (
     <>
-      <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
+      <div className="header bg-gradient-green pb-8 pt-5 pt-md-8 ">
         <Container fluid>
           <div className="header-body">
             {/* Card stats */}
@@ -65,8 +65,8 @@ const allUser = userStatistiques?.total
                         </span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
+                        <div className="icon icon-shape bg-green text-white rounded-circle shadow">
+                          <i className="fas fa-trash" />
                         </div>
                       </Col>
                     </Row>
@@ -97,7 +97,7 @@ const allUser = userStatistiques?.total
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
+                          <i className="fas fa-users" />
                         </div>
                       </Col>
                     </Row>
@@ -125,7 +125,7 @@ const allUser = userStatistiques?.total
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
+                          <i className="fas fa-truck" />
                         </div>
                       </Col>
                     </Row>

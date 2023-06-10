@@ -147,7 +147,7 @@ const ShowBinDetails = () => {
                 </div>
                 <Col className="col-auto">
                   <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                    <i className="fas fa-chart-bar" />
+                    <i className="fas fa-mobile" />
                   </div>
                 </Col>
               </Row>
@@ -217,7 +217,7 @@ const ShowBinDetails = () => {
                 </div>
                 <Col className="col-auto">
                   <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                    <i className="fas fa-chart-bar" />
+                    <i className="fas fa-check" />
                   </div>
                 </Col>
               </Row>
