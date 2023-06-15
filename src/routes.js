@@ -41,6 +41,7 @@ import ShowBinDetails from "components/ShowBinDetails";
 import EditBin from "components/EditBin";
 import PointBinDetails from "components/PointBinDetails";
 import EditPointBin from "components/EditPointBins";
+import MunicipalDetails from "components/MunicipalDetails";
 
 
 var routes = [
@@ -91,6 +92,13 @@ var routes = [
     name: " Municipal Requests ",
     icon: "ni ni-single-copy-04 text-grey",
     component: RequestsMunicpal,
+    layout: "/admin"
+  },
+  {
+    path: "/municipal-details/:id",
+    name: " Municipal Requests details ",
+    icon: "ni ni-single-copy-04 text-grey",
+    component: MunicipalDetails,
     layout: "/admin"
   },
   {
@@ -191,8 +199,15 @@ var routes = [
     component: ShowBinDetails,
     layout: "/admin"
   },
+  // {
+  //   path: "/Add-Point-Bin",
+  //   name: "create Point Bin",
+  //   icon: "ni ni-building text-red",
+  //   component: CreateBinPoint,
+  //   layout: "/admin"
+  // },
   {
-    path: "/Add-Point-Bin",
+    path: "/Add-Point-Bin/:idQuote",
     name: "create Point Bin",
     icon: "ni ni-building text-red",
     component: CreateBinPoint,

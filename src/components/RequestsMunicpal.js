@@ -137,7 +137,7 @@ const actionBodyTemplate = (rowData) => {
                           > */}
 
           <Btn icon="pi pi-check" rounded outlined className="mr-2"
-          onClick={()=>PutRequest("accepted", rowData?._id)}
+          onClick={()=>PutRequest("valid", rowData?._id)}
             />
                           {/* </Link> */}
           <Btn icon="pi pi-times" rounded outlined severity="danger" onClick={()=>{
@@ -276,6 +276,53 @@ const actionBodyTemplate = (rowData) => {
                 
                 </tbody>
               </Table> */}
+              <Modal
+              className="modal-dialog-centered modal-danger"
+              contentClassName="bg-gradient-danger"
+              isOpen={notificationModal}
+             
+            >
+              <div className="modal-header">
+                <h6 className="modal-title" id="modal-title-notification">
+                  Your attention is required
+                </h6>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                 
+                >
+                  <span aria-hidden={true}>×</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <div className="py-3 text-center">
+                  <i className="ni ni-bell-55 ni-3x" />
+                  <h4 className="heading mt-4">You should read this!</h4>
+                  <p>
+                    When you click on "Ok , Got it" the request will be deleted {selectedItem?._id}
+                  </p>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <Button className="btn-white" color="default" type="button"
+                onClick={()=>PutRequest("denied", selectedItem?._id)}
+                >
+                  Ok, Got it 
+                </Button>
+                <Button
+                  className="text-white ml-auto"
+                  color="link"
+                  data-dismiss="modal"
+                  type="button"
+                  onClick={() => setnotificationModal(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </Modal>
               <div className="card">
               
               <Tooltip target=".export-buttons>button" position="bottom" />
@@ -286,7 +333,7 @@ const actionBodyTemplate = (rowData) => {
               onRowClick={
                 (e) => {
              
-                  const url = `/admin/bin-details/${e.data._id}`;
+                  const url = `/admin/municipal-details/${e.data._id}`;
   history.push(url);
                 }
               }
@@ -305,7 +352,12 @@ const actionBodyTemplate = (rowData) => {
                     return <Column field={e.field} header={e.header} sortable style={{ width: '25%' }}></Column>
                   })
                 }
-                <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}>
+                <div className="spinner-border text-light" role="status">
+          <span className="visually-hidden"></span>
+        </div>
+                  
+                </Column>
             </DataTable>
                 </div>
               <CardFooter className="py-4">

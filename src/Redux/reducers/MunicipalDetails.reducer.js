@@ -1,20 +1,17 @@
-
-
-import {  SET_ALL_BINS_ } from "../types"
+import { SET_DETAILS_MUNICIPAL } from "../types"
 
 const initialState = {
-    Bins_list: []
+    MunicipalDetails: {}
     
     
 }
 
-
 export default function(state = initialState, action) {
     switch(action.type) {
-        case SET_ALL_BINS_:
+        case SET_DETAILS_MUNICIPAL:
             return {
                 ...state,
-                Bins_list: action.payload
+                MunicipalDetails: action.payload
               
             }
         

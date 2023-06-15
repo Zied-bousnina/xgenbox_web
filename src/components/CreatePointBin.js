@@ -43,6 +43,7 @@ import {Link} from "react-router-dom"
 import { FetchAllQuote } from "Redux/actions/QuoteAction";
 import { FetchAllBinsNotInUse } from "Redux/actions/BinAction";
 import { AddPointBin } from "Redux/actions/BinAction";
+import { useParams } from "react-router-dom";
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -119,7 +120,8 @@ useEffect(() => {
 
   // console.log(ListOfBinsNotInUse)
   
-
+  const { idQuote } = useParams();
+  // console.log("Params:", useParams())
   const onSubmit = (e)=>{
     
     e.preventDefault();
@@ -131,7 +133,7 @@ useEffect(() => {
     })
     console.log({...form, governorate: selectedValue, municipale: selectedMunicipal})
     
-  dispatch(AddPointBin({...form, governorate: selectedValue, municipale: selectedMunicipal}))
+  dispatch(AddPointBin({...form, governorate: selectedValue, municipale: selectedMunicipal, quoteDemande :idQuote}))
 
   // !error?.success ? showErrorToastMessage() : null
  
@@ -261,26 +263,7 @@ style={
 
 }
 >
-  <Row>
-    
-    
-    <Col 
-    md="12"
-    >
-       <div className=" mb-3">
-      <label className="form-label">address <span style={{color:"red"}}>*</span></label>
-      <div className="input-group">
-        
-        <input type="text" required  name={"address"} className={classNames("form-control")} onChange={onChangeHandler} />
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
-      </div>
-    </div>
-    </Col>
-  </Row>
+ 
   <ToastContainer />
   <Row>
     <Col 
@@ -347,6 +330,26 @@ style={
     
   </Row>
   <Row>
+    
+    
+    <Col 
+    md="12"
+    >
+       <div className=" mb-3">
+      <label className="form-label">address <span style={{color:"red"}}>*</span></label>
+      <div className="input-group">
+        
+        <input type="text" required  name={"address"} className={classNames("form-control")} onChange={onChangeHandler} />
+        {/* {
+          errors && (<div  className="invalid-feedback">
+          {errors}
+        </div>)
+        } */}
+      </div>
+    </div>
+    </Col>
+  </Row>
+  <Row>
     <Col 
     md="6"
     >
@@ -393,7 +396,7 @@ style={
     </Col> */}
   </Row>
   <Row>
-    <Col 
+    {/* <Col 
     md="12"
     >
        <div className=" mb-3">
@@ -401,11 +404,7 @@ style={
       <div className="input-group">
         
         
-        {/* {
-          errors && (<div  className="invalid-feedback">
-          {errors}
-        </div>)
-        } */}
+       
       <select name={"quoteDemande"} required className={classNames("form-control")} onChange={onChangeHandler}>
         
             <option value={""}>--Select Quote request ---</option>
@@ -421,7 +420,7 @@ style={
       </select>
       </div>
     </div>
-    </Col>
+    </Col> */}
     
     
   </Row>

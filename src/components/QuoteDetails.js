@@ -34,6 +34,8 @@ import { FileViewer } from "react-file-viewer";
 import { UpdateQuoteStatus } from "Redux/actions/QuoteAction";
 import axios from "axios";
 import { saveAs } from 'file-saver';
+import { UpdateQuoteStat } from "Redux/actions/QuoteAction";
+import {Link} from "react-router-dom"
 const QuoteDetail = () => {
   const profile = useSelector(state=>state?.profile?.[0]?.profile)
   const user = useSelector(state=>state.auth?.user)
@@ -90,6 +92,10 @@ const QuoteDetail = () => {
       
 
   };
+
+  const handleRequest = (status)=> {
+    dispatch(UpdateQuoteStat(id, status))
+  }
   return (
     <>
     <UserDetailsHeader />
@@ -253,10 +259,10 @@ const QuoteDetail = () => {
             <CardHeader className="bg-white border-0">
               <Row className="align-items-center">
                 <Col xs="8">
-                  <h3 className="mb-0">Partner Details</h3>
+                  <h3 className="mb-0">Quote Details</h3>
                 </Col>
                 <Col className="text-right" xs="4">
-                  <Button
+                  {/* <Button
                     color={`${QuoteDetails?.status ==='unreaded' ?  "success":"primary" }`}
                     // href="#pablo"
                     onClick={(e) => QuoteDetails?.status ==='unreaded' ? Unblock(QuoteDetails?._id) : block( QuoteDetails?._id) }
@@ -270,7 +276,76 @@ const QuoteDetail = () => {
       
       QuoteDetails?.status ==='unreaded' ?  "Mark as Read" :"Mark Unread"
     )}
+                  </Button> */}
+                  {
+                    QuoteDetails?.status !=='valid' && (
+
+                  
+                  <Button
+                    color={`success`}
+                    // href="#pablo"
+                    onClick={(e) => handleRequest("valid") }
+                    size="sm"
+                  >
+                    {isLoad ? (
+      <div className="spinner-border text-light" role="status">
+        <span className="visually-hidden"></span>
+      </div>
+    ) : (
+      
+      "Accept" 
+    )}
                   </Button>
+  )
+}
+{
+                    QuoteDetails?.status ==='valid' && (
+
+                  <Link
+                  to={{
+                    pathname: `/admin/Add-Point-Bin/${id}`,
+                  }}
+                  >
+
+                  <Button
+                    color={`success`}
+                    // href="#pablo"
+                    onClick={(e) => {} }
+                    size="sm"
+                  >
+                    {isLoad ? (
+      <div className="spinner-border text-light" role="status">
+        <span className="visually-hidden"></span>
+      </div>
+    ) : (
+      
+      "Create a Point bin" 
+      )}
+                  </Button>
+      </Link>
+  )
+}
+{
+    QuoteDetails?.status !=='denied' && (
+
+ 
+                  <Button
+                    color={ "danger"}
+                    // href="#pablo"
+                    onClick={(e) =>  handleRequest("denied") }
+                    size="sm"
+                  >
+                    {isLoad ? (
+      <div className="spinner-border text-light" role="status">
+        <span className="visually-hidden"></span>
+      </div>
+    ) : (
+      
+      "deny" 
+    )}
+                  </Button>
+                     )
+                    }
                 </Col>
               </Row>
             </CardHeader>

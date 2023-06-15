@@ -187,3 +187,55 @@ dispatch({
   }
   )
 }
+
+export const UpdateQuoteStat = (id,status,navigation)=>dispatch=>{
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
+  axios.put(`https://genbox.onrender.com/api/site/quote/Update/${id}`,
+  {status: status}
+  )
+  .then(res => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: []
+  })
+  setTimeout(() => {
+      
+      dispatch({
+          type:SET_IS_LOADING,
+          payload:false
+      })
+  }, 1000);
+  dispatch({
+      type:SET_IS_SECCESS,
+      payload:true
+  })
+  setTimeout(() => {
+      dispatch({
+        type:SET_IS_SECCESS,
+        payload:false
+    })
+    }, 3000);
+  })
+  .catch(err => 
+     { 
+      // console.log("err in authAction.js line 366",err)
+      dispatch({
+        type:SET_IS_LOADING,
+        payload:false
+    })
+
+dispatch({
+    type:SET_IS_SECCESS,
+    payload:false
+})
+      // dispatch(registerGoogleUser(data))
+  }
+  )
+}

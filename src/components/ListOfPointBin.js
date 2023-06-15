@@ -178,21 +178,21 @@ const PDFDocument = ({data}) => {
                 <h3 className="mb-0">List Of all Point Bins</h3>
                   </Col>
                   <Col 
-                  // lg="6"
+                 
                     md="3" 
                   >
-                     <Link
+                     {/* <Link
                           to={`/admin/Add-Point-Bin`}
                           >
                             <Button
                             className="float-right"
-                            // color="primary"
+                          
                             >
 
 
                 Add Bin Point<i className=" ml-2 fas fa-arrow-right" />
                             </Button>
-                          </Link>
+                          </Link> */}
                   </Col>
                 </Row>
               </CardHeader>

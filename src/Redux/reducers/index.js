@@ -25,6 +25,7 @@ import binDetailsReducers from './binDetails.reducers';
 import PointBinsDetailsReducer from './PointBinsDetails.reducer';
 import AllBinsReducer from './AllBins.reducer';
 import AllPointBinsReducer from './AllPointBins.reducer';
+import MunicipalDetailsReducer from './MunicipalDetails.reducer';
 export default combineReducers({
     auth:authReducer,
     error:errorReducer,
@@ -50,6 +51,7 @@ export default combineReducers({
     binDetails : binDetailsReducers,
     PointBinDetails : PointBinsDetailsReducer,
     allBins : AllBinsReducer,
-    AllPointBins : AllPointBinsReducer
+    AllPointBins : AllPointBinsReducer,
+    MunicipalDetails : MunicipalDetailsReducer
     
 })

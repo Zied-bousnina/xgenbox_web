@@ -1,5 +1,7 @@
 import { SET_BIN_STATISTIQUES } from "Redux/types"
 import { SET_DEMANDES_MUNICIPAL } from "Redux/types"
+import { SET_IS_LOADING } from "Redux/types"
+import { SET_DETAILS_MUNICIPAL } from "Redux/types"
 import { SET_ERRORS } from "Redux/types"
 import { SET_STATISTIQUES } from "Redux/types"
 import axios from "axios"
@@ -32,11 +34,27 @@ export const findDemandeInProgress = (navigation)=>dispatch=>{
 }
 
 export const UpadeteRequest = (data, navigation)=> (dispatch) => {
-  console.log(data)
+  // console.log(data)
+  dispatch({
+    type: SET_ERRORS,
+    payload: []
+})
+dispatch({
+    type:SET_IS_LOADING,
+    payload:true
+})
   axios.put(`https://genbox.onrender.com/api/demande-municipal/AcceptDemande/${data.id}`
   ,{status:data.status}
   )
   .then(async(res) => {
+    dispatch({
+      type: SET_ERRORS,
+      payload: []
+  })
+  dispatch({
+      type:SET_IS_LOADING,
+      payload:false
+  })
     
     // dispatch({
     //   type: SET_DEMANDES_MUNICIPAL,
@@ -54,6 +72,12 @@ export const UpadeteRequest = (data, navigation)=> (dispatch) => {
             type: SET_ERRORS,
             payload: err?.response?.data
           })
+    
+        
+      dispatch({
+        type:SET_IS_LOADING,
+        payload:false
+    })
       }
      
   
@@ -88,3 +112,31 @@ export const getBinsCount = (navigation)=>dispatch=>{
   }
   )
 }
+
+export const GetPMunicipalDetailsById = (id,navigation)=>dispatch=>{
+   
+  axios.get(`https://genbox.onrender.com/api/demande-municipal/findDemandeById/${id}`)
+  .then(res => {
+      // console.log(res)
+      dispatch({
+          type: SET_DETAILS_MUNICIPAL,
+          payload: res?.data
+      })
+
+
+      // dispatch(registerGoogleUser(data))
+
+      // dispatch(loginUser(data))
+  })
+  .catch(err => 
+     { 
+      // console.log("err in authAction.js line 366",err)
+      dispatch({
+          type: SET_ERRORS,
+          payload: err?.response?.data
+      })
+      // dispatch(registerGoogleUser(data))
+  }
+  )
+}
+
