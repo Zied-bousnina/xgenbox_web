@@ -6,7 +6,7 @@ class Chat extends Component {
     if (!window.kommunicate) {
       (function(d, m) {
         var kommunicateSettings = {
-          appId: '29ae028be39d44ebfcabd34a588e3a6b0',
+          appId: '2663c76645b9f366c54c2fa31cb26b859',
           popupWidget: true,
           automaticChatOpenOnNavigation: true,
         };
