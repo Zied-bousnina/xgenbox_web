@@ -95,6 +95,7 @@ useEffect(() => {
   }
   
  
+  // console.log("point bins",PointBinDetails)
   
   
   
@@ -129,20 +130,30 @@ useEffect(() => {
   }, [ListOfBinsNotInUse])
 
   // console.log(ListOfBinsNotInUse)
-  
+  const handleSelectChange = (selectedOptions) => {
+    console.log("selected option: ", selectedOptions)
+   
+    setSelectedValues(selectedOptions);
+  };
 
-  const onSubmit = (e)=>{
+  const onSubmit = async(e)=>{
+    console.log("selected values",selectedValues)
     
     e.preventDefault();
-     
-    selectedValues?.map(e=>{
+     var bin = []
+     selectedValues?.map(e=>{
       console.log("map", e?.value)
-      setForm({ ...form, bins: [...form.bins, e?.value] });
+      // setForm({ ...form, bins: [...form.bins, e?.value] });
+      bin.push(e.value)
     })
    
-
-    
-  dispatch(updatePointBin(id,{...form, governorate: selectedValue, municipale: selectedMunicipal}))
+   
+setTimeout(() => {
+  console.log("bins: ", bin)
+  
+  console.log("edit point bin",{...form,bins:bin, governorate: selectedValue, municipale: selectedMunicipal})
+  dispatch(updatePointBin(id,{...form, bins: bin,governorate: selectedValue, municipale: selectedMunicipal}))
+}, 1000);
 
   // !error?.success ? showErrorToastMessage() : null
  
@@ -179,11 +190,7 @@ useEffect(() => {
   
 
   // Handle onChange event
-  const handleSelectChange = (selectedOptions) => {
-    
-   
-    setSelectedValues(selectedOptions);
-  };
+  
   return (
     <>
       <UserHeader />
@@ -415,6 +422,7 @@ style={
       isMulti
       
       options={colourOptions}
+      defaultValue={PointBinDetails?.bins?.map((bin)=>({value:bin._id,label:bin.type}))}
       onChange={handleSelectChange}
       required
        isLoading={colourOptions.length==0 ?  true: false}
