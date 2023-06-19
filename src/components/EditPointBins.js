@@ -169,7 +169,7 @@ setTimeout(() => {
 
   useEffect(() => {
     axios
-      .get(`https://genbox.onrender.com/api/governorates`)
+      .get(`https://xgenboxv2.onrender.com/api/governorates`)
       .then(res => {
         setgovernorates(res.data[0]);
       })

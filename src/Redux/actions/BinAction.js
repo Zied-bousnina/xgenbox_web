@@ -23,7 +23,7 @@ dispatch({
 
 
    
-  axios.post(`https://genbox.onrender.com/api/bin/createBin`,data )
+  axios.post(`https://xgenboxv2.onrender.com/api/bin/createBin`,data )
   .then(res => {
       console.log(res)
       dispatch({
@@ -75,7 +75,7 @@ dispatch({
 }
 
 export const FetchAllBins = (data)=>dispatch=>{
-  axios.get(`https://genbox.onrender.com/api/bin/FetchAllBins`,data )
+  axios.get(`https://xgenboxv2.onrender.com/api/bin/FetchAllBins`,data )
   .then(res => {
       console.log(res)
 
@@ -120,7 +120,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://genbox.onrender.com/api/bin/updateStatus/${id}`)
+  axios.put(`https://xgenboxv2.onrender.com/api/bin/updateStatus/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
@@ -162,7 +162,7 @@ dispatch({
 }
 
 export const FetchAllBinsNotInUse = (data)=>dispatch=>{
-  axios.get(`https://genbox.onrender.com/api/bin/FetchAllBinsNotInPointBin`,data )
+  axios.get(`https://xgenboxv2.onrender.com/api/bin/FetchAllBinsNotInPointBin`,data )
   .then(res => {
       // console.log(res)
 
@@ -212,7 +212,7 @@ dispatch({
 
 
    
-  axios.post(`https://genbox.onrender.com/api/Pointbin/CreatePointBin`,data )
+  axios.post(`https://xgenboxv2.onrender.com/api/Pointbin/CreatePointBin`,data )
   .then(res => {
       console.log(res)
       dispatch({
@@ -264,7 +264,7 @@ dispatch({
 }
 
 export const FetchAllPointBins= (data)=>dispatch=>{
-  axios.get(`https://genbox.onrender.com/api/bin/fetchAllPointBins`,data )
+  axios.get(`https://xgenboxv2.onrender.com/api/bin/fetchAllPointBins`,data )
   .then(res => {
       // console.log(res)
 
@@ -301,7 +301,7 @@ export const FetchAllPointBins= (data)=>dispatch=>{
 }
 
 export const FetchBinByID= (data)=>dispatch=>{
-  axios.get(`https://genbox.onrender.com/api/bin/fetchBinByID/${data}` )
+  axios.get(`https://xgenboxv2.onrender.com/api/bin/fetchBinByID/${data}` )
   .then(res => {
       // console.log(res)
 
@@ -347,7 +347,7 @@ dispatch({
     payload:true
 })
 
-  axios.delete(`https://genbox.onrender.com/api/bin/deleteBinById/${id}`)
+  axios.delete(`https://xgenboxv2.onrender.com/api/bin/deleteBinById/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
@@ -395,7 +395,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-axios.put(`https://genbox.onrender.com/api/bin/updateBin/${id}`,data)
+axios.put(`https://xgenboxv2.onrender.com/api/bin/updateBin/${id}`,data)
 .then(res => {
   dispatch({
     type: SET_ERRORS,
@@ -450,7 +450,7 @@ dispatch({
 // console.log(id)
 // alert(id)
 
-  axios.delete(`https://genbox.onrender.com/api/Pointbin/deletePointBinById/${id}`)
+  axios.delete(`https://xgenboxv2.onrender.com/api/Pointbin/deletePointBinById/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
@@ -489,7 +489,7 @@ dispatch({
 }
 
 export const FetchPointBinByID= (data)=>dispatch=>{
-  axios.get(`https://genbox.onrender.com/api/Pointbin/fetchPointBinByID/${data}` )
+  axios.get(`https://xgenboxv2.onrender.com/api/Pointbin/fetchPointBinByID/${data}` )
   .then(res => {
       // console.log(res)
 
@@ -537,7 +537,7 @@ dispatch({
 // console.log(id)
 // alert(id)
 
-  axios.put(`https://genbox.onrender.com/api/Pointbin/deleteBinFromPointBin/${pointBinId}/${binId}`)
+  axios.put(`https://xgenboxv2.onrender.com/api/Pointbin/deleteBinFromPointBin/${pointBinId}/${binId}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
@@ -584,7 +584,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-axios.put(`http://localhost:4000/api/Pointbin/UpdatePointBin/${id}`,data)
+axios.put(`https://xgenboxv2.onrender.com/api/Pointbin/UpdatePointBin/${id}`,data)
 .then(res => {
   dispatch({
     type: SET_ERRORS,
@@ -632,7 +632,7 @@ export const fetchBin= (municipal)=>(dispatch)=> {
     payload: []
 })
 
-  axios.get(`https://genbox.onrender.com/api/bin/FetchBinsNotInPointBins`)
+  axios.get(`https://xgenboxv2.onrender.com/api/bin/FetchBinsNotInPointBins`)
   .then(async(res) => {
     // console.log(res.data)
 
@@ -668,7 +668,7 @@ export const fetchPointBin= (municipal)=>(dispatch)=> {
     payload: []
 })
 
-  axios.get(`https://genbox.onrender.com/api/Pointbin/fetchAllPointBin`)
+  axios.get(`https://xgenboxv2.onrender.com/api/Pointbin/fetchAllPointBin`)
   .then(async(res) => {
     // console.log(res.data)
 

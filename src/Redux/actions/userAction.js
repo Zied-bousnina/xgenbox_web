@@ -9,7 +9,7 @@ import axios from "axios"
 
 export const GetAllUsers = (navigation)=>dispatch=>{
    
-  axios.get(`https://genbox.onrender.com/api/users/getUsers`)
+  axios.get(`https://xgenboxv2.onrender.com/api/users/getUsers`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -36,7 +36,7 @@ export const GetAllUsers = (navigation)=>dispatch=>{
 
 export const GetAllUserDetails = (id,navigation)=>dispatch=>{
    
-    axios.get(`https://genbox.onrender.com/api/users/${id}`)
+    axios.get(`https://xgenboxv2.onrender.com/api/users/${id}`)
     .then(res => {
         // console.log(res)
         dispatch({
@@ -71,7 +71,7 @@ export const GetAllUserDetails = (id,navigation)=>dispatch=>{
         type:SET_IS_LOADING,
         payload:true
     })
-    axios.put(`https://genbox.onrender.com/api/users/block/${id}`)
+    axios.put(`https://xgenboxv2.onrender.com/api/users/block/${id}`)
     .then(res => {
         // console.log(res)
         
@@ -133,7 +133,7 @@ export const GetAllUserDetails = (id,navigation)=>dispatch=>{
         type:SET_IS_LOADING,
         payload:true
     })
-    axios.put(`https://genbox.onrender.com/api/users/deblock/${id}`)
+    axios.put(`https://xgenboxv2.onrender.com/api/users/deblock/${id}`)
     .then(res => {
         console.log(res)
        

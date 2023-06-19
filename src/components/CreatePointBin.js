@@ -117,6 +117,11 @@ useEffect(() => {
     dispatch(FetchAllBinsNotInUse())
    
   }, [ListOfBinsNotInUse])
+  const handleSelectChange = (selectedOptions) => {
+    
+   
+    setSelectedValues(selectedOptions);
+  };
 
   // console.log(ListOfBinsNotInUse)
   
@@ -126,14 +131,15 @@ useEffect(() => {
     
     e.preventDefault();
     // console.log("bins", selectedValues.value)
-    
+    var bin = []
     selectedValues?.map(e=>{
       console.log("map", e?.value)
-      setForm({ ...form, bins: [...form.bins, e?.value] });
+      // setForm({ ...form, bins: [...form.bins, e?.value] });
+      bin.push(e.value)
     })
     console.log({...form, governorate: selectedValue, municipale: selectedMunicipal})
     
-  dispatch(AddPointBin({...form, governorate: selectedValue, municipale: selectedMunicipal, quoteDemande :idQuote}))
+  dispatch(AddPointBin({...form,bins: bin, governorate: selectedValue, municipale: selectedMunicipal, quoteDemande :idQuote}))
 
   // !error?.success ? showErrorToastMessage() : null
  
@@ -152,7 +158,7 @@ useEffect(() => {
   
   useEffect(() => {
     axios
-      .get(`https://genbox.onrender.com/api/governorates`)
+      .get(`https://xgenboxv2.onrender.com/api/governorates`)
       .then(res => {
         setgovernorates(res.data[0]);
       })
@@ -172,11 +178,7 @@ useEffect(() => {
   
 
   // Handle onChange event
-  const handleSelectChange = (selectedOptions) => {
-    
-   
-    setSelectedValues(selectedOptions);
-  };
+ 
   // console.log("SelectedValues", selectedValues)
   return (
     <>

@@ -8,7 +8,7 @@ import axios from "axios"
 
 export const findDemandeInProgress = (navigation)=>dispatch=>{
    
-  axios.get(`https://genbox.onrender.com/api/demande-municipal/findDemandeInProgress`)
+  axios.get(`https://xgenboxv2.onrender.com/api/demande-municipal/findDemandeInProgress`)
   .then(res => {
       console.log(res)
       dispatch({
@@ -43,7 +43,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://genbox.onrender.com/api/demande-municipal/AcceptDemande/${data.id}`
+  axios.put(`https://xgenboxv2.onrender.com/api/demande-municipal/AcceptDemande/${data.id}`
   ,{status:data.status}
   )
   .then(async(res) => {
@@ -88,7 +88,7 @@ dispatch({
 
 export const getBinsCount = (navigation)=>dispatch=>{
    
-  axios.get(`https://genbox.onrender.com/api/bin/getBinsCount`)
+  axios.get(`https://xgenboxv2.onrender.com/api/bin/getBinsCount`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -115,7 +115,7 @@ export const getBinsCount = (navigation)=>dispatch=>{
 
 export const GetPMunicipalDetailsById = (id,navigation)=>dispatch=>{
    
-  axios.get(`https://genbox.onrender.com/api/demande-municipal/findDemandeById/${id}`)
+  axios.get(`https://xgenboxv2.onrender.com/api/demande-municipal/findDemandeById/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
