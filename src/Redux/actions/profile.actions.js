@@ -16,7 +16,7 @@ export const AddProfile =  (userData, navigation ) => (dispatch) => {
     payload:true
 })
   
-  axios.post(`https://xgenboxv2.onrender.com/api/profile/upload-profile`, userData, {
+  axios.post(`${process.env.REACT_APP_API_URL}/api/profile/upload-profile`, userData, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data'
@@ -69,7 +69,7 @@ export const AddProfile =  (userData, navigation ) => (dispatch) => {
 }
 
 export const GetProfile =  () => (dispatch) => {
-  axios.get(`https://xgenboxv2.onrender.com/api/profile`)
+  axios.get(`${process.env.REACT_APP_API_URL}/api/profile`)
       .then(async(res) => {
         // console.log(res.data)
         dispatch({

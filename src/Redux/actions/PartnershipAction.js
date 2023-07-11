@@ -21,7 +21,7 @@ dispatch({
 
 
    
-  axios.post(`https://xgenboxv2.onrender.com/api/site/Addpartnership`,data )
+  axios.post(`${process.env.REACT_APP_API_URL}/api/site/Addpartnership`,data )
   .then(res => {
       console.log(res)
       dispatch({
@@ -70,7 +70,7 @@ dispatch({
 
 
 export const FetchAllPartnership = (data)=>dispatch=>{
-  axios.get(`https://xgenboxv2.onrender.com/api/site/partnerShip/fetchAll`,data )
+  axios.get(`${process.env.REACT_APP_API_URL}/api/site/partnerShip/fetchAll`,data )
   .then(res => {
       console.log(res)
 
@@ -108,7 +108,7 @@ export const FetchAllPartnership = (data)=>dispatch=>{
 
 export const GetPartnerDetailsById = (id,navigation)=>dispatch=>{
    
-  axios.get(`https://xgenboxv2.onrender.com/api/site/partnerShip/fetchByID/${id}`)
+  axios.get(`${process.env.REACT_APP_API_URL}/api/site/partnerShip/fetchByID/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -143,7 +143,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://xgenboxv2.onrender.com/api/site/partnerShip/readed/${id}`)
+  axios.put(`${process.env.REACT_APP_API_URL}/api/site/partnerShip/readed/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,

@@ -4,7 +4,7 @@ import axios from "axios"
 
 export const getUsersCounts = (navigation)=>dispatch=>{
    
-  axios.get(`https://xgenboxv2.onrender.com/api/users/getUserCounts`)
+  axios.get(`${process.env.REACT_APP_API_URL}/api/users/getUserCounts`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -32,7 +32,7 @@ export const getUsersCounts = (navigation)=>dispatch=>{
 
 export const getBinsCount = (navigation)=>dispatch=>{
    
-  axios.get(`https://xgenboxv2.onrender.com/api/bin/getBinsCount`)
+  axios.get(`${process.env.REACT_APP_API_URL}/api/bin/getBinsCount`)
   .then(res => {
       // console.log(res)
       dispatch({

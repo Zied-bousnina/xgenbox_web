@@ -24,7 +24,7 @@ dispatch({
 
 
    
-  axios.post(`https://xgenboxv2.onrender.com/api/site/createQuote`,data, {   
+  axios.post(`${process.env.REACT_APP_API_URL}/api/site/createQuote`,data, {   
     headers: { "Content-Type": "multipart/form-data" } 
 } )
   
@@ -75,7 +75,7 @@ dispatch({
 }
 
 export const FetchAllQuote = (data)=>dispatch=>{
-  axios.get(`https://xgenboxv2.onrender.com/api/site/quote/fetchAll`,data )
+  axios.get(`${process.env.REACT_APP_API_URL}/api/site/quote/fetchAll`,data )
   .then(res => {
       // console.log(res)
 
@@ -113,7 +113,7 @@ export const FetchAllQuote = (data)=>dispatch=>{
 
 export const GetQuoteById = (id,navigation)=>dispatch=>{
    
-  axios.get(`https://xgenboxv2.onrender.com/api/site/quote/fetchByID/${id}`)
+  axios.get(`${process.env.REACT_APP_API_URL}/api/site/quote/fetchByID/${id}`)
   .then(res => {
       // console.log(res)
       dispatch({
@@ -147,7 +147,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://xgenboxv2.onrender.com/api/site/Quote/readed/${id}`)
+  axios.put(`${process.env.REACT_APP_API_URL}/api/site/Quote/readed/${id}`)
   .then(res => {
     dispatch({
       type: SET_ERRORS,
@@ -197,7 +197,7 @@ dispatch({
     type:SET_IS_LOADING,
     payload:true
 })
-  axios.put(`https://xgenboxv2.onrender.com/api/site/quote/Update/${id}`,
+  axios.put(`${process.env.REACT_APP_API_URL}/api/site/quote/Update/${id}`,
   {status: status}
   )
   .then(res => {
